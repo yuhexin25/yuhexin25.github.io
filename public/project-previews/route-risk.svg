@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Live Delay Analysis Route Risk preview</title>
+  <desc id="desc">A stylized live route risk screen with airport nodes, alerts, and route arcs.</desc>
+  <defs>
+    <radialGradient id="bg" cx=".7" cy=".25" r=".9">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset=".52" stop-color="#172554"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <g opacity=".14" stroke="#dbeafe">
+    <circle cx="480" cy="300" r="100" fill="none"/>
+    <circle cx="480" cy="300" r="190" fill="none"/>
+    <circle cx="480" cy="300" r="280" fill="none"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M150 365C302 205 498 198 668 318" stroke="#dbeafe" stroke-width="3" opacity=".75"/>
+    <path d="M272 160C406 256 530 164 790 218" stroke="#60a5fa" stroke-width="6"/>
+    <path d="M215 452C380 336 532 408 738 346" stroke="#93c5fd" stroke-width="4" opacity=".78"/>
+  </g>
+  <g>
+    <circle cx="272" cy="160" r="13" fill="#dbeafe"/>
+    <circle cx="790" cy="218" r="13" fill="#dbeafe"/>
+    <circle cx="668" cy="318" r="11" fill="#dbeafe"/>
+    <circle cx="215" cy="452" r="10" fill="#dbeafe"/>
+    <circle cx="738" cy="346" r="10" fill="#dbeafe"/>
+    <circle cx="150" cy="365" r="10" fill="#dbeafe"/>
+  </g>
+  <g transform="translate(620 392)">
+    <rect width="244" height="112" rx="24" fill="#fff" opacity=".96"/>
+    <circle cx="44" cy="42" r="16" fill="#2563eb"/>
+    <rect x="76" y="30" width="112" height="14" rx="7" fill="#0f172a"/>
+    <rect x="76" y="58" width="136" height="10" rx="5" fill="#94a3b8"/>
+    <rect x="30" y="82" width="184" height="8" rx="4" fill="#dbeafe"/>
+  </g>
+  <path d="M462 246l54-18-32 48-5 46-22-36-42-5z" fill="#fff" opacity=".96"/>
+</svg>

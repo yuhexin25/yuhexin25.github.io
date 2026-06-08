@@ -5,13 +5,33 @@ interface Props {
   description: string;
   tags: string[];
   href?: string;
+  githubHref?: string;
+  image?: string;
+  imageAlt?: string;
   variant?: 'row' | 'card';
 }
 
-const { title, year, description, tags, href = '#', variant = 'card' } = Astro.props;
+const {
+  title,
+  year,
+  description,
+  tags,
+  href,
+  githubHref,
+  image,
+  imageAlt = `${title} project preview`,
+  variant = 'card',
+} = Astro.props;
+
+const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}` : undefined;
 ---
 
 <article class:list={['project-card', variant === 'card' && 'project-card--card']}>
+  {imageSrc && (
+    <div class="project-preview">
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
+    </div>
+  )}
   <div class="project-year">{year}</div>
   <div class="project-body">
     <div class="project-title-row">
@@ -27,7 +47,10 @@ const { title, year, description, tags, href = '#', variant = 'card' } = Astro.p
     <ul class="tag-list" aria-label={`${title} tags`}>
       {tags.map((tag) => <li>{tag}</li>)}
     </ul>
-    <a class="visit-link" href={href} target="_blank" rel="noopener noreferrer">Visit site -></a>
+    <div class="project-actions">
+      {href && <a class="project-button project-button-primary" href={href} target="_blank" rel="noopener noreferrer">Live Demo</a>}
+      {githubHref && <a class="project-button" href={githubHref} target="_blank" rel="noopener noreferrer">GitHub</a>}
+    </div>
   </div>
 </article>
 
@@ -58,6 +81,40 @@ const { title, year, description, tags, href = '#', variant = 'card' } = Astro.p
     border-color: rgba(37, 99, 235, 0.24);
     box-shadow: var(--shadow);
     transform: translateY(-4px);
+  }
+
+  .project-preview {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    border: 1px solid rgba(37, 99, 235, 0.14);
+    border-radius: 18px;
+    background: #0f172a;
+  }
+
+  .project-preview::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 44%);
+    content: '';
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .project-card:hover .project-preview::after {
+    opacity: 1;
+  }
+
+  .project-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+  }
+
+  .project-card:hover .project-preview img {
+    transform: scale(1.035);
   }
 
   .project-year {
@@ -114,7 +171,7 @@ const { title, year, description, tags, href = '#', variant = 'card' } = Astro.p
   h3 {
     margin-bottom: 0;
     min-width: 0;
-    font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     font-weight: 720;
     letter-spacing: -0.02em;
     white-space: normal;
@@ -148,15 +205,54 @@ const { title, year, description, tags, href = '#', variant = 'card' } = Astro.p
     color: var(--accent);
   }
 
-  .visit-link {
-    display: inline-block;
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 18px;
+  }
+
+  .project-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--accent-dark);
+    padding: 0 14px;
     font-size: 0.94rem;
     font-weight: 760;
+    transition:
+      transform 160ms ease,
+      border-color 160ms ease,
+      background 160ms ease,
+      color 160ms ease;
+  }
+
+  .project-button:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .project-button-primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.16);
+  }
+
+  .project-button-primary:hover {
+    background: var(--accent-dark);
+    color: #fff;
   }
 
   .project-card--card {
-    min-height: 340px;
+    min-height: 520px;
   }
 
   .project-card--card:hover {
@@ -168,6 +264,10 @@ const { title, year, description, tags, href = '#', variant = 'card' } = Astro.p
   @media (max-width: 640px) {
     .project-card {
       padding: 1.5rem;
+    }
+
+    .project-card--card {
+      min-height: auto;
     }
   }
 </style>

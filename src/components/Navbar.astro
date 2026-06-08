@@ -3,7 +3,7 @@ const navItems = [
   { href: '/', label: 'Home' },
   { href: '/projects', label: 'Projects' },
   { href: '/research', label: 'Research' },
-  { href: '/observations', label: 'Observations' },
+  { href: '/observations', label: 'Research Notes' },
   { href: '/cv', label: 'CV' },
 ];
 
@@ -61,11 +61,15 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
     color: var(--text);
     font-weight: 760;
     letter-spacing: -0.01em;
+    transition:
+      color 160ms ease,
+      transform 160ms ease;
   }
 
   .brand:hover {
     color: var(--text);
     text-decoration: none;
+    transform: translateY(-1px);
   }
 
   .brand-mark {
@@ -98,14 +102,25 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
     padding: 7px 12px;
     font-size: 0.92rem;
     font-weight: 650;
+    transition:
+      background 160ms ease,
+      color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
   }
 
-  .nav-links a:hover,
-  .nav-links a[aria-current='page'] {
+  .nav-links a:hover {
     background: var(--accent-soft);
     color: var(--accent-dark);
     text-decoration: none;
-    box-shadow: none;
+    transform: translateY(-1px);
+  }
+
+  .nav-links a[aria-current='page'] {
+    background: var(--text);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
   }
 
   @media (max-width: 660px) {

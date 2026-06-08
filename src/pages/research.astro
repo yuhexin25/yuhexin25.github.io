@@ -4,59 +4,67 @@ import Layout from '../components/Layout.astro';
 
 <Layout
   title="Research"
-  description="Research interests for Hexin Yu, including aviation network resilience, delay propagation, regional airport performance, GIS, and transportation systems."
+  description="Research questions by Hexin Yu on aviation delay propagation, hub and regional airport performance, network resilience, GIS, and transportation systems."
 >
   <div class="page-shell">
     <header class="container page-intro">
       <p class="page-kicker">Research</p>
-      <h1>Reading aviation systems through data and geography</h1>
+      <h1>Questions for reading aviation systems through data and geography</h1>
       <p class="lead">
-        My current interests center on the shape of delay: where disruptions begin, how they travel,
-        and what airport networks reveal when they are studied as geographic systems.
+        I frame research as a set of working questions: where do disruptions begin, how do they travel,
+        and how can maps make aviation networks easier to reason about?
       </p>
     </header>
 
-    <section class="container research-list" aria-label="Research interests">
+    <section class="container research-list" aria-label="Research questions">
       <article>
-        <h2>Current Interests</h2>
+        <p class="question-number">01</p>
+        <h2>How do hub airports absorb or amplify disruption?</h2>
         <p>
-          Aviation analytics, public transportation datasets, geospatial visualization, route-level risk,
-          and data tools that help explain complex systems without hiding their uncertainty.
+          Hub airports concentrate aircraft, crews, passengers, and connecting itineraries. I want to compare
+          when that concentration creates recovery capacity and when it turns one operational problem into a
+          broader network delay.
         </p>
       </article>
       <article>
-        <h2>Hub vs Regional Airport Performance</h2>
+        <p class="question-number">02</p>
+        <h2>Why do regional airports experience delays differently?</h2>
         <p>
-          Comparing how large hub airports and smaller regional airports absorb, amplify, or inherit operational
-          disruptions across different route structures.
+          Regional airports may have fewer alternate flights, smaller buffers, and stronger dependence on inbound
+          aircraft. A small delay count can still mean a large reliability problem for passengers and local access.
         </p>
       </article>
       <article>
-        <h2>Delay Propagation Across Airline Networks</h2>
+        <p class="question-number">03</p>
+        <h2>How does delay propagate across airline networks?</h2>
         <p>
-          Studying how late aircraft, congested airports, and tight schedule dependencies can turn local delays
-          into wider network effects.
+          Flight delays are tied to aircraft rotations, airport congestion, crew schedules, and downstream routes.
+          I am interested in visual and statistical methods that make these dependencies visible without
+          overstating what public data can explain.
         </p>
       </article>
       <article>
-        <h2>Aviation Network Resilience</h2>
+        <p class="question-number">04</p>
+        <h2>What makes an aviation network resilient?</h2>
         <p>
-          Asking what makes a route system recoverable: redundancy, geography, airport capacity, carrier strategy,
-          and the ability to reroute passengers and aircraft.
+          Resilience depends on route redundancy, geography, airport capacity, carrier strategy, and recovery time.
+          I want to study how these factors shape the ability of an airport or route system to return to normal.
         </p>
       </article>
       <article>
-        <h2>GIS and Transportation Systems</h2>
+        <p class="question-number">05</p>
+        <h2>How can GIS make transportation systems more legible?</h2>
         <p>
-          Building maps and visual interfaces that connect route networks, airport regions, and operational
-          patterns in ways that support careful interpretation.
+          Maps can connect route networks, airport regions, delay patterns, and access questions. The challenge is
+          to design visualizations that support interpretation instead of turning complex systems into decoration.
         </p>
       </article>
       <article>
-        <h2>Future Directions</h2>
+        <p class="question-number">06</p>
+        <h2>What should live aviation tools communicate first?</h2>
         <p>
-          Future work may connect live aviation data, historical reliability, weather context, and airport network
-          structure into lightweight decision-support tools for route risk exploration.
+          Future work may connect live flight status, historical reliability, weather context, and network structure.
+          The goal is lightweight decision support for route risk exploration, not a black-box prediction score.
         </p>
       </article>
     </section>
@@ -71,18 +79,24 @@ import Layout from '../components/Layout.astro';
 
   .research-list article {
     display: grid;
-    grid-template-columns: minmax(220px, 0.36fr) minmax(0, 0.64fr);
-    gap: 36px;
+    grid-template-columns: 72px minmax(220px, 0.44fr) minmax(0, 0.56fr);
+    gap: 28px;
     border-top: 1px solid var(--border);
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.72), transparent);
     padding: 28px 0;
+  }
+
+  .question-number {
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 800;
   }
 
   .research-list p {
     color: var(--muted);
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 860px) {
     .research-list article {
       grid-template-columns: 1fr;
       gap: 10px;

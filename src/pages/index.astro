@@ -13,8 +13,8 @@ const featuredProjects = projects.slice(0, 3);
 ---
 
 <Layout
-  title="Home"
-  description="Hexin Yu is a Computational Modeling & Data Analytics student at Virginia Tech focused on aviation analytics, transportation systems, GIS, and data visualization."
+  title="Aviation Analytics Portfolio"
+  description="Hexin Yu builds data-driven tools for aviation networks, flight delays, transportation systems, GIS, and geospatial data visualization."
 >
   <section class="hero-section">
     <svg class="route-field" viewBox="0 0 1200 520" aria-hidden="true">
@@ -32,12 +32,13 @@ const featuredProjects = projects.slice(0, 3);
         <h1>Hexin Yu</h1>
         <p class="hero-subtitle">Aviation Analytics · Geospatial Visualization · Transportation Systems</p>
         <p class="lead">
-          Computational Modeling & Data Analytics student at Virginia Tech, working where aviation data,
-          transportation systems, geographic visualization, and public datasets meet.
+          I build data-driven tools to study aviation networks, flight delays, and transportation systems.
+          I am a Computational Modeling & Data Analytics student at Virginia Tech working across public aviation
+          datasets, GIS, and interactive visualization.
         </p>
         <div class="button-row">
           <a class="button" href={`${import.meta.env.BASE_URL}projects`}>View Projects</a>
-          <a class="button secondary" href="/hexinyu/Hexin-Yu-CV.pdf">Download CV</a>
+          <a class="button secondary" href="/hexinyu/Hexin-Yu-CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="Portfolio focus summary">
@@ -92,18 +93,18 @@ const featuredProjects = projects.slice(0, 3);
       <div class="container two-column">
         <div>
           <p class="page-kicker">Research frame</p>
-          <h2>Research Interests</h2>
+          <h2>Research Questions</h2>
           <p class="section-note">
-            I am interested in how flight disruptions become spatial patterns, how hub airports shape regional
-            access, and how visual systems can make transportation data more legible.
+            My work starts from questions about where disruptions begin, how they move through route networks,
+            and what maps can reveal about airport access and resilience.
           </p>
-          <a class="text-link" href={`${import.meta.env.BASE_URL}research`}>Research directions -></a>
+          <a class="text-link" href={`${import.meta.env.BASE_URL}research`}>Research questions -></a>
         </div>
         <ul class="quiet-list">
-          <li>Hub vs regional airport performance</li>
-          <li>Delay propagation across airline networks</li>
-          <li>Aviation network resilience</li>
-          <li>GIS and transportation systems</li>
+          <li>How do hub airports absorb or amplify delay?</li>
+          <li>When do regional routes become vulnerable?</li>
+          <li>How does delay propagate across airline networks?</li>
+          <li>What can GIS reveal about transportation resilience?</li>
         </ul>
       </div>
     </section>
@@ -111,10 +112,10 @@ const featuredProjects = projects.slice(0, 3);
     <section class="section">
       <div class="container section-heading">
         <div>
-          <p class="page-kicker">Field notes</p>
-          <h2>Recent Observations</h2>
+          <p class="page-kicker">Research notes</p>
+          <h2>Recent Research Notes</h2>
         </div>
-        <a href={`${import.meta.env.BASE_URL}observations`}>All observations -></a>
+        <a href={`${import.meta.env.BASE_URL}observations`}>All notes -></a>
       </div>
       <div class="container">
         <ul class="note-list">
@@ -304,7 +305,7 @@ const featuredProjects = projects.slice(0, 3);
   .featured-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    gap: 2rem;
     margin-top: 8px;
   }
 
@@ -319,14 +320,29 @@ const featuredProjects = projects.slice(0, 3);
     color: var(--muted);
   }
 
-  @media (max-width: 760px) {
-    .hero-section {
-      padding: 64px 0 54px;
+  @media (max-width: 1020px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
     }
 
-    .hero-grid,
+    .featured-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-panel {
+      max-width: 620px;
+    }
+  }
+
+  @media (max-width: 700px) {
     .featured-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-section {
+      padding: 74px 0 68px;
     }
   }
 </style>

@@ -1,5 +1,5 @@
 ---
-title: Observations on Hub Airports and Regional Airport Delays
+title: Hub Airports and Regional Airport Delay Patterns
 description: Hub airports can absorb and amplify delay patterns, while regional airports often experience the downstream effects with fewer recovery options.
 pubDate: 2026-01-18
 tags: ["aviation", "hubs", "regional airports"]

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">U.S. Airline Hub Atlas preview</title>
+  <desc id="desc">A stylized aviation route map with airport nodes and blue route lines.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#dbeafe" stroke-width="1">
+    <path d="M0 120h960M0 240h960M0 360h960M0 480h960M120 0v600M240 0v600M360 0v600M480 0v600M600 0v600M720 0v600M840 0v600"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M150 358C275 190 442 184 595 292S754 420 846 228" stroke="#60a5fa" stroke-width="5"/>
+    <path d="M220 230C376 318 507 158 742 150" stroke="#93c5fd" stroke-width="3" opacity=".8"/>
+    <path d="M284 430C420 338 515 380 708 304" stroke="#dbeafe" stroke-width="2.5" opacity=".7"/>
+  </g>
+  <g fill="#dbeafe" filter="url(#glow)">
+    <circle cx="150" cy="358" r="12"/>
+    <circle cx="595" cy="292" r="13"/>
+    <circle cx="846" cy="228" r="10"/>
+    <circle cx="220" cy="230" r="8"/>
+    <circle cx="742" cy="150" r="8"/>
+    <circle cx="284" cy="430" r="8"/>
+    <circle cx="708" cy="304" r="9"/>
+  </g>
+  <g fill="#fff">
+    <rect x="52" y="52" width="270" height="76" rx="18" opacity=".95"/>
+    <rect x="78" y="78" width="136" height="12" rx="6" fill="#2563eb"/>
+    <rect x="78" y="100" width="204" height="8" rx="4" fill="#94a3b8"/>
+  </g>
+</svg>
