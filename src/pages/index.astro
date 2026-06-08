@@ -5,12 +5,12 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
 
 const featuredProjects = projects.slice(0, 3);
-const readingNotes = (await getCollection('readingNotes')).sort(
+const readingNotes = (await getCollection('reading-notes')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 const latestReadingNote = readingNotes[0];
 const latestReadingHref = latestReadingNote
-  ? `${import.meta.env.BASE_URL}reading-notes/${latestReadingNote.id}`
+  ? `${import.meta.env.BASE_URL}reading-notes/${latestReadingNote.slug}`
   : `${import.meta.env.BASE_URL}reading-notes`;
 ---
 

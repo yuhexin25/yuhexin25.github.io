@@ -1,9 +1,8 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const readingNotes = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/reading-notes' }),
+  type: 'content',
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -21,4 +20,4 @@ const readingNotes = defineCollection({
   }),
 });
 
-export const collections = { readingNotes };
+export const collections = { 'reading-notes': readingNotes };

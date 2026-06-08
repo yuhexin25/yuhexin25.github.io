@@ -4,16 +4,16 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../components/Layout.astro';
 
 export async function getStaticPaths() {
-  const notes = await getCollection('readingNotes');
+  const notes = await getCollection('reading-notes');
 
   return notes.map((note) => ({
-    params: { id: note.id },
+    params: { id: note.slug },
     props: { note },
   }));
 }
 
 interface Props {
-  note: CollectionEntry<'readingNotes'>;
+  note: CollectionEntry<'reading-notes'>;
 }
 
 const { note } = Astro.props;
@@ -154,6 +154,12 @@ const { Content } = await render(note);
     margin-top: 0;
     padding-top: 0;
     border-top: 0;
+  }
+
+  .reading-content :global(h3) {
+    margin-top: 28px;
+    color: var(--warm-ink);
+    font-size: 1.18rem;
   }
 
   .reading-content :global(p) {
