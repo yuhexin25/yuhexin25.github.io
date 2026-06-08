@@ -6,9 +6,9 @@
   --soft: #eef4fb;
   --border: #d8e0ea;
   --border-strong: #c5d0de;
-  --accent: #2854c5;
-  --accent-dark: #1e3f95;
-  --accent-soft: #e8eefc;
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  --accent-soft: #dbeafe;
   --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
   --max-width: 1100px;
   color-scheme: light;
@@ -110,7 +110,7 @@ p {
 
 .section.tint {
   background:
-    linear-gradient(90deg, rgba(40, 84, 197, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.055) 1px, transparent 1px),
     linear-gradient(180deg, #f3f7fc 0%, #f8fafc 100%);
   background-size: 42px 42px, auto;
 }
@@ -200,7 +200,7 @@ p {
   color: #fff;
   padding: 0 20px;
   font-weight: 720;
-  box-shadow: 0 12px 24px rgba(40, 84, 197, 0.18);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18);
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -219,7 +219,7 @@ p {
   color: #fff;
   text-decoration: none;
   transform: translateY(-1px);
-  box-shadow: 0 16px 30px rgba(40, 84, 197, 0.24);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.24);
 }
 
 .button.secondary:hover {

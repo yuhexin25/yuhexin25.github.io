@@ -14,7 +14,15 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
 <article class:list={['project-card', variant === 'card' && 'project-card--card']}>
   <div class="project-year">{year}</div>
   <div class="project-body">
-    <h3>{title}</h3>
+    <div class="project-title-row">
+      <span class="project-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 12.2 21 4l-5.8 16-3.6-6.6L3 12.2Z" />
+          <path d="m11.6 13.4 4.8-5.1" />
+        </svg>
+      </span>
+      <h3>{title}</h3>
+    </div>
     <p>{description}</p>
     <ul class="tag-list" aria-label={`${title} tags`}>
       {tags.map((tag) => <li>{tag}</li>)}
@@ -51,8 +59,40 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
     max-width: 760px;
   }
 
-  h3 {
+  .project-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
     margin-bottom: 10px;
+  }
+
+  .project-icon {
+    display: inline-grid;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .project-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .project-icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  h3 {
+    margin-bottom: 0;
     font-size: clamp(1.2rem, 2vw, 1.55rem);
     font-weight: 520;
   }
@@ -94,7 +134,7 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
     border: 1px solid var(--border);
     border-radius: 18px;
     background:
-      linear-gradient(180deg, rgba(40, 84, 197, 0.045), transparent 42%),
+      linear-gradient(180deg, rgba(37, 99, 235, 0.045), transparent 42%),
       var(--paper);
     box-shadow: 0 12px 30px rgba(15, 23, 42, 0.055);
     padding: 24px;
@@ -102,7 +142,7 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
 
   .project-card--card:hover {
     background:
-      linear-gradient(180deg, rgba(40, 84, 197, 0.075), transparent 46%),
+      linear-gradient(180deg, rgba(37, 99, 235, 0.075), transparent 46%),
       var(--paper);
     box-shadow: var(--shadow);
     transform: translateY(-4px);
@@ -111,7 +151,7 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
   .project-card--card .project-year {
     display: inline-flex;
     width: fit-content;
-    border: 1px solid rgba(40, 84, 197, 0.16);
+    border: 1px solid rgba(37, 99, 235, 0.16);
     border-radius: 999px;
     background: var(--accent-soft);
     color: var(--accent-dark);

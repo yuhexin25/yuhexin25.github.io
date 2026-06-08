@@ -17,6 +17,15 @@ const featuredProjects = projects.slice(0, 3);
   description="Hexin Yu is a Computational Modeling & Data Analytics student at Virginia Tech focused on aviation analytics, transportation systems, GIS, and data visualization."
 >
   <section class="hero-section">
+    <svg class="route-field" viewBox="0 0 1200 520" aria-hidden="true">
+      <path d="M-30 400 C 210 260, 370 270, 610 130 S 1000 50, 1240 180" />
+      <path d="M80 120 C 300 210, 420 92, 640 220 S 960 390, 1210 300" />
+      <path d="M220 510 C 380 380, 520 390, 720 310 S 980 210, 1180 250" />
+      <circle cx="180" cy="318" r="5" />
+      <circle cx="610" cy="130" r="5" />
+      <circle cx="890" cy="92" r="5" />
+      <circle cx="1030" cy="342" r="5" />
+    </svg>
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="page-kicker">Portfolio / aviation analytics / GIS</p>
@@ -32,6 +41,20 @@ const featuredProjects = projects.slice(0, 3);
         </div>
       </div>
       <aside class="hero-panel" aria-label="Portfolio focus summary">
+        <div class="network-globe" aria-hidden="true">
+          <svg viewBox="0 0 260 260">
+            <circle class="globe-ring" cx="130" cy="130" r="96" />
+            <ellipse class="globe-line" cx="130" cy="130" rx="44" ry="96" />
+            <ellipse class="globe-line" cx="130" cy="130" rx="96" ry="34" />
+            <path class="route" d="M58 152 C 92 82, 168 74, 205 118" />
+            <path class="route route-alt" d="M76 190 C 126 134, 164 150, 214 72" />
+            <circle class="node" cx="58" cy="152" r="6" />
+            <circle class="node" cx="205" cy="118" r="6" />
+            <circle class="node" cx="76" cy="190" r="5" />
+            <circle class="node" cx="214" cy="72" r="5" />
+            <path class="plane" d="M139 107 L171 96 L151 124 L148 151 L135 130 L110 127 Z" />
+          </svg>
+        </div>
         <p class="panel-label">Current focus</p>
         <ul>
           <li>
@@ -114,16 +137,38 @@ const featuredProjects = projects.slice(0, 3);
   .hero-section {
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(219, 234, 254, 0.18);
     background:
-      radial-gradient(circle at 12% 18%, rgba(40, 84, 197, 0.12), transparent 34%),
-      linear-gradient(90deg, rgba(40, 84, 197, 0.06) 1px, transparent 1px),
-      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      radial-gradient(circle at 78% 18%, rgba(37, 99, 235, 0.36), transparent 30%),
+      radial-gradient(circle at 16% 80%, rgba(14, 165, 233, 0.22), transparent 34%),
+      linear-gradient(135deg, #07111f 0%, #0f172a 48%, #132a55 100%);
     background-size: auto, 46px 46px, auto;
-    padding: 92px 0 84px;
+    padding: 106px 0 96px;
+  }
+
+  .route-field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.46;
+    pointer-events: none;
+  }
+
+  .route-field path {
+    fill: none;
+    stroke: rgba(219, 234, 254, 0.36);
+    stroke-width: 1.4;
+  }
+
+  .route-field circle {
+    fill: #93c5fd;
+    filter: drop-shadow(0 0 10px rgba(147, 197, 253, 0.78));
   }
 
   .hero-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.65fr);
     gap: 52px;
@@ -134,24 +179,86 @@ const featuredProjects = projects.slice(0, 3);
     max-width: 780px;
   }
 
+  .hero-copy .page-kicker {
+    color: #93c5fd;
+  }
+
+  .hero-copy h1 {
+    color: #fff;
+    text-shadow: 0 18px 54px rgba(0, 0, 0, 0.26);
+  }
+
+  .hero-copy .lead {
+    color: #dbeafe;
+  }
+
   .hero-subtitle {
     margin-top: 12px;
-    color: var(--accent-dark);
+    color: #bfdbfe;
     font-size: clamp(1rem, 2vw, 1.28rem);
     font-weight: 760;
   }
 
   .hero-panel {
-    border: 1px solid rgba(40, 84, 197, 0.18);
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.78);
-    box-shadow: var(--shadow);
+    border: 1px solid rgba(219, 234, 254, 0.2);
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(15, 23, 42, 0.46), rgba(15, 23, 42, 0.68)),
+      rgba(15, 23, 42, 0.58);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
     backdrop-filter: blur(12px);
-    padding: 26px;
+    padding: 24px;
+  }
+
+  .network-globe {
+    display: grid;
+    place-items: center;
+    min-height: 238px;
+    border: 1px solid rgba(219, 234, 254, 0.14);
+    border-radius: 22px;
+    background:
+      radial-gradient(circle, rgba(37, 99, 235, 0.3), transparent 58%),
+      rgba(15, 23, 42, 0.28);
+    margin-bottom: 20px;
+  }
+
+  .network-globe svg {
+    width: min(100%, 260px);
+  }
+
+  .globe-ring,
+  .globe-line {
+    fill: none;
+    stroke: rgba(219, 234, 254, 0.38);
+    stroke-width: 1.5;
+  }
+
+  .route {
+    fill: none;
+    stroke: #60a5fa;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  .route-alt {
+    stroke: #dbeafe;
+    stroke-width: 2;
+    opacity: 0.78;
+  }
+
+  .node {
+    fill: #dbeafe;
+    filter: drop-shadow(0 0 8px rgba(219, 234, 254, 0.85));
+  }
+
+  .plane {
+    fill: #ffffff;
+    opacity: 0.94;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
   }
 
   .panel-label {
-    color: var(--accent);
+    color: #93c5fd;
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -170,9 +277,9 @@ const featuredProjects = projects.slice(0, 3);
     display: grid;
     grid-template-columns: 42px 1fr;
     gap: 12px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(219, 234, 254, 0.14);
     padding: 15px 0;
-    color: #334155;
+    color: #e2e8f0;
     font-weight: 650;
   }
 
@@ -181,7 +288,7 @@ const featuredProjects = projects.slice(0, 3);
   }
 
   .hero-panel span {
-    color: var(--accent);
+    color: #93c5fd;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.84rem;
   }
@@ -214,7 +321,7 @@ const featuredProjects = projects.slice(0, 3);
 
   @media (max-width: 760px) {
     .hero-section {
-      padding: 58px 0 50px;
+      padding: 64px 0 54px;
     }
 
     .hero-grid,
