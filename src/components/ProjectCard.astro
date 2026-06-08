@@ -60,12 +60,12 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
     width: 100%;
     min-width: 0;
     gap: 18px;
-    border: 1px solid #dbe3ef;
+    border: 1px solid var(--border);
     border-radius: 24px;
     background:
-      linear-gradient(180deg, rgba(37, 99, 235, 0.045), transparent 42%),
+      linear-gradient(180deg, rgba(245, 158, 11, 0.07), transparent 42%),
       #fff;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 12px 30px rgba(63, 47, 31, 0.06);
     padding: 2rem;
     white-space: normal;
     word-break: normal;
@@ -78,7 +78,7 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
   }
 
   .project-card:hover {
-    border-color: rgba(37, 99, 235, 0.24);
+    border-color: rgba(245, 158, 11, 0.42);
     box-shadow: var(--shadow);
     transform: translateY(-4px);
   }
@@ -87,9 +87,9 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
     position: relative;
     overflow: hidden;
     aspect-ratio: 16 / 10;
-    border: 1px solid rgba(37, 99, 235, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.22);
     border-radius: 18px;
-    background: #0f172a;
+    background: #1e293b;
   }
 
   .project-preview::after {
@@ -120,10 +120,10 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
   .project-year {
     display: inline-flex;
     width: fit-content;
-    border: 1px solid rgba(37, 99, 235, 0.16);
+    border: 1px solid rgba(245, 158, 11, 0.32);
     border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    background: var(--gold-soft);
+    color: var(--gold-dark);
     padding: 4px 10px;
     font-size: 0.82rem;
     font-weight: 800;
@@ -149,10 +149,10 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
     width: 34px;
     height: 34px;
     place-items: center;
-    border: 1px solid rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(245, 158, 11, 0.32);
     border-radius: 12px;
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--gold-soft);
+    color: var(--gold-dark);
   }
 
   .project-icon svg {
@@ -196,13 +196,13 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
   }
 
   .tag-list li {
-    color: #536170;
+    color: #6b5f4e;
     font-size: 0.9rem;
   }
 
   .tag-list li::before {
     content: '#';
-    color: var(--accent);
+    color: var(--gold);
   }
 
   .project-actions {
@@ -220,7 +220,7 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
     border: 1px solid var(--border-strong);
     border-radius: 999px;
     background: #fff;
-    color: var(--accent-dark);
+    color: var(--text);
     padding: 0 14px;
     font-size: 0.94rem;
     font-weight: 760;
@@ -232,22 +232,23 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
   }
 
   .project-button:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    border-color: var(--gold);
+    background: var(--gold-soft);
+    color: var(--gold-dark);
     text-decoration: none;
     transform: translateY(-1px);
   }
 
   .project-button-primary {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: #fff;
-    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.16);
+    border-color: var(--gold);
+    background: var(--gold);
+    color: #1e293b;
+    box-shadow: 0 10px 22px rgba(245, 158, 11, 0.2);
   }
 
   .project-button-primary:hover {
-    background: var(--accent-dark);
+    border-color: var(--gold-dark);
+    background: var(--gold-dark);
     color: #fff;
   }
 
@@ -257,7 +258,7 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
 
   .project-card--card:hover {
     background:
-      linear-gradient(180deg, rgba(37, 99, 235, 0.075), transparent 46%),
+      linear-gradient(180deg, rgba(245, 158, 11, 0.1), transparent 46%),
       var(--paper);
   }
 

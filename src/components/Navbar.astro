@@ -41,8 +41,8 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
     position: sticky;
     top: 0;
     z-index: 10;
-    border-bottom: 1px solid rgba(216, 224, 234, 0.82);
-    background: rgba(248, 250, 252, 0.88);
+    border-bottom: 1px solid rgba(231, 229, 228, 0.92);
+    background: rgba(255, 253, 248, 0.88);
     backdrop-filter: blur(16px);
   }
 
@@ -77,10 +77,10 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
     width: 34px;
     height: 34px;
     place-items: center;
-    border: 1px solid rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(245, 158, 11, 0.32);
     border-radius: 10px;
-    background: #fff;
-    color: var(--accent-dark);
+    background: var(--gold-soft);
+    color: var(--gold-dark);
     font-size: 0.82rem;
     font-weight: 800;
   }
@@ -90,14 +90,14 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 8px;
-    border: 1px solid rgba(216, 224, 234, 0.9);
+    border: 1px solid rgba(231, 229, 228, 0.95);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.72);
     padding: 5px;
   }
 
   .nav-links a {
-    color: #3a424a;
+    color: #4b5563;
     border-radius: 999px;
     padding: 7px 12px;
     font-size: 0.92rem;
@@ -110,17 +110,17 @@ const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
   }
 
   .nav-links a:hover {
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+    background: var(--gold-soft);
+    color: var(--gold-dark);
     text-decoration: none;
     transform: translateY(-1px);
   }
 
   .nav-links a[aria-current='page'] {
-    background: var(--text);
+    background: var(--warm-ink);
     color: #fff;
     text-decoration: none;
-    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+    box-shadow: 0 10px 22px rgba(63, 47, 31, 0.14);
   }
 
   @media (max-width: 660px) {

@@ -138,11 +138,11 @@ const featuredProjects = projects.slice(0, 3);
   .hero-section {
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid rgba(219, 234, 254, 0.18);
+    border-bottom: 1px solid var(--border);
     background:
-      radial-gradient(circle at 78% 18%, rgba(37, 99, 235, 0.36), transparent 30%),
-      radial-gradient(circle at 16% 80%, rgba(14, 165, 233, 0.22), transparent 34%),
-      linear-gradient(135deg, #07111f 0%, #0f172a 48%, #132a55 100%);
+      radial-gradient(circle at 78% 18%, rgba(245, 158, 11, 0.2), transparent 30%),
+      radial-gradient(circle at 16% 78%, rgba(37, 99, 235, 0.13), transparent 34%),
+      linear-gradient(135deg, #fffdf8 0%, #fff7ed 48%, #eff6ff 100%);
     background-size: auto, 46px 46px, auto;
     padding: 106px 0 96px;
   }
@@ -152,19 +152,19 @@ const featuredProjects = projects.slice(0, 3);
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.46;
+    opacity: 0.5;
     pointer-events: none;
   }
 
   .route-field path {
     fill: none;
-    stroke: rgba(219, 234, 254, 0.36);
+    stroke: rgba(180, 83, 9, 0.18);
     stroke-width: 1.4;
   }
 
   .route-field circle {
-    fill: #93c5fd;
-    filter: drop-shadow(0 0 10px rgba(147, 197, 253, 0.78));
+    fill: var(--gold);
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.38));
   }
 
   .hero-grid {
@@ -181,32 +181,32 @@ const featuredProjects = projects.slice(0, 3);
   }
 
   .hero-copy .page-kicker {
-    color: #93c5fd;
+    color: var(--gold-dark);
   }
 
   .hero-copy h1 {
-    color: #fff;
-    text-shadow: 0 18px 54px rgba(0, 0, 0, 0.26);
+    color: var(--text);
+    text-shadow: 0 18px 54px rgba(245, 158, 11, 0.12);
   }
 
   .hero-copy .lead {
-    color: #dbeafe;
+    color: #475569;
   }
 
   .hero-subtitle {
     margin-top: 12px;
-    color: #bfdbfe;
+    color: var(--accent-dark);
     font-size: clamp(1rem, 2vw, 1.28rem);
     font-weight: 760;
   }
 
   .hero-panel {
-    border: 1px solid rgba(219, 234, 254, 0.2);
+    border: 1px solid rgba(231, 229, 228, 0.95);
     border-radius: 28px;
     background:
-      linear-gradient(180deg, rgba(15, 23, 42, 0.46), rgba(15, 23, 42, 0.68)),
-      rgba(15, 23, 42, 0.58);
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 248, 235, 0.92)),
+      #fff;
+    box-shadow: 0 28px 80px rgba(63, 47, 31, 0.12);
     backdrop-filter: blur(12px);
     padding: 24px;
   }
@@ -215,11 +215,11 @@ const featuredProjects = projects.slice(0, 3);
     display: grid;
     place-items: center;
     min-height: 238px;
-    border: 1px solid rgba(219, 234, 254, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.18);
     border-radius: 22px;
     background:
-      radial-gradient(circle, rgba(37, 99, 235, 0.3), transparent 58%),
-      rgba(15, 23, 42, 0.28);
+      radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 58%),
+      linear-gradient(135deg, #fffdf8, #eff6ff);
     margin-bottom: 20px;
   }
 
@@ -230,36 +230,38 @@ const featuredProjects = projects.slice(0, 3);
   .globe-ring,
   .globe-line {
     fill: none;
-    stroke: rgba(219, 234, 254, 0.38);
+    stroke: rgba(37, 99, 235, 0.28);
     stroke-width: 1.5;
   }
 
   .route {
     fill: none;
-    stroke: #60a5fa;
+    stroke: var(--gold);
     stroke-width: 3;
     stroke-linecap: round;
   }
 
   .route-alt {
-    stroke: #dbeafe;
+    stroke: var(--accent);
     stroke-width: 2;
     opacity: 0.78;
   }
 
   .node {
-    fill: #dbeafe;
-    filter: drop-shadow(0 0 8px rgba(219, 234, 254, 0.85));
+    fill: #fff;
+    stroke: var(--gold);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.36));
   }
 
   .plane {
-    fill: #ffffff;
+    fill: var(--text);
     opacity: 0.94;
-    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0 8px 14px rgba(63, 47, 31, 0.16));
   }
 
   .panel-label {
-    color: #93c5fd;
+    color: var(--gold-dark);
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -278,9 +280,9 @@ const featuredProjects = projects.slice(0, 3);
     display: grid;
     grid-template-columns: 42px 1fr;
     gap: 12px;
-    border-top: 1px solid rgba(219, 234, 254, 0.14);
+    border-top: 1px solid var(--border);
     padding: 15px 0;
-    color: #e2e8f0;
+    color: var(--text);
     font-weight: 650;
   }
 
@@ -289,7 +291,7 @@ const featuredProjects = projects.slice(0, 3);
   }
 
   .hero-panel span {
-    color: #93c5fd;
+    color: var(--gold-dark);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.84rem;
   }
