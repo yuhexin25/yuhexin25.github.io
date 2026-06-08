@@ -1,13 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../components/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
-import { formatDate } from '../utils/formatDate';
-
-const observations = (await getCollection('observations'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
 
 const featuredProjects = projects.slice(0, 3);
 ---
@@ -105,29 +99,6 @@ const featuredProjects = projects.slice(0, 3);
           <li>When do regional routes become vulnerable?</li>
           <li>How does delay propagate across airline networks?</li>
           <li>What can GIS reveal about transportation resilience?</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container section-heading">
-        <div>
-          <p class="page-kicker">Research notes</p>
-          <h2>Recent Research Notes</h2>
-        </div>
-        <a href={`${import.meta.env.BASE_URL}observations`}>All notes -></a>
-      </div>
-      <div class="container">
-        <ul class="note-list">
-          {observations.map((post) => (
-            <li>
-              <a href={`${import.meta.env.BASE_URL}observations/${post.id}`}>{post.data.title}</a>
-              <p class="meta">
-                {formatDate(post.data.pubDate)}
-              </p>
-              <p>{post.data.description}</p>
-            </li>
-          ))}
         </ul>
       </div>
     </section>
@@ -313,12 +284,6 @@ const featuredProjects = projects.slice(0, 3);
 
   .section-note {
     margin-top: 14px;
-    color: var(--muted);
-  }
-
-  .note-list p:last-child {
-    max-width: 760px;
-    margin-top: 6px;
     color: var(--muted);
   }
 

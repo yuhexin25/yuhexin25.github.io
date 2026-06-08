@@ -1,6 +1,6 @@
 # Hexin Yu Personal Research Website
 
-Academic-style student portfolio website built with Astro. The site highlights aviation analytics, GIS, transportation networks, data visualization projects, research questions, and short research notes.
+Academic-style student portfolio website built with Astro. The site highlights aviation analytics, GIS, transportation networks, data visualization projects, and research questions.
 
 ## Local Development
 
@@ -39,12 +39,9 @@ src/
     ProjectCard.astro
   data/
     projects.ts
-  content/
-    observations/        # Research Notes pages
   pages/
     cv.astro
     index.astro
-    observations/
     projects.astro
     research.astro
   styles/
@@ -111,5 +108,5 @@ jobs:
 
 - Replace placeholder contact links in `src/components/Footer.astro` and `src/pages/cv.astro`.
 - The CV download is served from `public/Hexin-Yu-CV.pdf`.
-- Add or edit research note posts in `src/content/observations/`.
+- Archived sample research notes live in `archived-content/observations/` and are not shown publicly.
 - Update project links in `src/data/projects.ts`.
