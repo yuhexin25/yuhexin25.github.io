@@ -10,8 +10,8 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
   title="Projects"
   description="Projects by Hexin Yu on aviation networks, flight disruptions, transportation systems, GIS, and data visualization."
 >
-  <div class="page-shell">
-    <header class="container page-intro projects-intro">
+  <div class="projects-page">
+    <header class="projects-container page-intro projects-intro">
       <p class="page-kicker">Projects</p>
       <h1>Curated project archive</h1>
       <p class="lead">
@@ -20,12 +20,12 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
       </p>
     </header>
 
-    <div class="container year-groups">
+    <div class="projects-container year-groups">
       {years.map((year) => (
         <section class="year-group" aria-labelledby={`year-${year}`}>
           <h2 id={`year-${year}`}>{year}</h2>
-          <div>
-            {projectsByYear[year].map((project) => <ProjectCard {...project} />)}
+          <div class="projects-grid">
+            {projectsByYear[year].map((project) => <ProjectCard {...project} variant="card" />)}
           </div>
         </section>
       ))}
@@ -34,20 +34,28 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
 </Layout>
 
 <style>
+  .projects-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  .projects-container {
+    width: 100%;
+  }
+
+  .projects-intro {
+    max-width: 900px;
+  }
+
   .year-groups {
     display: grid;
-    gap: 48px;
+    gap: 3rem;
   }
 
   .year-group {
     display: grid;
-    grid-template-columns: 110px minmax(0, 1fr);
-    gap: 30px;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    background: var(--paper);
-    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.055);
-    padding: 26px;
+    gap: 1.25rem;
   }
 
   .year-group h2 {
@@ -57,24 +65,25 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
     font-weight: 760;
   }
 
-  .year-group :global(.project-year) {
-    display: none;
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
   }
 
-  .year-group :global(.project-card:first-child) {
-    border-top: 0;
-    padding-top: 0;
+  @media (max-width: 900px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  .year-group :global(.project-card:last-child) {
-    padding-bottom: 0;
-  }
+  @media (max-width: 640px) {
+    .projects-page {
+      padding: 3rem 1rem;
+    }
 
-  @media (max-width: 760px) {
-    .year-group {
+    .projects-grid {
       grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 20px;
     }
   }
 </style>
