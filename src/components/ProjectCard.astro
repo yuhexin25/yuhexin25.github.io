@@ -27,7 +27,7 @@ const { title, year, description, tags, href = '#', variant = 'row' } = Astro.pr
     <ul class="tag-list" aria-label={`${title} tags`}>
       {tags.map((tag) => <li>{tag}</li>)}
     </ul>
-    <a class="visit-link" href={href}>Visit site -></a>
+    <a class="visit-link" href={href} target="_blank" rel="noopener noreferrer">Visit site -></a>
   </div>
 </article>
 
