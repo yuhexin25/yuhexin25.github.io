@@ -11,9 +11,9 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
   description="Projects by Hexin Yu on aviation networks, flight disruptions, transportation systems, GIS, and data visualization."
 >
   <div class="page-shell">
-    <header class="container page-intro">
+    <header class="container page-intro projects-intro">
       <p class="page-kicker">Projects</p>
-      <h1>Projects</h1>
+      <h1>Curated project archive</h1>
       <p class="lead">
         Each project is a working answer to one question: how can data help us understand aviation networks,
         flight disruptions, and transportation systems?
@@ -36,19 +36,25 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
 <style>
   .year-groups {
     display: grid;
-    gap: 44px;
+    gap: 48px;
   }
 
   .year-group {
     display: grid;
-    grid-template-columns: 120px minmax(0, 1fr);
-    gap: 36px;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 30px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--paper);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.055);
+    padding: 26px;
   }
 
   .year-group h2 {
-    color: var(--muted);
-    font-size: 1.1rem;
-    font-weight: 440;
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.05rem;
+    font-weight: 760;
   }
 
   .year-group :global(.project-year) {
@@ -56,13 +62,19 @@ const years = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
   }
 
   .year-group :global(.project-card:first-child) {
-    border-top: 1px solid var(--border);
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .year-group :global(.project-card:last-child) {
+    padding-bottom: 0;
   }
 
   @media (max-width: 760px) {
     .year-group {
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 12px;
+      padding: 20px;
     }
   }
 </style>

@@ -5,12 +5,13 @@ interface Props {
   description: string;
   tags: string[];
   href?: string;
+  variant?: 'row' | 'card';
 }
 
-const { title, year, description, tags, href = '#' } = Astro.props;
+const { title, year, description, tags, href = '#', variant = 'row' } = Astro.props;
 ---
 
-<article class="project-card">
+<article class:list={['project-card', variant === 'card' && 'project-card--card']}>
   <div class="project-year">{year}</div>
   <div class="project-body">
     <h3>{title}</h3>
@@ -29,6 +30,15 @@ const { title, year, description, tags, href = '#' } = Astro.props;
     gap: 28px;
     border-top: 1px solid var(--border);
     padding: 28px 0;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background 180ms ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--border-strong);
   }
 
   .project-year {
@@ -74,6 +84,56 @@ const { title, year, description, tags, href = '#' } = Astro.props;
     display: inline-block;
     margin-top: 4px;
     font-size: 0.94rem;
+    font-weight: 760;
+  }
+
+  .project-card--card {
+    min-height: 340px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, rgba(40, 84, 197, 0.045), transparent 42%),
+      var(--paper);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.055);
+    padding: 24px;
+  }
+
+  .project-card--card:hover {
+    background:
+      linear-gradient(180deg, rgba(40, 84, 197, 0.075), transparent 46%),
+      var(--paper);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+
+  .project-card--card .project-year {
+    display: inline-flex;
+    width: fit-content;
+    border: 1px solid rgba(40, 84, 197, 0.16);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    padding: 4px 10px;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .project-card--card .project-body {
+    display: grid;
+    align-content: start;
+    min-height: 250px;
+  }
+
+  .project-card--card h3 {
+    font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+    letter-spacing: -0.02em;
+  }
+
+  .project-card--card .visit-link {
+    align-self: end;
+    margin-top: 18px;
   }
 
   @media (max-width: 640px) {

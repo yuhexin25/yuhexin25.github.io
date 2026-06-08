@@ -4,14 +4,20 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div>
+    <div class="footer-main">
       <p class="footer-title">Hexin Yu</p>
-      <p>&copy; {year} Computational Modeling & Data Analytics</p>
+      <p>
+        Computational Modeling & Data Analytics student at Virginia Tech exploring aviation analytics,
+        geospatial visualization, and transportation systems.
+      </p>
     </div>
-    <div class="footer-links">
-      <a href="mailto:hexinyu@example.com">Email</a>
-      <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+    <div class="footer-meta">
+      <div class="footer-links">
+        <a href="mailto:hexinyu@example.com">Email</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      <p>&copy; {year} Hexin Yu</p>
     </div>
   </div>
 </footer>
@@ -19,7 +25,7 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     border-top: 1px solid var(--border);
-    background: #fff;
+    background: #0f172a;
     color: var(--muted);
   }
 
@@ -27,14 +33,25 @@ const year = new Date().getFullYear();
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    min-height: 128px;
-    padding: 30px 0;
-    gap: 18px;
+    min-height: 190px;
+    padding: 44px 0;
+    gap: 48px;
+  }
+
+  .footer-main {
+    max-width: 560px;
+  }
+
+  .footer-main p:last-child,
+  .footer-meta p {
+    color: #94a3b8;
   }
 
   .footer-title {
-    color: var(--text);
-    font-weight: 600;
+    margin-bottom: 10px;
+    color: #f8fafc;
+    font-size: 1.18rem;
+    font-weight: 780;
   }
 
   .footer-links {
@@ -43,12 +60,27 @@ const year = new Date().getFullYear();
     gap: 14px;
   }
 
+  .footer-links a {
+    color: #dbeafe;
+  }
+
+  .footer-meta {
+    display: grid;
+    justify-items: end;
+    gap: 18px;
+  }
+
   @media (max-width: 640px) {
     .footer-inner {
       align-items: flex-start;
       flex-direction: column;
       justify-content: center;
-      padding: 20px 0;
+      padding: 34px 0;
+      gap: 24px;
+    }
+
+    .footer-meta {
+      justify-items: start;
     }
   }
 </style>

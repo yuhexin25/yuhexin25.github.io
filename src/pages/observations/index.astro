@@ -46,4 +46,17 @@ const observations = (await getCollection('observations'))
     margin-top: 6px;
     color: var(--muted);
   }
+
+  .observations-list li {
+    border-radius: 16px;
+    padding-inline: 18px;
+    transition:
+      background 160ms ease,
+      transform 160ms ease;
+  }
+
+  .observations-list li:hover {
+    background: #fff;
+    transform: translateX(4px);
+  }
 </style>

@@ -16,29 +16,59 @@ const featuredProjects = projects.slice(0, 3);
   title="Home"
   description="Hexin Yu is a Computational Modeling & Data Analytics student at Virginia Tech focused on aviation analytics, transportation systems, GIS, and data visualization."
 >
-  <div class="page-shell">
-    <section class="container page-intro home-intro">
-      <p class="page-kicker">Portfolio / aviation analytics / GIS</p>
-      <h1>Hexin Yu</h1>
-      <p class="lead">
-        Computational Modeling & Data Analytics student at Virginia Tech, working where aviation data,
-        transportation systems, geographic visualization, and public datasets meet.
-      </p>
-    </section>
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="page-kicker">Portfolio / aviation analytics / GIS</p>
+        <h1>Hexin Yu</h1>
+        <p class="hero-subtitle">Aviation Analytics · Geospatial Visualization · Transportation Systems</p>
+        <p class="lead">
+          Computational Modeling & Data Analytics student at Virginia Tech, working where aviation data,
+          transportation systems, geographic visualization, and public datasets meet.
+        </p>
+        <div class="button-row">
+          <a class="button" href={`${import.meta.env.BASE_URL}projects`}>View Projects</a>
+          <a class="button secondary" href={`${import.meta.env.BASE_URL}Hexin-Yu-CV.pdf`}>Download CV</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Portfolio focus summary">
+        <p class="panel-label">Current focus</p>
+        <ul>
+          <li>
+            <span>01</span>
+            Flight delay patterns and route risk
+          </li>
+          <li>
+            <span>02</span>
+            Hub-and-spoke airport networks
+          </li>
+          <li>
+            <span>03</span>
+            GIS dashboards for transportation systems
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
 
-    <section class="section">
+  <div class="page-shell home-shell">
+    <section class="section first-section">
       <div class="container section-heading">
-        <h2>Featured Projects</h2>
+        <div>
+          <p class="page-kicker">Selected work</p>
+          <h2>Featured Projects</h2>
+        </div>
         <a href={`${import.meta.env.BASE_URL}projects`}>All projects -></a>
       </div>
-      <div class="container project-list">
-        {featuredProjects.map((project) => <ProjectCard {...project} />)}
+      <div class="container project-list featured-grid">
+        {featuredProjects.map((project) => <ProjectCard {...project} variant="card" />)}
       </div>
     </section>
 
-    <section class="section">
+    <section class="section tint">
       <div class="container two-column">
         <div>
+          <p class="page-kicker">Research frame</p>
           <h2>Research Interests</h2>
           <p class="section-note">
             I am interested in how flight disruptions become spatial patterns, how hub airports shape regional
@@ -57,7 +87,10 @@ const featuredProjects = projects.slice(0, 3);
 
     <section class="section">
       <div class="container section-heading">
-        <h2>Recent Observations</h2>
+        <div>
+          <p class="page-kicker">Field notes</p>
+          <h2>Recent Observations</h2>
+        </div>
         <a href={`${import.meta.env.BASE_URL}observations`}>All observations -></a>
       </div>
       <div class="container">
@@ -78,13 +111,93 @@ const featuredProjects = projects.slice(0, 3);
 </Layout>
 
 <style>
-  .home-intro {
-    min-height: 420px;
-    display: grid;
-    align-content: center;
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 12% 18%, rgba(40, 84, 197, 0.12), transparent 34%),
+      linear-gradient(90deg, rgba(40, 84, 197, 0.06) 1px, transparent 1px),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    background-size: auto, 46px 46px, auto;
+    padding: 92px 0 84px;
   }
 
-  .project-list {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.65fr);
+    gap: 52px;
+    align-items: center;
+  }
+
+  .hero-copy {
+    max-width: 780px;
+  }
+
+  .hero-subtitle {
+    margin-top: 12px;
+    color: var(--accent-dark);
+    font-size: clamp(1rem, 2vw, 1.28rem);
+    font-weight: 760;
+  }
+
+  .hero-panel {
+    border: 1px solid rgba(40, 84, 197, 0.18);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    padding: 26px;
+  }
+
+  .panel-label {
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-panel ul {
+    display: grid;
+    gap: 0;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-panel li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    padding: 15px 0;
+    color: #334155;
+    font-weight: 650;
+  }
+
+  .hero-panel li:first-child {
+    border-top: 0;
+  }
+
+  .hero-panel span {
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.84rem;
+  }
+
+  .home-shell {
+    padding-top: 0;
+  }
+
+  .first-section {
+    border-top: 0;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
     margin-top: 8px;
   }
 
@@ -100,8 +213,13 @@ const featuredProjects = projects.slice(0, 3);
   }
 
   @media (max-width: 760px) {
-    .home-intro {
-      min-height: 320px;
+    .hero-section {
+      padding: 58px 0 50px;
+    }
+
+    .hero-grid,
+    .featured-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
