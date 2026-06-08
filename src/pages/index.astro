@@ -1,9 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../components/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
 
 const featuredProjects = projects.slice(0, 3);
+const readingNotes = (await getCollection('readingNotes')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const latestReadingNote = readingNotes[0];
+const latestReadingHref = latestReadingNote
+  ? `${import.meta.env.BASE_URL}reading-notes/${latestReadingNote.id}`
+  : `${import.meta.env.BASE_URL}reading-notes`;
 ---
 
 <Layout
@@ -100,6 +108,24 @@ const featuredProjects = projects.slice(0, 3);
         </ul>
       </div>
     </section>
+
+    {latestReadingNote && (
+      <section class="section">
+        <div class="container reading-strip">
+          <div>
+            <p class="page-kicker">Currently Reading</p>
+            <h2>
+              <a href={latestReadingHref}>{latestReadingNote.data.title}</a>
+            </h2>
+            <p>{latestReadingNote.data.description}</p>
+          </div>
+          <div class="reading-meta">
+            <span>{latestReadingNote.data.dateRange}</span>
+            <a class="text-link" href={latestReadingHref}>Open note -></a>
+          </div>
+        </div>
+      </section>
+    )}
   </div>
 </Layout>
 
@@ -285,6 +311,53 @@ const featuredProjects = projects.slice(0, 3);
     color: var(--muted);
   }
 
+  .reading-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 34px;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background:
+      linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0) 32%),
+      var(--paper);
+    box-shadow: 0 16px 38px rgba(63, 47, 31, 0.06);
+    padding: 30px;
+  }
+
+  .reading-strip h2 a {
+    color: var(--text);
+  }
+
+  .reading-strip h2 a:hover {
+    color: var(--gold-dark);
+    text-decoration: none;
+  }
+
+  .reading-strip p {
+    max-width: 700px;
+    margin-top: 12px;
+    color: var(--muted);
+  }
+
+  .reading-meta {
+    display: grid;
+    justify-items: end;
+    gap: 10px;
+  }
+
+  .reading-meta span {
+    display: inline-flex;
+    border: 1px solid rgba(245, 158, 11, 0.34);
+    border-radius: 999px;
+    background: var(--gold-soft);
+    color: var(--gold-dark);
+    padding: 6px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86rem;
+    font-weight: 720;
+  }
+
   @media (max-width: 1020px) {
     .hero-grid {
       grid-template-columns: 1fr;
@@ -302,6 +375,15 @@ const featuredProjects = projects.slice(0, 3);
   @media (max-width: 700px) {
     .featured-grid {
       grid-template-columns: 1fr;
+    }
+
+    .reading-strip {
+      grid-template-columns: 1fr;
+      padding: 24px;
+    }
+
+    .reading-meta {
+      justify-items: start;
     }
   }
 

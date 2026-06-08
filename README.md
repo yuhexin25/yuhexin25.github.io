@@ -43,7 +43,13 @@ src/
     cv.astro
     index.astro
     projects.astro
+    reading-notes/
+      [id].astro
+      index.astro
     research.astro
+  content/
+    reading-notes/
+      week-1-airline-competition-sustainability.md
   styles/
     global.css
 public/
@@ -106,7 +112,7 @@ jobs:
 
 ## Customization Notes
 
-- Replace placeholder contact links in `src/components/Footer.astro` and `src/pages/cv.astro`.
 - The CV download is served from `public/Hexin-Yu-CV.pdf`.
 - Archived sample research notes live in `archived-content/observations/` and are not shown publicly.
 - Update project links in `src/data/projects.ts`.
+- Add future reading notes as Markdown files in `src/content/reading-notes/`; each file should include `title`, `description`, `date`, `dateRange`, and `sources` frontmatter.
