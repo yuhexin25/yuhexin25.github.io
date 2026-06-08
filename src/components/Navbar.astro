@@ -1,0 +1,116 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About / CV' },
+];
+
+const base = import.meta.env.BASE_URL;
+const basePath = base.replace(/\/$/, '');
+const rawPath = Astro.url.pathname.startsWith(basePath)
+  ? Astro.url.pathname.slice(basePath.length) || '/'
+  : Astro.url.pathname;
+const currentPath = rawPath.replace(/\/$/, '') || '/';
+const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
+---
+
+<header class="site-header">
+  <nav class="container nav" aria-label="Primary navigation">
+    <a class="brand" href={withBase('/')}>
+      <span class="brand-mark">HY</span>
+      <span>Hexin Yu</span>
+    </a>
+    <div class="nav-links">
+      {navItems.map((item) => {
+        const itemPath = item.href.replace(/\/$/, '') || '/';
+        const isActive = currentPath === itemPath || (item.href !== '/' && currentPath.startsWith(itemPath));
+        return (
+          <a href={withBase(item.href)} aria-current={isActive ? 'page' : undefined}>
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    gap: 20px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-weight: 760;
+  }
+
+  .brand:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    display: inline-grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .nav-links a {
+    border-radius: 6px;
+    color: #344150;
+    padding: 8px 10px;
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+
+  .nav-links a:hover,
+  .nav-links a[aria-current='page'] {
+    background: var(--surface-strong);
+    color: var(--accent-dark);
+    text-decoration: none;
+  }
+
+  @media (max-width: 660px) {
+    .nav {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 12px 0;
+      gap: 10px;
+    }
+
+    .nav-links {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>

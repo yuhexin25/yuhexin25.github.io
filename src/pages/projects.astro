@@ -1,0 +1,56 @@
+---
+import Layout from '../components/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+  {
+    title: 'U.S. Flight Delay Analysis',
+    description: 'Analyzes how delays vary across airports, carriers, seasons, time of day, and regional markets using public U.S. aviation performance data.',
+    techStack: ['Python', 'Pandas', 'NumPy', 'Altair', 'BTS'],
+    status: 'completed',
+    github: 'https://github.com/',
+  },
+  {
+    title: 'U.S. Airline Hub Atlas',
+    description: 'Maps major airline hubs, route geography, and hub concentration patterns to make the national air transportation network easier to inspect.',
+    techStack: ['GeoJSON', 'Leaflet', 'QGIS', 'JavaScript'],
+    status: 'ongoing',
+    github: 'https://github.com/',
+  },
+  {
+    title: 'Live Delay Analysis / Route Risk',
+    description: 'Prototype for route-level delay risk scoring that combines airport conditions, historical reliability, and interactive visual summaries.',
+    techStack: ['Astro', 'APIs', 'Python', 'Observable Plot'],
+    status: 'prototype',
+    github: 'https://github.com/',
+  },
+  {
+    title: 'Transportation Network Coursework Repository',
+    description: 'A future collection of modeling notebooks, maps, and short technical notes from transportation systems and data science coursework.',
+    techStack: ['Python', 'NetworkX', 'GIS', 'Markdown'],
+    status: 'ongoing',
+  },
+];
+---
+
+<Layout
+  title="Projects"
+  description="Project portfolio for Hexin Yu, including aviation analytics, airport hub mapping, live delay analysis, route risk, and transportation data science work."
+>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Research and Coursework</p>
+      <h1>Projects</h1>
+      <p>
+        Selected technical projects focused on aviation systems, geographic data, transportation networks,
+        and reproducible analysis workflows.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container grid">
+      {projects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+</Layout>

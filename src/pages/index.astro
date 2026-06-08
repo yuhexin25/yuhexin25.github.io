@@ -1,0 +1,184 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../components/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const featuredProjects = [
+  {
+    title: 'U.S. Flight Delay Analysis',
+    description: 'Exploratory analysis of delay patterns across carriers, airports, seasons, and regional markets using public aviation datasets.',
+    techStack: ['Python', 'Pandas', 'Altair', 'BTS Data'],
+    status: 'completed',
+    github: 'https://github.com/',
+  },
+  {
+    title: 'U.S. Airline Hub Atlas',
+    description: 'A geospatial reference for major U.S. airline hubs, route concentration, and regional network structure.',
+    techStack: ['GIS', 'GeoJSON', 'Leaflet', 'Data Visualization'],
+    status: 'ongoing',
+    github: 'https://github.com/',
+  },
+  {
+    title: 'Live Delay Analysis / Route Risk',
+    description: 'Prototype dashboard concept for comparing route-level delay risk and disruption indicators in near real time.',
+    techStack: ['Astro', 'APIs', 'Python', 'Charts'],
+    status: 'prototype',
+    github: 'https://github.com/',
+  },
+];
+---
+
+<Layout
+  title="Home"
+  description="Hexin Yu is a Computational Modeling & Data Analytics student at Virginia Tech focused on aviation analytics, GIS, transportation networks, and data visualization."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Student Portfolio</p>
+        <h1>Hexin Yu</h1>
+        <p class="lead">
+          Computational Modeling & Data Analytics student at Virginia Tech studying aviation data analysis,
+          geospatial visualization, transportation networks, and data science.
+        </p>
+        <div class="button-row">
+          <a class="button" href={`${import.meta.env.BASE_URL}projects`}>View projects</a>
+          <a class="button secondary" href={`${import.meta.env.BASE_URL}about`}>About / CV</a>
+        </div>
+      </div>
+      <aside class="research-box" aria-label="Research focus areas">
+        <h2>Research Interests</h2>
+        <ul>
+          <li>Aviation delay analysis and operational reliability</li>
+          <li>Geospatial systems and airport network mapping</li>
+          <li>Transportation data pipelines and dashboards</li>
+          <li>Applied modeling for public mobility datasets</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-heading">
+      <div>
+        <p class="eyebrow">Selected Work</p>
+        <h2>Featured Projects</h2>
+      </div>
+      <a href={`${import.meta.env.BASE_URL}projects`}>All projects</a>
+    </div>
+    <div class="container grid">
+      {featuredProjects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-column">
+      <div>
+        <p class="eyebrow">Observations</p>
+        <h2>Recent Observations</h2>
+        <ul class="list post-list">
+          {posts.map((post) => (
+            <li class="list-item">
+              <a href={`${import.meta.env.BASE_URL}blog/${post.id}`}>{post.data.title}</a>
+              <p class="meta">
+                {post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </p>
+              <p>{post.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <aside class="card">
+        <h2>Current Direction</h2>
+        <p>
+          I am especially interested in how delays propagate through hub-and-spoke networks,
+          how regional airports experience reliability differently, and how clear visual interfaces can make
+          transportation datasets easier to reason about.
+        </p>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--border);
+    background:
+      linear-gradient(90deg, rgba(31, 111, 178, 0.08) 1px, transparent 1px),
+      linear-gradient(180deg, #f8fbfe 0%, #ffffff 75%);
+    background-size: 44px 44px, auto;
+    padding: 78px 0 64px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    gap: 42px;
+    align-items: center;
+  }
+
+  .research-box {
+    border-left: 4px solid var(--accent);
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 18px 50px rgba(22, 41, 64, 0.08);
+  }
+
+  .research-box h2 {
+    font-size: 1.25rem;
+  }
+
+  .research-box ul {
+    display: grid;
+    gap: 10px;
+    margin: 16px 0 0;
+    padding-left: 20px;
+    color: var(--muted);
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .post-list {
+    margin-top: 22px;
+  }
+
+  .post-list a {
+    font-weight: 700;
+  }
+
+  .post-list p:last-child {
+    color: var(--muted);
+  }
+
+  .card p {
+    margin-top: 14px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      padding: 52px 0 42px;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

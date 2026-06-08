@@ -1,0 +1,119 @@
+---
+import Layout from '../components/Layout.astro';
+
+const skills = [
+  'Python',
+  'Pandas',
+  'NumPy',
+  'SQL',
+  'JavaScript',
+  'Astro',
+  'GIS / GeoJSON',
+  'QGIS',
+  'Data visualization',
+  'Dashboard design',
+];
+---
+
+<Layout
+  title="About / CV"
+  description="About Hexin Yu: education, research interests, technical skills, selected projects, and contact links."
+>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">About / CV</p>
+      <h1>Hexin Yu</h1>
+      <p>
+        Computational Modeling & Data Analytics student at Virginia Tech interested in aviation analytics,
+        geospatial visualization, transportation networks, and applied data science.
+      </p>
+      <div class="button-row">
+        <a class="button" href={`${import.meta.env.BASE_URL}Hexin-Yu-CV.pdf`}>Download CV</a>
+        <a class="button secondary" href="mailto:hexinyu@example.com">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container cv-grid">
+      <article>
+        <h2>Education</h2>
+        <div class="cv-entry">
+          <h3>Virginia Tech</h3>
+          <p class="meta">Computational Modeling & Data Analytics</p>
+          <p>
+            Coursework and project interests include data science, transportation systems, geospatial analysis,
+            modeling, and visual analytics.
+          </p>
+        </div>
+      </article>
+
+      <article>
+        <h2>Research Interests</h2>
+        <ul class="plain-list">
+          <li>Aviation delay propagation and operational reliability</li>
+          <li>Airport hub systems and regional accessibility</li>
+          <li>Geospatial visualization for transportation networks</li>
+          <li>Interactive dashboards for public data exploration</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Technical Skills</h2>
+        <div class="tag-list">
+          {skills.map((skill) => <span class="tag">{skill}</span>)}
+        </div>
+      </article>
+
+      <article>
+        <h2>Selected Projects</h2>
+        <ul class="plain-list">
+          <li>U.S. Flight Delay Analysis</li>
+          <li>U.S. Airline Hub Atlas</li>
+          <li>Live Delay Analysis / Route Risk</li>
+          <li>Transportation Network Coursework Repository</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Contact</h2>
+        <ul class="plain-list">
+          <li><a href="mailto:hexinyu@example.com">hexinyu@example.com</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 44px;
+  }
+
+  .cv-entry {
+    margin-top: 14px;
+  }
+
+  .cv-entry p:last-child {
+    margin-top: 10px;
+    color: var(--muted);
+  }
+
+  .plain-list {
+    display: grid;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding-left: 20px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 760px) {
+    .cv-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  techStack: string[];
+  status: 'completed' | 'ongoing' | 'prototype' | string;
+  github?: string;
+  demo?: string;
+}
+
+const { title, description, techStack, status, github, demo } = Astro.props;
+---
+
+<article class="project-card">
+  <div>
+    <div class="status">{status}</div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+  <div class="tag-list" aria-label={`${title} technology stack`}>
+    {techStack.map((tech) => <span class="tag">{tech}</span>)}
+  </div>
+  <div class="project-links">
+    {github ? <a href={github} target="_blank" rel="noreferrer">GitHub</a> : <span>GitHub coming soon</span>}
+    {demo ? <a href={demo} target="_blank" rel="noreferrer">Live demo</a> : <span>Demo pending</span>}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    min-height: 300px;
+    align-content: space-between;
+    gap: 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    padding: 22px;
+  }
+
+  .status {
+    display: inline-flex;
+    margin-bottom: 12px;
+    border: 1px solid #c9dceb;
+    border-radius: 999px;
+    background: #f2f7fc;
+    color: var(--accent-dark);
+    padding: 3px 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--muted);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    font-size: 0.92rem;
+    font-weight: 650;
+  }
+
+  .project-links span {
+    color: var(--muted);
+  }
+</style>
