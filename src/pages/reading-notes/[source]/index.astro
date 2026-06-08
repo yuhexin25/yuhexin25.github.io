@@ -1,0 +1,150 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import { getLibrarySource, librarySources } from '../../../data/researchLibrary';
+
+export function getStaticPaths() {
+  return librarySources.map((source) => ({
+    params: { source: source.slug },
+    props: { source },
+  }));
+}
+
+interface Props {
+  source: (typeof librarySources)[number];
+}
+
+const { source } = Astro.props;
+const notes = (await getCollection('reading-notes'))
+  .filter((note) => note.data.source.slug === source.slug)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const sourceInfo = getLibrarySource(source.slug) || source;
+const noteHref = (noteSlug: string) => `${import.meta.env.BASE_URL}reading-notes/${source.slug}/${noteSlug}`;
+---
+
+<Layout
+  title={`${sourceInfo.name} Research Notes`}
+  description={`Research notes from ${sourceInfo.name}, organized by topic for Hexin Yu's aviation research library.`}
+>
+  <div class="source-page">
+    <header class="source-hero">
+      <div class="container source-intro">
+        <p class="page-kicker">{sourceInfo.category}</p>
+        <h1>{sourceInfo.name}</h1>
+        <p class="lead">
+          Source-specific notes organized by topic, with summaries, findings, evidence, reflections,
+          and research questions for future aviation analytics projects.
+        </p>
+      </div>
+    </header>
+
+    <section class="container source-notes" aria-label={`${sourceInfo.name} notes`}>
+      {notes.length > 0 ? (
+        notes.map((note) => (
+          <article class="note-card">
+            <div class="note-topic">{note.data.topic}</div>
+            <h2>
+              <a href={noteHref(note.data.noteSlug)}>{note.data.title}</a>
+            </h2>
+            <p>{note.data.description}</p>
+            <a class="text-link" href={noteHref(note.data.noteSlug)}>Open note -></a>
+          </article>
+        ))
+      ) : (
+        <div class="empty-state">
+          <p class="page-kicker">No notes yet</p>
+          <h2>Future {sourceInfo.name} notes will live here.</h2>
+          <p>
+            This source page is reserved for future research notes, reports, articles, and literature
+            connected to aviation analytics and transportation systems.
+          </p>
+        </div>
+      )}
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .source-page {
+    padding-bottom: 92px;
+  }
+
+  .source-hero {
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 82% 16%, rgba(245, 158, 11, 0.18), transparent 28rem),
+      linear-gradient(135deg, #fffdf8 0%, #fff7ed 50%, #eff6ff 100%);
+    padding: 72px 0 64px;
+  }
+
+  .source-intro {
+    max-width: 900px;
+  }
+
+  .source-intro h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+  }
+
+  .source-notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding-top: 48px;
+  }
+
+  .note-card,
+  .empty-state {
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--paper);
+    box-shadow: 0 14px 32px rgba(63, 47, 31, 0.055);
+    padding: 26px;
+  }
+
+  .note-card h2 {
+    margin-top: 12px;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+  }
+
+  .note-card h2 a {
+    color: var(--text);
+  }
+
+  .note-card h2 a:hover {
+    color: var(--gold-dark);
+    text-decoration: none;
+  }
+
+  .note-card p,
+  .empty-state p:not(.page-kicker) {
+    margin-top: 12px;
+    color: var(--muted);
+  }
+
+  .note-topic {
+    width: fit-content;
+    border: 1px solid rgba(245, 158, 11, 0.32);
+    border-radius: 999px;
+    background: var(--gold-soft);
+    color: var(--gold-dark);
+    padding: 5px 10px;
+    font-size: 0.84rem;
+    font-weight: 760;
+  }
+
+  .empty-state {
+    grid-column: 1 / -1;
+    max-width: 760px;
+  }
+
+  @media (max-width: 760px) {
+    .source-hero {
+      padding: 54px 0 48px;
+    }
+
+    .source-notes {
+      grid-template-columns: 1fr;
+      padding-top: 34px;
+    }
+  }
+</style>

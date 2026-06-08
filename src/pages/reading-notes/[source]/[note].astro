@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
-import Layout from '../../components/Layout.astro';
+import Layout from '../../../components/Layout.astro';
 
 export async function getStaticPaths() {
   const notes = await getCollection('reading-notes');
 
   return notes.map((note) => ({
-    params: { id: note.slug },
+    params: { source: note.data.source.slug, note: note.data.noteSlug },
     props: { note },
   }));
 }
@@ -18,32 +18,27 @@ interface Props {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
+const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.slug}`;
 ---
 
-<Layout title={note.data.title} description={note.data.description}>
+<Layout title={`${note.data.title} | ${note.data.source.name}`} description={note.data.description}>
   <article class="note-page">
     <header class="note-hero">
       <div class="container note-header">
-        <p class="page-kicker">Reading Notes</p>
+        <p class="page-kicker">{note.data.source.category} / {note.data.source.name}</p>
         <h1>{note.data.title}</h1>
         <p class="lead">{note.data.description}</p>
-        <div class="note-date">{note.data.dateRange}</div>
+        <div class="note-topic">{note.data.topic}</div>
       </div>
     </header>
 
     <div class="container note-layout">
-      <aside class="source-panel" aria-label="Sources">
-        <h2>Sources</h2>
-        <ol>
-          {note.data.sources.map((source) => (
-            <li>
-              <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
-              {source.authors && <span>{source.authors}</span>}
-              {source.publisher && <span>{source.publisher}</span>}
-              {source.note && <em>{source.note}</em>}
-            </li>
-          ))}
-        </ol>
+      <aside class="source-panel" aria-label="Source details">
+        <h2>Source</h2>
+        <a href={note.data.source.url} target="_blank" rel="noopener noreferrer">{note.data.sourceTitle}</a>
+        {note.data.authors && <span>{note.data.authors}</span>}
+        <span>{note.data.source.name}</span>
+        <a class="source-link" href={sourceHref}>All {note.data.source.name} notes -></a>
       </aside>
 
       <div class="reading-content">
@@ -74,7 +69,7 @@ const { Content } = await render(note);
     font-size: clamp(2.6rem, 6vw, 5.2rem);
   }
 
-  .note-date {
+  .note-topic {
     display: inline-flex;
     margin-top: 24px;
     border: 1px solid rgba(245, 158, 11, 0.34);
@@ -82,7 +77,6 @@ const { Content } = await render(note);
     background: var(--gold-soft);
     color: var(--gold-dark);
     padding: 6px 12px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.86rem;
     font-weight: 720;
   }
@@ -110,29 +104,26 @@ const { Content } = await render(note);
     color: var(--gold-dark);
   }
 
-  .source-panel ol {
-    display: grid;
-    gap: 16px;
-    margin: 18px 0 0;
-    padding-left: 20px;
+  .source-panel a:first-of-type {
+    display: block;
+    margin-top: 14px;
+    color: var(--text);
+    font-weight: 760;
   }
 
-  .source-panel li {
+  .source-panel span {
+    display: block;
+    margin-top: 8px;
     color: var(--muted);
     font-size: 0.92rem;
     line-height: 1.55;
   }
 
-  .source-panel a {
-    display: block;
-    color: var(--text);
-    font-weight: 700;
-  }
-
-  .source-panel span,
-  .source-panel em {
-    display: block;
-    margin-top: 4px;
+  .source-link {
+    display: inline-flex;
+    margin-top: 18px;
+    font-size: 0.94rem;
+    font-weight: 720;
   }
 
   .reading-content {
@@ -156,12 +147,6 @@ const { Content } = await render(note);
     border-top: 0;
   }
 
-  .reading-content :global(h3) {
-    margin-top: 28px;
-    color: var(--warm-ink);
-    font-size: 1.18rem;
-  }
-
   .reading-content :global(p) {
     margin-top: 16px;
   }
@@ -171,20 +156,6 @@ const { Content } = await render(note);
     gap: 12px;
     margin: 18px 0 0;
     padding-left: 22px;
-  }
-
-  .reading-content :global(blockquote) {
-    margin: 18px 0;
-    border-left: 4px solid var(--gold);
-    background: #fff8eb;
-    border-radius: 0 14px 14px 0;
-    padding: 16px 18px;
-    color: var(--warm-ink);
-    font-size: 1rem;
-  }
-
-  .reading-content :global(blockquote p) {
-    margin: 0;
   }
 
   @media (max-width: 900px) {

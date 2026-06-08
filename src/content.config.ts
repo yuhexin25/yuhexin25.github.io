@@ -6,17 +6,17 @@ const readingNotes = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
-    dateRange: z.string(),
-    sources: z.array(
-      z.object({
-        title: z.string(),
-        authors: z.string().optional(),
-        publisher: z.string().optional(),
-        url: z.string().url(),
-        note: z.string().optional(),
-      }),
-    ),
+    source: z.object({
+      name: z.string(),
+      slug: z.string(),
+      category: z.enum(['Industry Reports', 'News & Analysis', 'Academic Literature']),
+      url: z.string().url(),
+    }),
+    topic: z.string(),
+    noteSlug: z.string(),
+    sourceTitle: z.string(),
+    authors: z.string().optional(),
+    sourceDate: z.string().optional(),
   }),
 });
 

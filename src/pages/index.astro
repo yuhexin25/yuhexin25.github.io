@@ -6,11 +6,11 @@ import { projects } from '../data/projects';
 
 const featuredProjects = projects.slice(0, 3);
 const readingNotes = (await getCollection('reading-notes')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  (a, b) => `${a.data.source.name} ${a.data.title}`.localeCompare(`${b.data.source.name} ${b.data.title}`),
 );
-const latestReadingNote = readingNotes[0];
-const latestReadingHref = latestReadingNote
-  ? `${import.meta.env.BASE_URL}reading-notes/${latestReadingNote.slug}`
+const featuredLibraryNote = readingNotes[0];
+const featuredLibraryHref = featuredLibraryNote
+  ? `${import.meta.env.BASE_URL}reading-notes/${featuredLibraryNote.data.source.slug}/${featuredLibraryNote.data.noteSlug}`
   : `${import.meta.env.BASE_URL}reading-notes`;
 ---
 
@@ -109,19 +109,19 @@ const latestReadingHref = latestReadingNote
       </div>
     </section>
 
-    {latestReadingNote && (
+    {featuredLibraryNote && (
       <section class="section">
         <div class="container reading-strip">
           <div>
-            <p class="page-kicker">Currently Reading</p>
+            <p class="page-kicker">Research Library</p>
             <h2>
-              <a href={latestReadingHref}>{latestReadingNote.data.title}</a>
+              <a href={featuredLibraryHref}>{featuredLibraryNote.data.title}</a>
             </h2>
-            <p>{latestReadingNote.data.description}</p>
+            <p>{featuredLibraryNote.data.description}</p>
           </div>
           <div class="reading-meta">
-            <span>{latestReadingNote.data.dateRange}</span>
-            <a class="text-link" href={latestReadingHref}>Open note -></a>
+            <span>{featuredLibraryNote.data.source.name}</span>
+            <a class="text-link" href={`${import.meta.env.BASE_URL}reading-notes`}>Open library -></a>
           </div>
         </div>
       </section>

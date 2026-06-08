@@ -39,17 +39,23 @@ src/
     ProjectCard.astro
   data/
     projects.ts
+    researchLibrary.ts
   pages/
     cv.astro
     index.astro
     projects.astro
     reading-notes/
-      [id].astro
+      [source]/
+        [note].astro
+        index.astro
       index.astro
     research.astro
   content/
     reading-notes/
-      week-1-airline-competition-sustainability.md
+      cbs-news/
+        spirit-airlines-market-exit.md
+      cirium/
+        flight-emissions-review-2025.md
   styles/
     global.css
 public/
@@ -115,4 +121,5 @@ jobs:
 - The CV download is served from `public/Hexin-Yu-CV.pdf`.
 - Archived sample research notes live in `archived-content/observations/` and are not shown publicly.
 - Update project links in `src/data/projects.ts`.
-- Add future reading notes as Markdown files in `src/content/reading-notes/`; each file should include `title`, `description`, `date`, `dateRange`, and `sources` frontmatter.
+- Add future research library notes as Markdown files under `src/content/reading-notes/{source-slug}/`; each file should include `title`, `description`, `source`, `topic`, `noteSlug`, and `sourceTitle` frontmatter.
+- Add new source categories or source pages in `src/data/researchLibrary.ts`.
