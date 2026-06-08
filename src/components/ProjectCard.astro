@@ -5,7 +5,6 @@ interface Props {
   description: string;
   tags: string[];
   href?: string;
-  githubHref?: string;
   image?: string;
   imageAlt?: string;
   variant?: 'row' | 'card';
@@ -17,7 +16,6 @@ const {
   description,
   tags,
   href,
-  githubHref,
   image,
   imageAlt = `${title} project preview`,
   variant = 'card',
@@ -49,7 +47,6 @@ const imageSrc = image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}
     </ul>
     <div class="project-actions">
       {href && <a class="project-button project-button-primary" href={href} target="_blank" rel="noopener noreferrer">Live Demo</a>}
-      {githubHref && <a class="project-button" href={githubHref} target="_blank" rel="noopener noreferrer">GitHub</a>}
     </div>
   </div>
 </article>

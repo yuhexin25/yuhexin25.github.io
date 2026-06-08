@@ -7,8 +7,7 @@ const themes = [
     title: 'Hub Airports & Network Disruption',
     questions: [
       'How do hub airports absorb or amplify disruption?',
-      'When does concentration create recovery capacity?',
-      'When does it turn one delay into a broader network problem?',
+      'How does network concentration affect recovery?',
     ],
   },
   {
@@ -16,42 +15,37 @@ const themes = [
     title: 'Regional Airports & Accessibility',
     questions: [
       'Why do regional airports experience delays differently?',
-      'How do limited route options affect passenger reliability?',
-      'What does airport access mean for smaller communities?',
+      'How do limited route options affect reliability?',
     ],
   },
   {
     number: '03',
     title: 'Delay Propagation & Resilience',
     questions: [
-      'How do delays move across airline networks?',
+      'How do delays move through airline networks?',
       'What makes an aviation network resilient?',
-      'How can historical data and live signals support route-risk analysis?',
     ],
   },
 ];
 
 const methods = [
-  'GIS',
+  'Data Analysis',
+  'Statistical Modeling',
   'Network Analysis',
-  'Flight Delay Data',
   'Interactive Visualization',
-  'Real-time APIs',
-  'Transportation Analytics',
 ];
 
 const futureDirections = [
   'Live route-risk evaluation',
-  'Hub vs regional airport comparison',
   'Delay propagation visualization',
+  'Hub vs regional airport comparison',
   'Aviation network resilience metrics',
-  'Airport accessibility and regional development',
 ];
 ---
 
 <Layout
   title="Research"
-  description="Research questions by Hexin Yu on aviation delay propagation, hub and regional airport performance, network resilience, GIS, and transportation systems."
+  description="Hexin Yu's research agenda on aviation systems, hub airports, regional accessibility, delay propagation, and network resilience."
 >
   <div class="research-page">
     <section class="research-hero">
@@ -102,8 +96,8 @@ const futureDirections = [
           <p class="page-kicker">Methods / Tools</p>
           <h2 id="methods-heading">Analytical toolkit</h2>
           <p>
-            I use spatial, network, and visualization methods to connect public aviation data with interpretable
-            research questions.
+            I use data analysis, statistical modeling, network analysis, and interactive visualization to connect
+            aviation datasets with interpretable research questions.
           </p>
         </div>
         <div class="method-tags">
@@ -328,7 +322,7 @@ const futureDirections = [
 
   .future-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
     margin: 0;
     padding: 0;

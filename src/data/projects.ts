@@ -8,18 +8,16 @@ export const projects = [
     image: 'project-previews/hub-atlas.svg',
     imageAlt: 'Stylized route map preview for the U.S. Airline Hub Atlas project.',
     href: 'https://yuhexin25-oss.github.io/us-airline-hub-atlas/',
-    githubHref: 'https://github.com/yuhexin25-oss/us-airline-hub-atlas',
   },
   {
     title: 'U.S. Flight Delay Analysis',
     year: '2026',
     description:
       'Exploratory analysis of U.S. flight delays, cancellations, and disruption patterns using public aviation datasets.',
-    tags: ['flight delay', 'BTS data', 'transportation analytics'],
+    tags: ['flight delay', 'BTS data', 'data analysis'],
     image: 'project-previews/flight-delay.svg',
     imageAlt: 'Stylized dashboard preview for the U.S. Flight Delay Analysis project.',
     href: 'https://yuhexin25-oss.github.io/usflightdelay/',
-    githubHref: 'https://github.com/yuhexin25-oss/usflightdelay',
   },
   {
     title: 'Live Delay Analysis / Route Risk',
@@ -30,7 +28,6 @@ export const projects = [
     image: 'project-previews/route-risk.svg',
     imageAlt: 'Stylized live route risk map preview with airport nodes and alerts.',
     href: 'https://yuhexin25-oss.github.io/livedelayanalysis/',
-    githubHref: 'https://github.com/yuhexin25-oss/livedelayanalysis',
   },
 ];
 

@@ -1,71 +1,147 @@
 ---
 import Layout from '../components/Layout.astro';
-import { projects } from '../data/projects';
+
+const coursework = [
+  'Calculus I',
+  'Calculus II',
+  'General Physics',
+  'Statistical Methods',
+  'Intro to Python',
+  'First-Year Writing',
+];
 
 const skills = [
   'Python',
-  'Pandas',
-  'SQL',
-  'JavaScript',
-  'Astro',
-  'GIS',
-  'GeoJSON',
-  'QGIS',
-  'data visualization',
-  'transportation analytics',
+  'Data Analysis',
+  'Statistics',
+  'Scientific Computing',
+  'Team Leadership',
+  'Public Speaking',
+];
+
+const experiences = [
+  {
+    title: 'IBM Skills Build AI Experiential Learning Lab',
+    role: 'Team Leader',
+    detail: 'Led a 4-member team developing a healthcare chatbot.',
+  },
+  {
+    title: 'BITS (Building Impactful Tech with Students)',
+    role: 'Developer - Turing Note Project',
+    detail: 'Selected through a competitive interview process.',
+  },
+  {
+    title: 'Beijing No. 4 High School Student Union',
+    role: 'Head of Finance',
+  },
+];
+
+const activities = [
+  'Virginia Tech Design Build Fly Club',
+  'CMDA Club',
+  'Virginia Tech Chinese Soccer Club',
+  'Beijing No.4 High School Soccer Team Captain',
+];
+
+const volunteerWork = [
+  'Yulan Primary School Volunteer Head Teacher',
+  'Beijing Planetarium Volunteer Docent',
+];
+
+const awards = [
+  'Best Speaker Award',
+  'Best All-Around Student Award',
+  'High School Soccer League Champion',
 ];
 ---
 
 <Layout
   title="CV"
-  description="Hexin Yu's CV with education, technical skills, selected aviation analytics projects, and a downloadable resume PDF."
+  description="Hexin Yu's CV with education, experience, coursework, skills, activities, volunteer work, awards, and contact information."
 >
   <div class="page-shell">
-    <header class="container page-intro">
+    <header class="container page-intro cv-intro">
       <p class="page-kicker">CV</p>
       <h1>Hexin Yu</h1>
       <p class="lead">
-        Computational Modeling & Data Analytics student at Virginia Tech with interests in aviation analytics,
-        GIS, transportation networks, and data visualization.
+        Computational Modeling & Data Analytics student at Virginia Tech interested in aviation analytics,
+        transportation systems, data visualization, and network analysis.
       </p>
       <a class="button" href="/hexinyu/Hexin-Yu-CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
     </header>
 
-    <section class="container cv-list">
+    <section class="container cv-list" aria-label="CV details">
       <article>
         <h2>Education</h2>
-        <div>
-          <h3>Virginia Tech</h3>
-          <p>Computational Modeling & Data Analytics student</p>
-          <p>Focus: aviation analytics, transportation systems, GIS, and data visualization.</p>
+        <div class="entry-stack">
+          <div>
+            <h3>Virginia Tech</h3>
+            <p>B.S. Computational Modeling & Data Analytics</p>
+            <p>Expected Graduation: 2029</p>
+          </div>
+          <div>
+            <h3>Beijing No. 4 High School</h3>
+          </div>
         </div>
       </article>
 
       <article>
-        <h2>Technical Skills</h2>
-        <div class="tag-row">
-          {skills.map((skill) => <span>{skill}</span>)}
-        </div>
-      </article>
-
-      <article>
-        <h2>Selected Projects</h2>
-        <ul class="quiet-list">
-          {projects.map((project) => (
-            <li>
-              <a href={project.href} target="_blank" rel="noopener noreferrer">{project.title}</a>
-              <span>{project.year}</span>
-            </li>
+        <h2>Experience</h2>
+        <div class="entry-stack">
+          {experiences.map((experience) => (
+            <div>
+              <h3>{experience.title}</h3>
+              <p class="role">{experience.role}</p>
+              {experience.detail && <p>{experience.detail}</p>}
+            </div>
           ))}
+        </div>
+      </article>
+
+      <article>
+        <h2>Coursework & Skills</h2>
+        <div class="skills-layout">
+          <div>
+            <h3>Completed Coursework</h3>
+            <div class="tag-row">
+              {coursework.map((item) => <span>{item}</span>)}
+            </div>
+          </div>
+          <div>
+            <h3>Skills</h3>
+            <div class="tag-row">
+              {skills.map((skill) => <span>{skill}</span>)}
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article>
+        <h2>Activities</h2>
+        <ul class="quiet-list compact-list">
+          {activities.map((activity) => <li>{activity}</li>)}
+        </ul>
+      </article>
+
+      <article>
+        <h2>Volunteer Work</h2>
+        <ul class="quiet-list compact-list">
+          {volunteerWork.map((work) => <li>{work}</li>)}
+        </ul>
+      </article>
+
+      <article>
+        <h2>Awards</h2>
+        <ul class="quiet-list compact-list">
+          {awards.map((award) => <li>{award}</li>)}
         </ul>
       </article>
 
       <article>
         <h2>Contact</h2>
-        <ul class="quiet-list">
-          <li><a href="mailto:hexinyu@example.com">hexinyu@example.com</a></li>
-          <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <ul class="quiet-list contact-list">
+          <li><a href="mailto:yuhexin25@vt.edu">yuhexin25@vt.edu</a></li>
+          <li><a href="https://github.com/yuhexin25-oss" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
       </article>
     </section>
@@ -73,6 +149,10 @@ const skills = [
 </Layout>
 
 <style>
+  .cv-intro .button {
+    margin-top: 28px;
+  }
+
   .cv-list {
     display: grid;
     gap: 0;
@@ -80,46 +160,54 @@ const skills = [
 
   .cv-list article {
     display: grid;
-    grid-template-columns: minmax(220px, 0.36fr) minmax(0, 0.64fr);
+    grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
     gap: 36px;
     border-top: 1px solid var(--border);
     background: linear-gradient(90deg, rgba(255, 248, 235, 0.82), transparent);
-    padding: 28px 0;
+    padding: 30px 0;
   }
 
   .cv-list p {
     color: var(--muted);
   }
 
-  .page-intro .button {
-    margin-top: 28px;
-  }
-
-  .cv-list .quiet-list li {
+  .entry-stack {
     display: grid;
-    min-height: 96px;
-    gap: 8px;
+    gap: 22px;
   }
 
-  .cv-list .quiet-list a {
+  .role {
+    color: var(--gold-dark);
+    font-weight: 720;
+  }
+
+  .skills-layout {
+    display: grid;
+    gap: 28px;
+  }
+
+  .skills-layout h3 {
+    margin-bottom: 4px;
+  }
+
+  .compact-list li,
+  .contact-list li {
+    min-height: auto;
+  }
+
+  .contact-list a {
     color: var(--text);
     font-weight: 720;
   }
 
-  .cv-list .quiet-list a:hover {
+  .contact-list a:hover {
     color: var(--gold-dark);
-  }
-
-  .cv-list .quiet-list span {
-    color: var(--muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.88rem;
   }
 
   @media (max-width: 760px) {
     .cv-list article {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 14px;
     }
   }
 </style>
