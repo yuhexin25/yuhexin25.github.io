@@ -1,0 +1,18 @@
+[
+  {"city":"Vancouver","country":"Canada","stadium":"Vancouver Stadium","airportCodes":["YVR"],"matches":7,"groupMatches":5,"knockoutMatches":2,"lat":49.2827,"lon":-123.1207},
+  {"city":"Toronto","country":"Canada","stadium":"Toronto Stadium","airportCodes":["YYZ"],"matches":6,"groupMatches":5,"knockoutMatches":1,"lat":43.6532,"lon":-79.3832},
+  {"city":"Mexico City","country":"Mexico","stadium":"Mexico City Stadium","airportCodes":["MEX"],"matches":5,"groupMatches":3,"knockoutMatches":2,"lat":19.4326,"lon":-99.1332},
+  {"city":"Guadalajara","country":"Mexico","stadium":"Guadalajara Stadium","airportCodes":["GDL"],"matches":4,"groupMatches":4,"knockoutMatches":0,"lat":20.6597,"lon":-103.3496},
+  {"city":"Monterrey","country":"Mexico","stadium":"Monterrey Stadium","airportCodes":["MTY"],"matches":4,"groupMatches":3,"knockoutMatches":1,"lat":25.6866,"lon":-100.3161},
+  {"city":"Atlanta","country":"United States","stadium":"Atlanta Stadium","airportCodes":["ATL"],"matches":8,"groupMatches":5,"knockoutMatches":3,"lat":33.7490,"lon":-84.3880},
+  {"city":"Boston","country":"United States","stadium":"Boston Stadium","airportCodes":["BOS"],"matches":7,"groupMatches":5,"knockoutMatches":2,"lat":42.3601,"lon":-71.0589},
+  {"city":"Dallas","country":"United States","stadium":"Dallas Stadium","airportCodes":["DFW","DAL"],"matches":9,"groupMatches":5,"knockoutMatches":4,"lat":32.7767,"lon":-96.7970},
+  {"city":"Houston","country":"United States","stadium":"Houston Stadium","airportCodes":["IAH","HOU"],"matches":7,"groupMatches":5,"knockoutMatches":2,"lat":29.7604,"lon":-95.3698},
+  {"city":"Kansas City","country":"United States","stadium":"Kansas City Stadium","airportCodes":["MCI"],"matches":6,"groupMatches":4,"knockoutMatches":2,"lat":39.0997,"lon":-94.5786},
+  {"city":"Los Angeles","country":"United States","stadium":"Los Angeles Stadium","airportCodes":["LAX"],"matches":8,"groupMatches":5,"knockoutMatches":3,"lat":34.0522,"lon":-118.2437},
+  {"city":"Miami","country":"United States","stadium":"Miami Stadium","airportCodes":["MIA","FLL"],"matches":7,"groupMatches":4,"knockoutMatches":3,"lat":25.7617,"lon":-80.1918},
+  {"city":"New York/New Jersey","country":"United States","stadium":"New York New Jersey Stadium","airportCodes":["JFK","EWR","LGA"],"matches":8,"groupMatches":5,"knockoutMatches":3,"lat":40.7357,"lon":-74.1724},
+  {"city":"Philadelphia","country":"United States","stadium":"Philadelphia Stadium","airportCodes":["PHL"],"matches":6,"groupMatches":5,"knockoutMatches":1,"lat":39.9526,"lon":-75.1652},
+  {"city":"San Francisco Bay Area","country":"United States","stadium":"San Francisco Bay Area Stadium","airportCodes":["SFO","SJC","OAK"],"matches":6,"groupMatches":5,"knockoutMatches":1,"lat":37.3541,"lon":-121.9552},
+  {"city":"Seattle","country":"United States","stadium":"Seattle Stadium","airportCodes":["SEA"],"matches":6,"groupMatches":4,"knockoutMatches":2,"lat":47.6062,"lon":-122.3321}
+]
