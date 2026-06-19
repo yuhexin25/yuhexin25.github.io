@@ -190,6 +190,49 @@ const formatMillions = (value: string | number) => `${(Number(value) / 1_000_000
           <p>Business aviation adds another layer. NBAA advises operators to secure required reservations and expect holding or surface delays; Universal Weather identifies slot, parking, permit, and security pressure. FAA procedures coordinate scarce airspace and ramp access through flight-plan windows, ground-delay programs, TFRs, and airport-specific permissions.</p>
         </section>
 
+        <section class="research-projects">
+          <p class="eyebrow">Ongoing research agenda</p>
+          <h2>Connecting the World Cup to My Aviation Research</h2>
+          <p>This article extends three existing projects rather than treating the tournament as an isolated event. Together, they move from the structure of the airline network, to the historical analysis of disruption, to operational monitoring. The World Cup supplies a time-bounded stress test in which those layers interact.</p>
+
+          <div class="project-evidence-grid">
+            <article class="project-evidence">
+              <img src={`${base}project-previews/hub-atlas.svg`} alt="Stylized route-map preview of the U.S. Airline Hub Atlas" loading="lazy" />
+              <div>
+                <p class="project-number">01 / Network structure</p>
+                <h3><a href="https://yuhexin25-oss.github.io/us-airline-hub-atlas/" target="_blank" rel="noopener noreferrer">U.S. Airline Hub Atlas</a></h3>
+                <p>The atlas scales airport nodes with FAA CY2024 enplanements and uses a static OpenFlights route snapshot to expose airport hierarchy, carrier networks, and concentrated connectivity. Its central insight supports this article directly: traffic does not enter an evenly connected national grid. It is organized through a limited set of major hubs and focus cities.</p>
+                <p>That structure helps explain why World Cup exposure concentrates at ATL, DFW, IAH, EWR, DEN, ORD, and SFO. A hub offers more destination choices and recovery paths, but dependence on that same node allows disruption to reach many downstream routes.</p>
+              </div>
+            </article>
+
+            <article class="project-evidence">
+              <img src={`${base}project-previews/flight-delay.svg`} alt="Stylized dashboard preview of the U.S. Flight Delay Analysis project" loading="lazy" />
+              <div>
+                <p class="project-number">02 / Historical analysis framework</p>
+                <h3><a href="https://yuhexin25-oss.github.io/usflightdelay/" target="_blank" rel="noopener noreferrer">U.S. Flight Delay Analysis</a></h3>
+                <p>FlightScope organizes delay questions by airport concentration, hub-versus-regional performance, route disruption, delay cause, carrier, and seasonality. Those dimensions define how the World Cup should be evaluated after the event: not only by average delay, but by where disruption clustered and how it moved through connected routes.</p>
+                <p>The current site is explicitly a mock BTS-style research prototype, not a source of observed historical results. Its value here is methodological: it specifies the comparisons that real BTS On-Time Performance data can support when measuring hub vulnerability and disruption transmission.</p>
+              </div>
+            </article>
+
+            <article class="project-evidence">
+              <img src={`${base}project-previews/route-risk.svg`} alt="Stylized route-risk preview of the Hub Resilience Monitor" loading="lazy" />
+              <div>
+                <p class="project-number">03 / Operational awareness</p>
+                <h3><a href="https://yuhexin25-oss.github.io/livedelayanalysis/" target="_blank" rel="noopener noreferrer">Live Delay Analysis Dashboard</a></h3>
+                <p>The Hub Resilience Monitor combines airport operational metrics, supplemental FAA advisories, static routes, and estimated hub-impact and route-risk scores. This provides the real-time layer missing from retrospective datasets: awareness of current hub conditions and potential downstream network exposure.</p>
+                <p>The dashboard distinguishes connected operational data from labeled sample fallback mode, and its scores are analytical estimates rather than FAA predictions. That provenance discipline is essential during the World Cup, when a visible delay at one airport should inform network awareness without being misreported as tournament causation.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="research-chain" role="img" aria-label="Research progression from aviation projects through hub connectivity and delay propagation to the World Cup aviation stress test">
+            <span>My Research Projects<small>Atlas · delay analysis · live monitor</small></span><i>↓</i><span>Hub Connectivity<small>Concentration and dependency</small></span><i>↓</i><span>Delay Propagation<small>Transmission and recovery</small></span><i>↓</i><span class="active">World Cup Aviation Stress Test<small>Temporary network reorganization</small></span>
+          </div>
+          <p class="concept-caption">Figure 6. The article connects structural network analysis, delay research, and operational monitoring within one continuing aviation-resilience agenda.</p>
+        </section>
+
         <section>
           <h2>What This Means for Aviation Research</h2>
           <p>The World Cup creates a useful natural experiment. The match schedule supplies known demand events; FAA OPSNET and BTS TranStats can supply subsequent operations, delay, and passenger outcomes. After the tournament, daily data can test whether host airports experienced statistically unusual volumes or delays relative to comparable summer days.</p>
@@ -212,6 +255,9 @@ const formatMillions = (value: string | number) => `${(Number(value) / 1_000_000
             <li><a href="https://jetstream.united.com/" target="_blank" rel="noopener noreferrer">United Airlines. Network hub and operational status information.</a></li>
             <li><a href="https://www.skyteam.com/en/about/history/" target="_blank" rel="noopener noreferrer">SkyTeam. Alliance history and member-network context.</a></li>
             <li><a href="https://www.oneworld.com/members" target="_blank" rel="noopener noreferrer">oneworld. Member airlines and hub-network profiles.</a></li>
+            <li><a href="https://yuhexin25-oss.github.io/us-airline-hub-atlas/" target="_blank" rel="noopener noreferrer">Yu, Hexin. “U.S. Airline Hub Atlas.” FAA CY2024 enplanements and static OpenFlights route data.</a></li>
+            <li><a href="https://yuhexin25-oss.github.io/usflightdelay/" target="_blank" rel="noopener noreferrer">Yu, Hexin. “FlightScope: U.S. Flight Delay Research.” BTS-style research prototype.</a></li>
+            <li><a href="https://yuhexin25-oss.github.io/livedelayanalysis/" target="_blank" rel="noopener noreferrer">Yu, Hexin. “Hub Resilience Monitor.” Operational-risk dashboard with labeled fallback mode.</a></li>
           </ol>
         </section>
       </div>
@@ -227,7 +273,8 @@ const formatMillions = (value: string | number) => `${(Number(value) / 1_000_000
   .chart-figure{border:1px solid var(--border);border-radius:20px;background:#fff;padding:26px;box-shadow:0 16px 38px rgba(63,47,31,.07)}.chart-title{display:flex;justify-content:space-between;gap:18px;margin-bottom:24px;color:#6b7280;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}.chart-title strong{color:var(--gold-dark)}.bar-chart{display:grid;gap:10px}.bar-row{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:10px;align-items:center;font-size:.78rem}.bar-label{font-weight:800;color:#334155}.bar-label.city{font-weight:650}.index-figure .bar-row{grid-template-columns:minmax(125px,190px) minmax(0,1fr) 42px}.bar-track{height:13px;border-radius:999px;background:#edf1f6;overflow:hidden}.bar-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#2563eb,#f59e0b)}.formula{margin-top:22px;border-radius:10px;background:#f8fafc;padding:12px;color:#64748b;font:12px ui-monospace,SFMono-Regular,monospace;text-align:center}
   .beyond-demand{border-top:1px solid var(--border);padding-top:54px}.alliance-flow{display:grid;gap:10px;margin-top:28px}.alliance-flow div{display:grid;grid-template-columns:110px 1fr auto 1.5fr;gap:12px;align-items:center;border:1px solid var(--border);border-radius:14px;background:#fff;padding:13px 16px;font-size:.82rem}.alliance-flow strong{color:#1e293b}.alliance-flow span{color:#64748b}.alliance-flow i,.corridor-flow i{color:var(--gold-dark);font-style:normal;font-weight:800;text-align:center}.concept-caption{margin-top:10px!important;color:#6b7280!important;font-family:inherit!important;font-size:.78rem!important;line-height:1.55!important}.corridor-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin-top:26px}.corridor-flow span{border:1px solid var(--border);border-radius:14px;background:#fff;padding:14px 10px;color:#334155;font-size:.8rem;font-weight:750;text-align:center}.corridor-flow span.active{border-color:#e6ad3d;background:#fff7e5}.corridor-flow small{display:block;margin-bottom:4px;color:#8a7660;font-size:.63rem;font-weight:700;text-transform:uppercase}.weather-chain{display:grid;justify-items:center;gap:9px;padding:16px}.weather-chain span{width:min(100%,520px);border:1px solid #425474;border-radius:14px;background:#202d48;padding:15px;color:#fff;font-weight:760;text-align:center}.weather-chain span small{display:block;margin-top:4px;color:#9db0cb;font-size:.7rem;font-weight:500}.weather-chain i{color:#f6c76f;font-size:1.35rem;font-style:normal}
   .houston-panel{display:grid;grid-template-columns:1fr;overflow:hidden;border:1px solid #d5b270;border-radius:22px;background:#fff;box-shadow:0 18px 42px rgba(63,47,31,.09)}.houston-stats{padding:30px}.houston-stats h3{font-size:1.55rem}.houston-stats dl{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:28px 0 0}.houston-stats dl div{border-top:3px solid var(--gold);padding-top:12px}.houston-stats dt{color:#1e293b;font-size:1.55rem;font-weight:800}.houston-stats dd{margin:4px 0 0;color:#6b7280;font-size:.78rem;line-height:1.45}.author-evidence{display:grid;grid-template-columns:1.35fr .65fr;gap:0;border-top:1px solid var(--border)}.author-evidence>img{display:block;width:100%;height:100%;max-height:520px;object-fit:contain;background:#111827}.author-evidence>img.iah-screenshot{max-height:680px;background:#f3f4f6}.author-evidence>p{display:grid;align-content:center;margin:0!important;padding:22px;color:#64748b;font-family:inherit;font-size:.78rem;line-height:1.55}.field-note{border-left:3px solid var(--gold);padding-left:14px;color:#6b5f4e!important;font-family:inherit!important;font-size:.88rem!important}.houston-panel figcaption{margin:0;border-top:1px solid var(--border);padding:14px 18px}
+  .research-projects{border-top:1px solid var(--border);padding-top:54px}.project-evidence-grid{display:grid;gap:20px;margin-top:34px}.project-evidence{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);overflow:hidden;border:1px solid var(--border);border-radius:20px;background:#fff;box-shadow:0 14px 34px rgba(63,47,31,.06)}.project-evidence>img{display:block;width:100%;height:100%;min-height:300px;object-fit:cover;background:#f8fafc}.project-evidence>div{padding:26px}.project-evidence h3{margin:8px 0 14px}.project-evidence h3 a{color:#1e293b}.project-evidence h3 a:hover{color:var(--gold-dark);text-decoration:none}.project-evidence p{font-size:.96rem;line-height:1.72}.project-evidence .project-number{color:var(--gold-dark);font-family:ui-monospace,SFMono-Regular,monospace;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.research-chain{display:grid;justify-items:center;gap:9px;margin-top:44px;border:1px solid #31405d;border-radius:20px;background:#172033;padding:28px}.research-chain span{width:min(100%,540px);border:1px solid #425474;border-radius:14px;background:#202d48;padding:15px;color:#fff;font-weight:760;text-align:center}.research-chain span.active{border-color:#d99a2b;background:#3b3023}.research-chain small{display:block;margin-top:4px;color:#9db0cb;font-size:.7rem;font-weight:500}.research-chain i{color:#f6c76f;font-size:1.35rem;font-style:normal}
   .references{border-top:1px solid var(--border);padding-top:52px}.references ol{display:grid;gap:14px;padding-left:24px}.references li{padding-left:8px;color:var(--muted);font-size:.9rem;line-height:1.55}.references a{color:#475569;text-decoration:underline;text-decoration-color:#cbd5e1;text-underline-offset:3px}
-  @media(max-width:900px){.article-grid{grid-template-columns:1fr;gap:36px}.article-aside{position:static}.author-evidence{grid-template-columns:1fr}}
+  @media(max-width:900px){.article-grid{grid-template-columns:1fr;gap:36px}.article-aside{position:static}.author-evidence{grid-template-columns:1fr}.project-evidence{grid-template-columns:1fr}.project-evidence>img{min-height:0;max-height:360px}}
   @media(max-width:640px){.article-hero{min-height:620px}.hero-content{padding-block:86px 48px}.back-link{margin-bottom:44px}.article-grid{padding-block:52px 80px}.prose p{font-size:1.02rem}.dark-figure{border-radius:14px;padding:12px;overflow-x:auto}.map-figure svg{min-width:700px}.chart-figure{padding:18px 14px}.chart-title{display:grid}.index-figure .bar-row{grid-template-columns:120px minmax(0,1fr) 36px}.bar-label.city{font-size:.68rem}.houston-stats dl{grid-template-columns:1fr}.method-box{padding:22px}.alliance-flow div{grid-template-columns:1fr}.alliance-flow i{text-align:left}.corridor-flow{grid-template-columns:1fr}.corridor-flow i{transform:rotate(90deg)}}
 </style>
