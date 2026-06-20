@@ -1,0 +1,5 @@
+[
+  {"alliance":"Star Alliance","airlines":["Lufthansa","United"],"color":"#d9a441","origins":[{"code":"FRA","lat":50.0379,"lon":8.5622},{"code":"MUC","lat":48.3537,"lon":11.775}],"destinations":["IAH","ORD","EWR","DEN","SFO"]},
+  {"alliance":"SkyTeam","airlines":["Air France","KLM","Delta"],"color":"#4f83cc","origins":[{"code":"CDG","lat":49.0097,"lon":2.5479},{"code":"AMS","lat":52.3105,"lon":4.7683}],"destinations":["ATL","JFK","DTW"]},
+  {"alliance":"oneworld","airlines":["British Airways","Iberia","American"],"color":"#b56576","origins":[{"code":"LHR","lat":51.47,"lon":-0.4543},{"code":"MAD","lat":40.4983,"lon":-3.5676}],"destinations":["DFW","MIA","PHL","CLT"]}
+]

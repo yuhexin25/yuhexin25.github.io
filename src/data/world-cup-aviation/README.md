@@ -2,6 +2,17 @@
 
 Processed data supporting the World Cup aviation posts under `src/pages/blog/`.
 
+## Interactive map files
+
+- `hostCities2026.json`: 16 FIFA host cities, nearby airport codes, match counts, and approximate city coordinates.
+- `qatar2022Venues.json`: eight Qatar 2022 stadiums and approximate coordinates.
+- `airportHubs.json`: selected U.S. alliance hubs and exploratory connectivity indicators used only in the labeled conceptual comparison.
+- `allianceHubs.json`: selected alliance origin gateways, U.S. hubs, airlines, and display colors.
+- `houstonCaseStudy.json`: Houston airports, downtown, fan-activity area, stadium, analytical routes, and field-observation timeline.
+- `sampleFanCorridors.json`: an explicitly conceptual Germany supporter corridor. It is not passenger tracking or a forecast.
+
+The interactive maps use MapLibre GL JS with OpenFreeMap's public Liberty style. The maps require no API key. D3 renders only the curved alliance and fan-corridor overlays. Coordinates are approximate and intended for regional-scale analysis rather than navigation.
+
 ## Sources
 
 - `host-cities.json`: match allocations transcribed from FIFA's official 2026 match schedule, published December 6, 2025. Airport codes and coordinates are analytical additions identifying the major commercial gateways used in the article.

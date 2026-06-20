@@ -1,0 +1,13 @@
+---
+import WorldCupMap from './WorldCupMap.astro';
+interface Props { qatarPoints: any[]; northAmericaPoints: any[]; }
+const { qatarPoints, northAmericaPoints } = Astro.props;
+---
+<div class="comparison-maps">
+  <WorldCupMap id="qatar-2022-map" title="Qatar 2022 · compact" points={qatarPoints} bounds={[[51.28,25.10],[51.62,25.70]]} height="390px" caption="Eight venues clustered in and around Doha." source="FIFA venue locations; approximate coordinates stored locally." fallback="Qatar's eight tournament stadiums were concentrated around Doha, Al Rayyan, Lusail, Al Khor, and Al Wakrah." />
+  <WorldCupMap id="north-america-2026-map" title="North America 2026 · continental" points={northAmericaPoints} bounds={[[-126,18],[-68,51]]} height="390px" caption="Sixteen host cities distributed across Canada, Mexico, and the United States." source="FIFA 2026 host-city schedule; local GeoJSON-style data." fallback="The 2026 host cities span the continent from Vancouver and Seattle to Miami, Mexico City, Boston, and New York/New Jersey." />
+</div>
+<p class="comparison-callout"><strong>Scale shift:</strong> the 2022 venue cluster fits within one metropolitan travel system; the 2026 host footprint spans thousands of kilometers and multiple airline regions.</p>
+<style>
+  .comparison-maps{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}.comparison-callout{border-left:4px solid #d99a2b;padding:12px 16px;color:#526071!important;font-family:inherit!important;font-size:.85rem!important;line-height:1.55!important}@media(max-width:820px){.comparison-maps{grid-template-columns:1fr}}
+</style>

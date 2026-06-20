@@ -1,6 +1,28 @@
 ---
 import BlogArticle from '../../components/BlogArticle.astro';
+import FlowMap from '../../components/FlowMap.astro';
+import NetworkDiagram from '../../components/NetworkDiagram.astro';
+import allianceGroups from '../../data/world-cup-aviation/allianceHubs.json';
+import airportHubs from '../../data/world-cup-aviation/airportHubs.json';
+import fanCorridors from '../../data/world-cup-aviation/sampleFanCorridors.json';
 const base = import.meta.env.BASE_URL;
+const hubByCode = Object.fromEntries(airportHubs.map((hub) => [hub.code,hub]));
+const alliancePoints = allianceGroups.flatMap((group) => [
+  ...group.origins.map((origin) => ({ label:origin.code,lat:origin.lat,lon:origin.lon,color:group.color })),
+  ...group.destinations.map((code) => ({ label:code,lat:hubByCode[code].lat,lon:hubByCode[code].lon,color:group.color })),
+]);
+const uniqueAlliancePoints = [...new Map(alliancePoints.map((point) => [point.label,point])).values()];
+const allianceFlows = allianceGroups.flatMap((group) => group.destinations.map((code,index) => ({ from:group.origins[index % group.origins.length], to:hubByCode[code], color:group.color, width:2 })));
+const corridor = fanCorridors[0];
+const corridorPoints = corridor.stops.map((stop,index) => ({ label:stop.label,lat:stop.lat,lon:stop.lon,color:index===1?'#d99a2b':'#527ca8' }));
+const corridorFlows = corridor.stops.slice(0,-1).map((stop,index) => ({ from:stop,to:corridor.stops[index+1],color:'#d99a2b',width:2.5,dash:'6 4' }));
+const centralityItems = [
+  {label:'Atlanta / ATL',code:'ATL',matchScore:89,note:'Host + central hub'},
+  {label:'Dallas / DFW',code:'DFW',matchScore:100,note:'Most matches + central hub'},
+  {label:'Chicago / ORD',code:'ORD',matchScore:0,note:'No matches; major connector'},
+  {label:'Denver / DEN',code:'DEN',matchScore:0,note:'No matches; major connector'},
+  {label:'Houston / IAH',code:'IAH',matchScore:78,note:'Host + alliance hub'},
+].map((item) => ({ ...item, connectivityScore:hubByCode[item.code].connectivityScore }));
 ---
 <BlogArticle title="Hubs, Alliances, and World Cup Mobility" subtitle="The tournament temporarily reweights airline network flows, making connectivity and centrality more important than match counts alone." category="Aviation Networks" date="June 20, 2026" readingTime="7 min read" tags={['Aviation Networks','Network Centrality','Airline Alliances','Passenger Flows']} image={`${base}project-previews/hub-atlas.svg`} imageAlt="Stylized U.S. airline hub map with connecting routes">
   <p class="lead">The World Cup does not create a new airline network. It temporarily changes the amount, direction, and timing of flow across the network that already exists.</p>
@@ -12,7 +34,7 @@ const base = import.meta.env.BASE_URL;
   <p>A Germany-related journey illustrates the idea. Lufthansa and United belong to Star Alliance, so a supporter may encounter an itinerary through IAH, ORD, EWR, DEN, or SFO depending on the origin and match destination. The relevant network is not simply Germany to the nearest American airport. It is a set of alliance-compatible paths linking European origins to United's connecting structure.</p>
   <p>SkyTeam and oneworld produce different path sets. SkyTeam can channel some European, Asian, or Latin American flows through nodes such as ATL, JFK, DTW, or MSP. oneworld can connect international gateways at LHR, MAD, or DOH with American Airlines hubs including DFW, MIA, PHL, and CLT.</p>
   <p>These examples are exploratory, not itinerary predictions. Fare, nonstop service, loyalty programs, capacity, and schedule timing still matter. The network insight is that supporters with similar destinations can move through different U.S. nodes because their origin markets sit inside different alliance geographies.</p>
-  <div class="dark-visual"><div class="flow-stack"><span>International origin markets<small>Europe · Latin America · Asia</small></span><i>↓</i><span>Alliance networks<small>Star Alliance · SkyTeam · oneworld</small></span><i>↓</i><span class="active">U.S. gateway and connecting hubs<small>Alternative paths through a shared national network</small></span><i>↓</i><span>World Cup destinations<small>Host city or onward connection</small></span></div></div>
+  <FlowMap id="alliance-hub-flow-map" title="Alliance-linked gateway flows" points={uniqueAlliancePoints} flows={allianceFlows} bounds={[[-125,24],[14,54]]} legend={allianceGroups.map((group)=>({label:group.alliance,color:group.color}))} caption="Selected alliance-linked paths show how origin markets can enter different U.S. hub systems." source="Alliance member networks and locally stored airport coordinates; routes are illustrative, not schedule or passenger data." fallback="Star Alliance examples connect Frankfurt and Munich with United hubs. SkyTeam examples connect Paris and Amsterdam with Delta-related hubs. oneworld examples connect London and Madrid with American Airlines hubs." />
 
   <h2>Connectivity vs. Geography</h2>
   <p>A host city with more matches does not automatically become the most important aviation node. Match count measures local event load. Connectivity measures how many journeys a node can support, including journeys that continue somewhere else.</p>
@@ -26,13 +48,14 @@ const base = import.meta.env.BASE_URL;
     <div><span>Weighted connectivity</span><strong>Strength of linked service</strong><strong>Capacity across useful corridors</strong></div>
     <div><span>Betweenness</span><strong>Position on connecting paths</strong><strong>Dependence on transfer hubs</strong></div>
   </div>
+  <NetworkDiagram title="Connectivity vs. host-city importance" items={centralityItems} caption="Conceptual/exploratory scores. Match importance is normalized from official host-city match counts; connectivity values are illustrative indicators informed by the Hub Atlas, not measured centrality estimates." />
 
   <h2>The World Cup as a Network Flow Problem</h2>
   <p>In a network model, airports are nodes, scheduled services are edges, and passengers create flow. The World Cup temporarily changes the flow without immediately changing most of the underlying topology. The same routes remain, but some carry more supporters, some become directional, and some become important only after a team advances.</p>
   <p>Normal leisure travel is often represented as a round trip: A to B and back to A. Team-following behavior can create an open chain: home country, first host city, second host city, possible knockout destination, then home. The reverse flow may not match the outbound flow.</p>
   <p>This creates temporary corridors. A Germany supporter might enter through Houston, continue toward another group-stage match, and branch again after qualification. A team elimination can end that corridor; an unexpected qualification can activate another. The bracket therefore acts like a rule that dynamically reassigns passenger demand across edges.</p>
   <p>Airlines cannot redesign their full schedules after every result. The network absorbs much of the change through fuller flights, connecting itineraries, prices, and limited capacity adjustments. The operational question is whether existing paths can carry the reweighted flow while retaining enough flexibility for ordinary travelers and recovery from disruption.</p>
-  <div class="dark-visual"><div class="flow-stack"><span>Existing airline network<small>Mostly fixed nodes and scheduled edges</small></span><i>↓</i><span>Tournament schedule and results<small>Demand changes by time and destination</small></span><i>↓</i><span class="active">Temporarily reweighted passenger flows<small>Directional corridors and shared hubs</small></span><i>↓</i><span>Network outcomes<small>Load concentration · rerouting · propagation risk</small></span></div></div>
+  <FlowMap id="fan-mobility-corridor-map" title="Conceptual Germany fan corridor" points={corridorPoints} flows={corridorFlows} bounds={[[-105,24],[16,55]]} legend={[{label:'Conceptual one-way sequence',color:'#d99a2b'}]} caption="Germany → Houston → Atlanta → New York/New Jersey → home illustrates conditional, directional movement between matches." source="Author-created conceptual scenario; not actual passenger tracking." fallback="A conceptual supporter path begins in Germany, reaches Houston, continues to Atlanta and New York/New Jersey, and then returns home. Actual team paths and traveler itineraries vary." />
 
   <h2>Why Alliance Networks Matter More in 2026 than in 2022</h2>
   <p>Qatar 2022 concentrated eight stadiums in and around one metropolitan region. Airline networks were essential for reaching the host country, but most supporters did not need a new flight between matches. Once they arrived, the tournament operated largely through local ground transportation.</p>

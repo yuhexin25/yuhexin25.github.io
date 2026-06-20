@@ -1,0 +1,14 @@
+[
+  {"code":"IAH","city":"Houston","airline":"United","alliance":"Star Alliance","lat":29.9902,"lon":-95.3368,"role":"hub","connectivityScore":82},
+  {"code":"ORD","city":"Chicago","airline":"United / American","alliance":"Multiple","lat":41.9742,"lon":-87.9073,"role":"hub","connectivityScore":94},
+  {"code":"EWR","city":"Newark","airline":"United","alliance":"Star Alliance","lat":40.6895,"lon":-74.1745,"role":"hub","connectivityScore":86},
+  {"code":"DEN","city":"Denver","airline":"United","alliance":"Star Alliance","lat":39.8561,"lon":-104.6737,"role":"hub","connectivityScore":91},
+  {"code":"SFO","city":"San Francisco","airline":"United","alliance":"Star Alliance","lat":37.6213,"lon":-122.379,"role":"hub","connectivityScore":78},
+  {"code":"ATL","city":"Atlanta","airline":"Delta","alliance":"SkyTeam","lat":33.6407,"lon":-84.4277,"role":"hub","connectivityScore":100},
+  {"code":"JFK","city":"New York","airline":"Delta / partners","alliance":"SkyTeam","lat":40.6413,"lon":-73.7781,"role":"gateway","connectivityScore":80},
+  {"code":"DTW","city":"Detroit","airline":"Delta","alliance":"SkyTeam","lat":42.2162,"lon":-83.3554,"role":"hub","connectivityScore":70},
+  {"code":"DFW","city":"Dallas","airline":"American","alliance":"oneworld","lat":32.8998,"lon":-97.0403,"role":"hub","connectivityScore":98},
+  {"code":"MIA","city":"Miami","airline":"American","alliance":"oneworld","lat":25.7959,"lon":-80.287,"role":"hub","connectivityScore":77},
+  {"code":"PHL","city":"Philadelphia","airline":"American","alliance":"oneworld","lat":39.8744,"lon":-75.2424,"role":"hub","connectivityScore":68},
+  {"code":"CLT","city":"Charlotte","airline":"American","alliance":"oneworld","lat":35.214,"lon":-80.9431,"role":"hub","connectivityScore":88}
+]

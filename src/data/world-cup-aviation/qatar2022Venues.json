@@ -1,0 +1,10 @@
+[
+  {"name":"Lusail Stadium","area":"Lusail","lat":25.4209,"lon":51.4903},
+  {"name":"Al Bayt Stadium","area":"Al Khor","lat":25.6522,"lon":51.4879},
+  {"name":"Education City Stadium","area":"Al Rayyan","lat":25.3109,"lon":51.4244},
+  {"name":"Ahmad Bin Ali Stadium","area":"Al Rayyan","lat":25.3297,"lon":51.3424},
+  {"name":"Khalifa International Stadium","area":"Al Rayyan","lat":25.2637,"lon":51.4481},
+  {"name":"Stadium 974","area":"Doha","lat":25.2889,"lon":51.5664},
+  {"name":"Al Thumama Stadium","area":"Doha","lat":25.2354,"lon":51.5321},
+  {"name":"Al Janoub Stadium","area":"Al Wakrah","lat":25.1599,"lon":51.5744}
+]

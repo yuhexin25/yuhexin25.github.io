@@ -1,16 +1,25 @@
 ---
 import BlogArticle from '../../components/BlogArticle.astro';
+import WorldCupMap from '../../components/WorldCupMap.astro';
+import houstonCase from '../../data/world-cup-aviation/houstonCaseStudy.json';
 const base = import.meta.env.BASE_URL;
+const pointColors = { airport:'#527ca8', city:'#d99a2b', event:'#5f8f7b', stadium:'#b56576' };
+const houstonPoints = houstonCase.points.map((point) => ({ label:point.label, detail:point.detail, lat:point.lat, lon:point.lon, color:pointColors[point.type], size:point.type === 'airport' ? 8 : 7 }));
+const pointById = Object.fromEntries(houstonCase.points.map((point) => [point.id, point]));
+const houstonLines = houstonCase.routes.map(([from,to]) => ({ coordinates:[[pointById[from].lon,pointById[from].lat],[pointById[to].lon,pointById[to].lat]], color:'#6a86a5' }));
 ---
 <BlogArticle title="World Cup 2026 and the U.S. Aviation System" subtitle="The operational challenge is not one match-day spike, but repeated demand waves meeting summer traffic and uncertain weather." category="Airline Operations" date="June 20, 2026" readingTime="7 min read" tags={['Airline Operations','Aviation Resilience','Houston','World Cup 2026']} image={`${base}research/houston-match-attendance.jpg`} imageAlt="Germany versus Curaçao scoreboard in Houston showing attendance of 68,021">
   <p class="lead">A host city does not return to normal when the final whistle blows. One crowd leaves while the next match's teams, media, sponsors, and supporters are already moving in.</p>
   <p>That overlap is the operational problem I noticed in Houston. The World Cup is often described as an extra burst of travel demand. A better description is a sequence of waves layered onto an aviation system already operating through the U.S. summer peak.</p>
 
+  <WorldCupMap id="houston-event-mobility-map" title="Houston event mobility" points={houstonPoints} lines={houstonLines} bounds={[[-95.55,29.56],[-95.18,30.07]]} height="470px" caption="The airport-to-city-to-stadium chain shows why event mobility extends beyond a single venue." source="Author field locations; airport and stadium coordinates stored locally." fallback="IAH lies north of central Houston, Hobby lies southeast, and Houston Stadium lies south of downtown. Visitors move through airport, downtown, fan-activity, and stadium locations rather than one isolated point." />
+  <p>The map also shows why “Houston demand” is not one location. IAH, Hobby, downtown activity, the fan area, and the stadium form a linked mobility chain. Pressure can appear at different points and times as visitors transfer between the regional gateway and the event district.</p>
+
   <h2>Demand waves, not one demand spike</h2>
   <p>I attended Germany versus Curaçao at Houston Stadium on June 14. The stadium display recorded 68,021 spectators. The gathering was comparable in scale to a major U.S. sporting event, but Houston was not hosting a one-day event. Portugal versus DR Congo followed on June 17, with more fixtures after that.</p>
   <p>The Germany match generated arrivals before kickoff and departures afterward. At the same time, team logistics, media travel, sponsor movement, and preparations for the next match continued. A later fixture started another cycle before the city had fully exited the first one.</p>
   <p>This differs from a Super Bowl, which can create a larger single peak but a comparatively concentrated arrival-event-departure pattern. A World Cup host city manages repeated cycles over several weeks.</p>
-  <div class="dark-visual"><div class="flow-stack"><span>June 14: Germany vs. Curaçao<small>Supporter and event arrivals</small></span><i>↓</i><span>June 15: departure wave<small>Fans, media, and visitors leave Houston</small></span><i>↓</i><span class="active">Thunderstorm activity + elevated IAH delays<small>Observed conditions, not proof of causation</small></span><i>↓</i><span>June 17: Portugal vs. DR Congo<small>New arrivals and event logistics</small></span></div></div>
+  <div class="dark-visual"><div class="flow-stack">{houstonCase.timeline.map((item,index) => <><span class:list={{active:index===1}}>{item.date}: {item.event}<small>{item.note}</small></span>{index < houstonCase.timeline.length - 1 && <i>↓</i>}</>)}</div></div>
   <p class="visual-note">Demand waves and operational stress in Houston. The sequence shows overlapping conditions, not a causal chain.</p>
 
   <h2>The tournament meets the summer peak</h2>

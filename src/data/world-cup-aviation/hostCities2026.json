@@ -1,0 +1,18 @@
+[
+  {"city":"Vancouver","country":"Canada","stadium":"Vancouver Stadium","airportCodes":["YVR"],"lat":49.2827,"lon":-123.1207,"matches":7},
+  {"city":"Toronto","country":"Canada","stadium":"Toronto Stadium","airportCodes":["YYZ"],"lat":43.6532,"lon":-79.3832,"matches":6},
+  {"city":"Mexico City","country":"Mexico","stadium":"Mexico City Stadium","airportCodes":["MEX"],"lat":19.4326,"lon":-99.1332,"matches":5},
+  {"city":"Guadalajara","country":"Mexico","stadium":"Guadalajara Stadium","airportCodes":["GDL"],"lat":20.6597,"lon":-103.3496,"matches":4},
+  {"city":"Monterrey","country":"Mexico","stadium":"Monterrey Stadium","airportCodes":["MTY"],"lat":25.6866,"lon":-100.3161,"matches":4},
+  {"city":"Atlanta","country":"USA","stadium":"Atlanta Stadium","airportCodes":["ATL"],"lat":33.749,"lon":-84.388,"matches":8},
+  {"city":"Boston","country":"USA","stadium":"Boston Stadium","airportCodes":["BOS"],"lat":42.3601,"lon":-71.0589,"matches":7},
+  {"city":"Dallas","country":"USA","stadium":"Dallas Stadium","airportCodes":["DFW","DAL"],"lat":32.7767,"lon":-96.797,"matches":9},
+  {"city":"Houston","country":"USA","stadium":"Houston Stadium","airportCodes":["IAH","HOU"],"lat":29.7604,"lon":-95.3698,"matches":7},
+  {"city":"Kansas City","country":"USA","stadium":"Kansas City Stadium","airportCodes":["MCI"],"lat":39.0997,"lon":-94.5786,"matches":6},
+  {"city":"Los Angeles","country":"USA","stadium":"Los Angeles Stadium","airportCodes":["LAX"],"lat":34.0522,"lon":-118.2437,"matches":8},
+  {"city":"Miami","country":"USA","stadium":"Miami Stadium","airportCodes":["MIA","FLL"],"lat":25.7617,"lon":-80.1918,"matches":7},
+  {"city":"New York/New Jersey","country":"USA","stadium":"New York New Jersey Stadium","airportCodes":["JFK","EWR","LGA"],"lat":40.7357,"lon":-74.1724,"matches":8},
+  {"city":"Philadelphia","country":"USA","stadium":"Philadelphia Stadium","airportCodes":["PHL"],"lat":39.9526,"lon":-75.1652,"matches":6},
+  {"city":"San Francisco Bay Area","country":"USA","stadium":"San Francisco Bay Area Stadium","airportCodes":["SFO","SJC","OAK"],"lat":37.3541,"lon":-121.9552,"matches":6},
+  {"city":"Seattle","country":"USA","stadium":"Seattle Stadium","airportCodes":["SEA"],"lat":47.6062,"lon":-122.3321,"matches":6}
+]

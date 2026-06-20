@@ -1,11 +1,19 @@
 ---
 import BlogArticle from '../../components/BlogArticle.astro';
+import ComparisonMap from '../../components/ComparisonMap.astro';
+import hostCities from '../../data/world-cup-aviation/hostCities2026.json';
+import qatarVenues from '../../data/world-cup-aviation/qatar2022Venues.json';
 const base = import.meta.env.BASE_URL;
+const qatarPoints = qatarVenues.map((venue) => ({ label: venue.name, detail: venue.area, lat: venue.lat, lon: venue.lon, color: '#d99a2b', size: 7 }));
+const countryColors = { USA:'#527ca8', Canada:'#5f8f7b', Mexico:'#b56576' };
+const northAmericaPoints = hostCities.map((city) => ({ label: city.city, detail: `${city.country} · ${city.matches} matches · ${city.airportCodes.join('/')}`, lat: city.lat, lon: city.lon, color: countryColors[city.country], size: 5 + city.matches / 2 }));
 ---
 <BlogArticle title="Why World Cup 2026 Is Different from Qatar 2022" subtitle="The biggest change is not only tournament size. It is the geography of how supporters must move." category="Transportation Geography" date="June 20, 2026" readingTime="6 min read" tags={['Transportation Geography','World Cup 2026','Air Travel']} image={`${base}research/world-cup-network-hero.png`} imageAlt="Aviation routes connecting cities across North America">
   <p class="lead">In Qatar, aviation brought most international visitors to the tournament. In North America, aviation may also be how many of them move through it.</p>
   <p>That distinction changes the transportation problem. The 2022 World Cup was staged in a country small enough for supporters to sleep in one place and reach different stadiums by metro, shuttle, taxi, or relatively short road trips. The 2026 tournament stretches across Canada, Mexico, and the United States. Its 16 host cities span a continent.</p>
   <p>The result is not simply a larger event. It is a different mobility system.</p>
+
+  <ComparisonMap qatarPoints={qatarPoints} northAmericaPoints={northAmericaPoints} />
 
   <h2>One metropolitan region, then a continent</h2>
   <p>Qatar used eight stadiums concentrated in and around Doha. The compact venue pattern allowed the tournament to function through a centralized gateway and a dense ground-transportation network. Visitors still faced crowding and peak demand, but attending a second match did not normally require another flight.</p>

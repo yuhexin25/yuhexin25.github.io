@@ -1,0 +1,14 @@
+---
+interface Item { label:string; matchScore:number; connectivityScore:number; note:string; }
+interface Props { title:string; items:Item[]; caption:string; }
+const { title,items,caption }=Astro.props;
+---
+<figure class="network-diagram">
+  <h3>{title}</h3>
+  <div class="diagram-legend"><span><i class="match"></i>Host-city match importance</span><span><i class="connectivity"></i>Hub connectivity importance</span></div>
+  <div class="diagram-rows">{items.map((item)=><div class="diagram-row"><div><strong>{item.label}</strong><small>{item.note}</small></div><div class="metric"><span class="match" style={`width:${item.matchScore}%`}></span></div><div class="metric"><span class="connectivity" style={`width:${item.connectivityScore}%`}></span></div></div>)}</div>
+  <figcaption>{caption}</figcaption>
+</figure>
+<style>
+  .network-diagram{margin:46px 0;border:1px solid #d9dee7;border-radius:18px;background:#fff;padding:24px}.network-diagram h3{margin:0 0 14px}.diagram-legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:20px;color:#64748b;font-size:.72rem}.diagram-legend span{display:flex;align-items:center;gap:6px}.diagram-legend i{width:18px;height:5px;border-radius:5px}.match{background:#d99a2b}.connectivity{background:#527ca8}.diagram-rows{display:grid;gap:14px}.diagram-row{display:grid;grid-template-columns:150px 1fr 1fr;gap:12px;align-items:center}.diagram-row>div:first-child{display:grid}.diagram-row small{color:#8a7c6b;font-size:.64rem}.metric{height:12px;overflow:hidden;border-radius:99px;background:#edf1f6}.metric span{display:block;height:100%;border-radius:inherit}.network-diagram figcaption{margin-top:18px;color:#6b7280;font-size:.78rem;line-height:1.5}@media(max-width:640px){.diagram-row{grid-template-columns:110px 1fr 1fr;gap:7px}.network-diagram{padding:17px}}
+</style>
