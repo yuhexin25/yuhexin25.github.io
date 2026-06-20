@@ -8,37 +8,17 @@ const config = encodeURIComponent(JSON.stringify({ points, lines, center, zoom, 
 <figure class="wc-map-figure">
   <div class="wc-map-heading"><strong>{title}</strong><span>Interactive map</span></div>
   <div id={id} class="wc-map" data-world-cup-map data-config={config} style={`height:${height}`} aria-label={title}></div>
-  <details class="wc-map-fallback"><summary>Text alternative</summary><p>{fallback}</p></details>
+  <details class="wc-map-fallback" data-map-fallback hidden><summary>Text alternative</summary><p>{fallback}</p></details>
   <figcaption>{caption}<span>Source: {source}</span></figcaption>
 </figure>
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" />
-<script is:inline type="module">
-  // OpenFreeMap Liberty is a public, no-key MapLibre style suitable for GitHub Pages.
-  const initWorldCupMaps = async () => {
-    const nodes = [...document.querySelectorAll('[data-world-cup-map]:not([data-map-ready])')];
-    if (!nodes.length) return;
-    let maplibregl;
-    try { maplibregl = await import('https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.es.js'); }
-    catch { nodes.forEach((node) => node.classList.add('map-unavailable')); return; }
-    nodes.forEach((node) => {
-      node.dataset.mapReady = 'true';
-      const config = JSON.parse(decodeURIComponent(node.dataset.config));
-      const map = new maplibregl.Map({ container: node, style: 'https://tiles.openfreemap.org/styles/liberty', center: config.center, zoom: config.zoom, attributionControl: true });
-      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-      map.dragRotate.disable(); map.touchZoomRotate.disableRotation();
-      map.on('load', () => {
-        const pointData = { type:'FeatureCollection', features:config.points.map((p) => ({ type:'Feature', properties:{ label:p.label, detail:p.detail || '', color:p.color || '#d99a2b', size:p.size || 7 }, geometry:{ type:'Point', coordinates:[p.lon,p.lat] } })) };
-        map.addSource('points',{ type:'geojson', data:pointData });
-        map.addLayer({ id:'points', type:'circle', source:'points', paint:{ 'circle-radius':['get','size'], 'circle-color':['get','color'], 'circle-stroke-color':'#fff', 'circle-stroke-width':1.5 } });
-        map.addLayer({ id:'labels', type:'symbol', source:'points', layout:{ 'text-field':['get','label'], 'text-size':11, 'text-offset':[0,1.25], 'text-anchor':'top' }, paint:{ 'text-color':'#172033', 'text-halo-color':'#fff', 'text-halo-width':1.5 } });
-        map.on('click','points',(event) => { const f=event.features?.[0]; if(f) new maplibregl.Popup().setLngLat(event.lngLat).setHTML(`<strong>${f.properties.label}</strong><br>${f.properties.detail}`).addTo(map); });
-        if(config.lines.length){ const lineData={ type:'FeatureCollection', features:config.lines.map((l)=>({ type:'Feature', properties:{color:l.color||'#527ca8'}, geometry:{type:'LineString',coordinates:l.coordinates} }))}; map.addSource('lines',{type:'geojson',data:lineData}); map.addLayer({id:'lines',type:'line',source:'lines',paint:{'line-color':['get','color'],'line-width':2,'line-opacity':.68}},'points'); }
-        if(config.bounds) map.fitBounds(config.bounds,{padding:34,duration:0});
-      });
-    });
+<script>
+  import { initWorldCupMaps } from '../scripts/mapRuntime';
+  const startMaps = () => {
+    if (typeof window !== 'undefined') initWorldCupMaps();
   };
-  initWorldCupMaps();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startMaps, { once: true });
+  else startMaps();
 </script>
 <style>
-  .wc-map-figure{margin:46px 0}.wc-map-heading{display:flex;justify-content:space-between;gap:16px;border:1px solid #d9dee7;border-bottom:0;border-radius:18px 18px 0 0;background:#172033;padding:13px 17px;color:#fff}.wc-map-heading span{color:#f6c76f;font-size:.72rem;font-weight:750;text-transform:uppercase}.wc-map{width:100%;min-height:300px;border:1px solid #d9dee7;background:#e9eef4}.wc-map.map-unavailable::after{display:grid;height:100%;place-items:center;padding:20px;color:#64748b;content:'Interactive map unavailable. Use the text alternative below.'}.wc-map-fallback{border:1px solid #d9dee7;border-top:0;background:#fff;padding:9px 14px;color:#64748b;font-size:.78rem}.wc-map-fallback p{margin-top:8px!important;font-family:inherit!important;font-size:.8rem!important;line-height:1.5!important}.wc-map-figure figcaption{margin-top:12px;color:#6b7280;font-size:.8rem;line-height:1.55}.wc-map-figure figcaption span{display:block;margin-top:3px}@media(max-width:640px){.wc-map-heading{display:grid}.wc-map{height:360px!important}}
+  .wc-map-figure{margin:46px 0}.wc-map-heading{display:flex;justify-content:space-between;gap:16px;border:1px solid #d9dee7;border-bottom:0;border-radius:18px 18px 0 0;background:#172033;padding:13px 17px;color:#fff}.wc-map-heading span{color:#f6c76f;font-size:.72rem;font-weight:750;text-transform:uppercase}.wc-map{width:100%;height:55vh;min-height:420px;max-height:640px;border:1px solid #d9dee7;background:#e9eef4}.wc-map.map-unavailable::after{display:grid;height:100%;place-items:center;padding:20px;color:#64748b;content:'Interactive map unavailable. Use the text alternative below.'}.wc-map-fallback{border:1px solid #d9dee7;border-top:0;background:#fff;padding:9px 14px;color:#64748b;font-size:.78rem}.wc-map-fallback p{margin-top:8px!important;font-family:inherit!important;font-size:.8rem!important;line-height:1.5!important}.wc-map-figure figcaption{margin-top:12px;color:#6b7280;font-size:.8rem;line-height:1.55}.wc-map-figure figcaption span{display:block;margin-top:3px}@media(max-width:640px){.wc-map-heading{display:grid}.wc-map{height:55vh!important;min-height:420px}}
 </style>

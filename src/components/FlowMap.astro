@@ -6,20 +6,17 @@ const config=encodeURIComponent(JSON.stringify({points,flows,bounds}));
 <figure class="flow-map-figure">
   <div class="flow-map-title"><strong>{title}</strong><div>{legend.map((item)=><span><i style={`background:${item.color}`}></i>{item.label}</span>)}</div></div>
   <div id={id} class="flow-map" data-flow-map data-config={config} style={`height:${height}`} aria-label={title}></div>
-  <details><summary>Text alternative</summary><p>{fallback}</p></details>
+  <details data-map-fallback hidden><summary>Text alternative</summary><p>{fallback}</p></details>
   <figcaption>{caption}<span>Source: {source}</span></figcaption>
 </figure>
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" />
-<script is:inline type="module">
-  const initFlowMaps=async()=>{
-    const nodes=[...document.querySelectorAll('[data-flow-map]:not([data-map-ready])')]; if(!nodes.length)return;
-    let maplibregl,d3; try{[maplibregl,d3]=await Promise.all([import('https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.es.js'),import('https://cdn.jsdelivr.net/npm/d3@7/+esm')]);}catch{nodes.forEach(n=>n.classList.add('map-unavailable'));return;}
-    nodes.forEach((node)=>{node.dataset.mapReady='true';const c=JSON.parse(decodeURIComponent(node.dataset.config));const map=new maplibregl.Map({container:node,style:'https://tiles.openfreemap.org/styles/liberty',center:[-55,40],zoom:1.5});map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');map.dragRotate.disable();map.touchZoomRotate.disableRotation();
-      const svg=d3.select(map.getCanvasContainer()).append('svg').attr('class','d3-flow-overlay');const layer=svg.append('g');
-      const render=()=>{const box=node.getBoundingClientRect();svg.attr('width',box.width).attr('height',box.height);layer.selectAll('path').data(c.flows).join('path').attr('d',(f)=>{const a=map.project([f.from.lon,f.from.lat]),b=map.project([f.to.lon,f.to.lat]);const mx=(a.x+b.x)/2,my=Math.min(a.y,b.y)-Math.min(80,Math.abs(b.x-a.x)*.12);return `M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`;}).attr('fill','none').attr('stroke',f=>f.color||'#d99a2b').attr('stroke-width',f=>f.width||2).attr('stroke-opacity',.75).attr('stroke-dasharray',f=>f.dash||null);};
-      map.on('load',()=>{const data={type:'FeatureCollection',features:c.points.map(p=>({type:'Feature',properties:{label:p.label,color:p.color||'#d99a2b'},geometry:{type:'Point',coordinates:[p.lon,p.lat]}}))};map.addSource('flow-points',{type:'geojson',data});map.addLayer({id:'flow-points',type:'circle',source:'flow-points',paint:{'circle-radius':6,'circle-color':['get','color'],'circle-stroke-color':'#fff','circle-stroke-width':1.2}});map.addLayer({id:'flow-labels',type:'symbol',source:'flow-points',layout:{'text-field':['get','label'],'text-size':10,'text-offset':[0,1.1],'text-anchor':'top'},paint:{'text-color':'#172033','text-halo-color':'#fff','text-halo-width':1.5}});map.fitBounds(c.bounds,{padding:42,duration:0});render();});map.on('move',render);map.on('resize',render);
-    });};initFlowMaps();
+<script>
+  import { initFlowMaps } from '../scripts/mapRuntime';
+  const startFlowMaps = () => {
+    if (typeof window !== 'undefined') initFlowMaps();
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startFlowMaps, { once: true });
+  else startFlowMaps();
 </script>
 <style>
-  .flow-map-figure{margin:46px 0}.flow-map-title{display:flex;justify-content:space-between;gap:14px;border:1px solid #d9dee7;border-bottom:0;border-radius:18px 18px 0 0;background:#172033;padding:13px 17px;color:#fff}.flow-map-title>div{display:flex;flex-wrap:wrap;gap:10px}.flow-map-title span{display:inline-flex;align-items:center;gap:5px;color:#dbe6f7;font-size:.68rem}.flow-map-title i{width:16px;height:3px;border-radius:3px}.flow-map{position:relative;width:100%;min-height:340px;border:1px solid #d9dee7;background:#e9eef4}.flow-map :global(.d3-flow-overlay){position:absolute;inset:0;pointer-events:none}.flow-map.map-unavailable::after{display:grid;height:100%;place-items:center;content:'Interactive flow map unavailable. Use the text alternative.'}.flow-map-figure details{border:1px solid #d9dee7;border-top:0;padding:9px 14px;color:#64748b;font-size:.78rem}.flow-map-figure details p{margin-top:8px!important;font-family:inherit!important;font-size:.8rem!important}.flow-map-figure figcaption{margin-top:12px;color:#6b7280;font-size:.8rem;line-height:1.55}.flow-map-figure figcaption span{display:block}@media(max-width:640px){.flow-map-title{display:grid}.flow-map{height:390px!important}}
+  .flow-map-figure{margin:46px 0}.flow-map-title{display:flex;justify-content:space-between;gap:14px;border:1px solid #d9dee7;border-bottom:0;border-radius:18px 18px 0 0;background:#172033;padding:13px 17px;color:#fff}.flow-map-title>div{display:flex;flex-wrap:wrap;gap:10px}.flow-map-title span{display:inline-flex;align-items:center;gap:5px;color:#dbe6f7;font-size:.68rem}.flow-map-title i{width:16px;height:3px;border-radius:3px}.flow-map{position:relative;width:100%;height:55vh;min-height:420px;max-height:640px;border:1px solid #d9dee7;background:#e9eef4}.flow-map.map-unavailable::after{display:grid;height:100%;place-items:center;padding:20px;color:#64748b;content:'Interactive flow map unavailable. Use the text alternative.'}.flow-map-figure details{border:1px solid #d9dee7;border-top:0;padding:9px 14px;color:#64748b;font-size:.78rem}.flow-map-figure details p{margin-top:8px!important;font-family:inherit!important;font-size:.8rem!important}.flow-map-figure figcaption{margin-top:12px;color:#6b7280;font-size:.8rem;line-height:1.55}.flow-map-figure figcaption span{display:block}@media(max-width:640px){.flow-map-title{display:grid}.flow-map{height:55vh!important;min-height:420px}}
 </style>
