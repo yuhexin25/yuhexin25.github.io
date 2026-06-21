@@ -24,10 +24,44 @@ const centralityItems = [
   {label:'Houston / IAH',code:'IAH',matchScore:78,note:'Host + alliance hub'},
 ].map((item) => ({ ...item, connectivityScore:hubByCode[item.code].connectivityScore }));
 ---
-<BlogArticle title="Hubs, Alliances, and World Cup Mobility" subtitle="The tournament temporarily reweights airline network flows, making connectivity and centrality more important than match counts alone." category="Aviation Networks" date="June 20, 2026" readingTime="7 min read" tags={['Aviation Networks','Network Centrality','Airline Alliances','Passenger Flows']} image={`${base}blog/hubs-alliances-world-cup-mobility-hero.png`} imageAlt="North American aviation network linking ATL, DFW, IAH, ORD, DEN, and New York area hubs with alliance-inspired flight paths">
+<BlogArticle title="Hubs, Alliances, and World Cup Mobility" subtitle="The tournament temporarily reweights airline network flows, making connectivity and centrality more important than match counts alone." category="Aviation Networks" date="June 20, 2026" readingTime="8 min read" tags={['Aviation Networks','Network Centrality','Airline Alliances','Passenger Flows']} image={`${base}blog/hubs-alliances-world-cup-mobility-hero.png`} imageAlt="North American aviation network linking ATL, DFW, IAH, ORD, DEN, and New York area hubs with alliance-inspired flight paths">
   <p class="lead">The World Cup does not create a new airline network. It temporarily changes the amount, direction, and timing of flow across the network that already exists.</p>
   <p>That distinction matters. A list of extra flights treats every movement as an isolated event. Network analysis asks a different set of questions: Which nodes concentrate the flow? Which connections become temporarily important? Where do many plausible journeys depend on the same hub? How does a change at one node affect paths elsewhere?</p>
   <p>Seen this way, the 2026 tournament is not mainly an aviation-demand story. It is a temporary reconfiguration of airline network flows.</p>
+
+  <h2>The Three Global Airline Alliances</h2>
+  <p>Airline alliances connect carriers into broader networks through coordinated schedules, shared hubs, and interline or codeshare relationships. For World Cup travelers, that structure can determine which gateways and connections make a multi-city journey practical.</p>
+  <figure class="alliance-network" aria-labelledby="alliance-network-title">
+    <div class="alliance-network-heading">
+      <strong id="alliance-network-title">Alliance networks at a glance</strong>
+      <span>Alliance → representative members → major U.S. hubs</span>
+    </div>
+    <div class="alliance-network-grid">
+      <article class="alliance-card alliance-star">
+        <div class="alliance-name"><i aria-hidden="true"></i><strong>Star Alliance</strong></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Representative members</small><p>Lufthansa · United · Air Canada · Swiss · Turkish Airlines</p></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Major U.S. hubs</small><p class="hub-codes"><b>IAH</b><b>ORD</b><b>DEN</b><b>EWR</b><b>SFO</b></p></div>
+      </article>
+      <article class="alliance-card alliance-skyteam">
+        <div class="alliance-name"><i aria-hidden="true"></i><strong>SkyTeam</strong></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Representative members</small><p>Delta · Air France · KLM · Aeromexico</p></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Major U.S. hubs</small><p class="hub-codes"><b>ATL</b><b>JFK</b><b>DTW</b><b>MSP</b></p></div>
+      </article>
+      <article class="alliance-card alliance-oneworld">
+        <div class="alliance-name"><i aria-hidden="true"></i><strong>oneworld</strong></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Representative members</small><p>American Airlines · British Airways · Iberia · Qatar Airways · Japan Airlines</p></div>
+        <span class="alliance-arrow" aria-hidden="true">→</span>
+        <div><small>Major U.S. hubs</small><p class="hub-codes"><b>DFW</b><b>MIA</b><b>PHL</b><b>CLT</b><b>LAX</b></p></div>
+      </article>
+    </div>
+    <figcaption>Representative connections include FRA → IAH, MUC → ORD, and ZRH → EWR for Star Alliance; AMS → ATL, CDG → JFK, and MEX → ATL for SkyTeam; and LHR → DFW, MAD → MIA, and DOH → PHL for oneworld. These routes are illustrative examples of alliance connectivity and not actual World Cup passenger itineraries.</figcaption>
+  </figure>
+  <p class="alliance-takeaway"><strong>Key takeaway:</strong> For many international supporters, the practical travel network is often defined by airline alliances and hub connectivity rather than by a single airline.</p>
 
   <h2>Alliance Geography</h2>
   <p>Geographic distance does not fully explain how supporters reach a host city. Airline alliances overlay their own geography on the physical map. They connect home markets, long-haul gateways, U.S. hubs, and final destinations through schedules and commercial partnerships.</p>
@@ -77,3 +111,18 @@ const centralityItems = [
 
   <h2>References</h2><ol class="reference-list"><li><a href="https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/arp-cy2024-commercial-service-enplanements.pdf">FAA CY2024 enplanements</a></li><li><a href="https://www.transtats.bts.gov/">BTS TranStats aviation datasets</a></li><li><a href="https://www.staralliance.com/en/members">Star Alliance member airlines</a></li><li><a href="https://www.skyteam.com/en/about/">SkyTeam network information</a></li><li><a href="https://www.oneworld.com/members">oneworld member airlines</a></li><li><a href="https://yuhexin25-oss.github.io/us-airline-hub-atlas/">U.S. Airline Hub Atlas</a></li></ol>
 </BlogArticle>
+
+<style is:global>
+  .alliance-network{margin:34px 0;border:1px solid #d8e1ec;border-radius:22px;overflow:hidden;background:#f8fafc;box-shadow:0 18px 42px rgba(20,34,54,.08)}
+  .alliance-network-heading{display:flex;justify-content:space-between;gap:18px;padding:20px 22px;background:#17243a;color:#fff}
+  .alliance-network-heading strong{font-family:var(--font-display);font-size:1.1rem}.alliance-network-heading span{color:#b9c7dc;font-size:.82rem}
+  .alliance-network-grid{display:grid;gap:1px;background:#dfe6ee}
+  .alliance-card{--alliance:#d9a441;display:grid;grid-template-columns:minmax(125px,.72fr) 24px minmax(210px,1.35fr) 24px minmax(175px,1fr);align-items:center;gap:10px;padding:20px 22px;background:#fff}
+  .alliance-card>div{min-width:0}.alliance-card small{display:block;margin-bottom:5px;color:#6b7788;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .alliance-card p{margin:0!important;color:#344256!important;font-size:.91rem!important;line-height:1.55!important}.alliance-name{display:flex;align-items:center;gap:10px}.alliance-name i{width:13px;height:13px;border:3px solid var(--alliance);border-radius:50%;box-shadow:0 0 0 5px color-mix(in srgb,var(--alliance) 16%,transparent)}
+  .alliance-name strong{color:#1f2d42;font-size:.96rem}.alliance-arrow{color:var(--alliance);font-size:1.3rem;text-align:center}.alliance-skyteam{--alliance:#4f83cc}.alliance-oneworld{--alliance:#b56576}
+  .hub-codes{display:flex;flex-wrap:wrap;gap:6px}.hub-codes b{padding:4px 7px;border:1px solid color-mix(in srgb,var(--alliance) 35%,#dce4ed);border-radius:6px;background:color-mix(in srgb,var(--alliance) 8%,#fff);color:#26384f;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;letter-spacing:.04em}
+  .alliance-network figcaption{padding:16px 22px;border-top:1px solid #dfe6ee;color:#68778a;font-size:.78rem;line-height:1.65}
+  .alliance-takeaway{padding:18px 20px;border-left:4px solid #d9a441;border-radius:0 12px 12px 0;background:#fff8e8;color:#354257!important}
+  @media(max-width:760px){.alliance-network-heading{display:block}.alliance-network-heading span{display:block;margin-top:5px}.alliance-card{grid-template-columns:1fr;gap:8px}.alliance-arrow{transform:rotate(90deg);text-align:left}.alliance-card>div:not(.alliance-name){padding-left:22px}}
+</style>
