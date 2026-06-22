@@ -7,7 +7,9 @@ const featuredProjects = [
   {
     number: '01',
     title: 'U.S. Airline Hub Atlas',
+    type: 'Interactive Map',
     description: 'Interactive visualization of U.S. airline hub structures and connectivity patterns.',
+    tools: ['MapLibre', 'D3', 'Network Analysis'],
     href: 'https://yuhexin25-oss.github.io/us-airline-hub-atlas/',
     image: `${base}project-previews/hub-atlas.svg`,
     imageAlt: 'Route map preview of the U.S. Airline Hub Atlas.',
@@ -16,7 +18,9 @@ const featuredProjects = [
   {
     number: '02',
     title: 'Live Flight Delay Analysis',
+    type: 'Live Dashboard',
     description: 'Real-time aviation delay monitoring and route risk assessment using FAA and aviation data.',
+    tools: ['FAA Data', 'Python', 'MapLibre'],
     href: 'https://yuhexin25-oss.github.io/livedelayanalysis/',
     image: `${base}project-previews/route-risk.svg`,
     imageAlt: 'Live flight delay and route risk dashboard preview.',
@@ -25,7 +29,9 @@ const featuredProjects = [
   {
     number: '03',
     title: 'World Cup Air Travel Network',
+    type: 'Research Article',
     description: 'Analysis of fan mobility and airline network responses during FIFA World Cup 2026.',
+    tools: ['MapLibre', 'Network Analysis'],
     href: `${base}blog/hubs-alliances-world-cup-mobility/`,
     image: `${base}blog/hubs-alliances-world-cup-mobility-hero.png`,
     imageAlt: 'North American airline hub network created for the World Cup aviation analysis.',
@@ -79,28 +85,28 @@ const featuredBlogArticle = {
       </div>
       <section class="featured-projects" aria-labelledby="featured-projects-heading">
         <div class="featured-projects-heading">
-          <div>
-            <p class="page-kicker">Selected work</p>
-            <h2 id="featured-projects-heading">Featured Projects</h2>
-          </div>
+          <h2 id="featured-projects-heading">Selected Work</h2>
           <a href={`${base}projects`}>All projects <span aria-hidden="true">→</span></a>
         </div>
         <div class="featured-project-list">
           {featuredProjects.map((project) => (
-            <a
-              class="priority-project-card"
-              href={project.href}
-              target={project.external ? '_blank' : undefined}
-              rel={project.external ? 'noopener noreferrer' : undefined}
-            >
+            <article class="priority-project-card">
               <img src={project.image} alt={project.imageAlt} />
-              <div>
-                <span>{project.number}</span>
+              <div class="priority-project-copy">
+                <div class="project-eyebrow"><span>{project.number}</span><b>{project.type}</b></div>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
+                <ul aria-label={`${project.title} tools`}>
+                  {project.tools.map((tool) => <li>{tool}</li>)}
+                </ul>
               </div>
-              <b aria-hidden="true">↗</b>
-            </a>
+              <a
+                class="view-project"
+                href={project.href}
+                target={project.external ? '_blank' : undefined}
+                rel={project.external ? 'noopener noreferrer' : undefined}
+              >View project <span aria-hidden="true">↗</span></a>
+            </article>
           ))}
         </div>
       </section>
@@ -110,10 +116,7 @@ const featuredBlogArticle = {
   <div class="page-shell home-shell">
     <section class="section featured-research-section" aria-labelledby="featured-research-heading">
       <div class="container section-heading">
-        <div>
-          <p class="page-kicker">Featured Blog</p>
-          <h2 id="featured-research-heading">Aviation systems in context</h2>
-        </div>
+        <h2 id="featured-research-heading">Latest Writing</h2>
         <a href={`${base}blog/`}>All posts -&gt;</a>
       </div>
       <a class="featured-research-card container" href={featuredBlogArticle.href}>
@@ -134,10 +137,10 @@ const featuredBlogArticle = {
     </section>
 
     {featuredLibraryNote && (
-      <section class="section">
+      <section class="section research-notes-section" aria-labelledby="research-notes-heading">
         <div class="container reading-strip">
           <div>
-            <p class="page-kicker">Research Library</p>
+            <p class="page-kicker" id="research-notes-heading">Research Notes</p>
             <h2>
               <a href={featuredLibraryHref}>{featuredLibraryNote.data.title}</a>
             </h2>
@@ -257,12 +260,7 @@ const featuredBlogArticle = {
     margin-bottom: 14px;
   }
 
-  .featured-projects-heading .page-kicker {
-    color: var(--gold-dark);
-  }
-
   .featured-projects-heading h2 {
-    margin-top: 1px;
     font-size: clamp(1.8rem, 3vw, 2.65rem);
   }
 
@@ -281,17 +279,17 @@ const featuredBlogArticle = {
 
   .priority-project-card {
     display: grid;
-    grid-template-columns: 112px minmax(0, 1fr) auto;
+    grid-template-columns: 112px minmax(0, 1fr) 102px;
     gap: 16px;
     align-items: center;
     overflow: hidden;
-    min-height: 104px;
+    min-height: 120px;
     border: 1px solid rgba(217, 206, 191, 0.92);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 12px 28px rgba(63, 47, 31, 0.07);
     color: var(--text);
-    padding: 9px 16px 9px 9px;
+    padding: 9px 14px 9px 9px;
     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
 
@@ -305,37 +303,87 @@ const featuredBlogArticle = {
 
   .priority-project-card img {
     width: 112px;
-    height: 84px;
+    height: 102px;
     border-radius: 12px;
     object-fit: cover;
   }
 
-  .priority-project-card div {
+  .priority-project-copy {
     min-width: 0;
   }
 
-  .priority-project-card div > span {
+  .project-eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 9px;
+    align-items: center;
+  }
+
+  .project-eyebrow span {
     color: var(--gold-dark);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.7rem;
     font-weight: 800;
   }
 
+  .project-eyebrow b {
+    color: #64748b;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
   .priority-project-card h3 {
-    margin-top: 1px;
+    margin-top: 2px;
     font-size: clamp(1.02rem, 1.5vw, 1.22rem);
   }
 
   .priority-project-card p {
-    margin-top: 4px;
+    margin-top: 2px;
     color: #667085;
-    font-size: 0.83rem;
-    line-height: 1.45;
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
-  .priority-project-card > b {
+  .priority-project-card ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .priority-project-card li {
+    border: 1px solid rgba(82, 124, 168, 0.18);
+    border-radius: 999px;
+    background: #f5f8fb;
+    color: #5b6878;
+    padding: 2px 6px;
+    font-size: 0.61rem;
+    font-weight: 700;
+  }
+
+  .view-project {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-height: 34px;
+    border: 1px solid rgba(245, 158, 11, 0.38);
+    border-radius: 999px;
+    background: var(--gold-soft);
     color: var(--gold-dark);
-    font-size: 1rem;
+    padding: 7px 10px;
+    font-size: 0.73rem;
+    font-weight: 800;
+  }
+
+  .view-project:hover {
+    border-color: var(--gold);
+    color: #7c2d12;
+    text-decoration: none;
   }
 
   .home-shell {
@@ -344,17 +392,18 @@ const featuredBlogArticle = {
 
   .featured-research-section {
     background: #fffdf8;
+    padding-block: 52px;
   }
 
   .featured-research-card {
     display: grid;
-    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(220px, 0.5fr) minmax(0, 1.5fr);
     overflow: hidden;
-    border: 1px solid #31405d;
-    border-radius: 26px;
-    background: #172033;
-    box-shadow: 0 22px 48px rgba(30, 41, 59, 0.16);
-    color: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(63, 47, 31, 0.07);
+    color: var(--text);
     padding: 0;
     transition:
       transform 180ms ease,
@@ -362,14 +411,14 @@ const featuredBlogArticle = {
   }
 
   .featured-research-card:hover {
-    color: #fff;
+    color: var(--text);
     text-decoration: none;
     transform: translateY(-3px);
-    box-shadow: 0 28px 58px rgba(30, 41, 59, 0.2);
+    box-shadow: 0 18px 38px rgba(63, 47, 31, 0.12);
   }
 
   .featured-research-image {
-    min-height: 350px;
+    min-height: 220px;
   }
 
   .featured-research-image img {
@@ -382,11 +431,11 @@ const featuredBlogArticle = {
   .featured-research-copy {
     display: grid;
     align-content: center;
-    padding: clamp(28px, 5vw, 54px);
+    padding: clamp(24px, 4vw, 38px);
   }
 
   .featured-research-meta {
-    color: #f6c76f;
+    color: var(--gold-dark);
     font-size: 0.78rem;
     font-weight: 780;
     letter-spacing: 0.07em;
@@ -396,19 +445,19 @@ const featuredBlogArticle = {
   .featured-research-copy h3 {
     max-width: 660px;
     margin-top: 14px;
-    color: #fff;
-    font-size: clamp(1.55rem, 3vw, 2.45rem);
+    color: var(--text);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
   }
 
   .featured-research-copy > p:not(.featured-research-meta) {
     max-width: 620px;
     margin-top: 16px;
-    color: #cbd8ea;
+    color: var(--muted);
   }
 
   .featured-research-copy > span {
-    margin-top: 26px;
-    color: #f6c76f;
+    margin-top: 20px;
+    color: var(--gold-dark);
     font-weight: 750;
   }
 
@@ -422,8 +471,12 @@ const featuredBlogArticle = {
     background:
       linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0) 32%),
       var(--paper);
-    box-shadow: 0 16px 38px rgba(63, 47, 31, 0.06);
-    padding: 30px;
+    box-shadow: 0 10px 24px rgba(63, 47, 31, 0.05);
+    padding: 24px;
+  }
+
+  .research-notes-section {
+    padding-block: 38px 68px;
   }
 
   .reading-strip h2 a {
@@ -507,19 +560,27 @@ const featuredBlogArticle = {
     }
 
     .priority-project-card {
-      grid-template-columns: 82px minmax(0, 1fr) auto;
+      grid-template-columns: 82px minmax(0, 1fr);
       gap: 12px;
-      min-height: 98px;
+      min-height: 112px;
       padding-right: 12px;
     }
 
     .priority-project-card img {
       width: 82px;
-      height: 76px;
+      height: 92px;
+      grid-row: 1 / span 2;
     }
 
     .priority-project-card p {
       font-size: 0.78rem;
+    }
+
+    .view-project {
+      grid-column: 2;
+      width: fit-content;
+      min-height: 30px;
+      padding: 5px 9px;
     }
   }
 </style>
