@@ -76,6 +76,15 @@ const currentProjects = [
   description="Hexin Yu is a Virginia Tech Computational Modeling & Data Analytics student interested in aviation analytics, transportation systems, data visualization, and network analysis."
 >
   <section class="hero-section" aria-labelledby="home-title">
+    <svg class="hero-lines" viewBox="0 0 1100 520" aria-hidden="true">
+      <path d="M-20 365 C 180 230, 350 260, 540 160 S 860 80, 1130 165" />
+      <path d="M110 130 C 290 205, 410 108, 610 220 S 900 365, 1120 290" />
+      <path d="M190 470 C 360 350, 540 372, 730 285 S 970 190, 1130 235" />
+      <circle cx="180" cy="318" r="4" />
+      <circle cx="540" cy="160" r="4" />
+      <circle cx="820" cy="110" r="4" />
+      <circle cx="985" cy="326" r="4" />
+    </svg>
     <div class="container priority-grid">
       <div class="hero-copy">
         <h1 id="home-title">Hexin Yu</h1>
@@ -84,6 +93,12 @@ const currentProjects = [
         <p class="lead">
           Data-driven work on aviation networks and transportation systems.
         </p>
+        <ul class="focus-row" aria-label="Academic focus areas">
+          <li>Airline Networks</li>
+          <li>Aviation Reliability</li>
+          <li>GIS</li>
+          <li>Data Visualization</li>
+        </ul>
         <div class="button-row">
           <a class="button" href={`${base}projects`}>View Projects</a>
           <a class="button secondary" href={`${base}Hexin-Yu-CV.pdf`} target="_blank" rel="noopener noreferrer">Download CV</a>
@@ -199,9 +214,33 @@ const currentProjects = [
   .hero-section {
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--border);
-    background: #fffdf8;
+    border-bottom: 1px solid rgba(231, 229, 228, 0.82);
+    background:
+      radial-gradient(circle at 17% 22%, rgba(245, 158, 11, 0.13), transparent 30rem),
+      radial-gradient(circle at 86% 16%, rgba(217, 119, 6, 0.07), transparent 28rem),
+      linear-gradient(135deg, #fffdf8 0%, #fff8ed 50%, #fffdf8 100%);
     padding: 56px 0 58px;
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: #b45309;
+    opacity: 0.13;
+    pointer-events: none;
+  }
+
+  .hero-lines path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.2;
+  }
+
+  .hero-lines circle {
+    fill: currentColor;
   }
 
   .priority-grid {
@@ -233,6 +272,26 @@ const currentProjects = [
     color: #475569;
     font-size: 1rem;
     line-height: 1.6;
+  }
+
+  .focus-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .focus-row li {
+    border: 1px solid rgba(214, 211, 209, 0.92);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.58);
+    color: #65544a;
+    padding: 5px 9px;
+    font-size: 0.78rem;
+    font-weight: 650;
+    backdrop-filter: blur(6px);
   }
 
   .hero-subtitle {
@@ -271,22 +330,26 @@ const currentProjects = [
   }
 
   .hero-copy .button:first-child {
-    border-color: #cbd5e1;
-    background: #1e293b;
+    border-color: rgba(180, 83, 9, 0.34);
+    background: #b45309;
+    color: #fffdf8;
+  }
+
+  .hero-copy .button:hover {
+    border-color: rgba(180, 83, 9, 0.48);
+    background: #92400e;
     color: #fff;
   }
 
-  .hero-copy .button:hover,
   .hero-copy .button.secondary:hover {
-    border-color: #94a3b8;
-    background: #f8fafc;
-    color: var(--text);
+    border-color: rgba(180, 83, 9, 0.28);
+    background: #fff7ed;
+    color: var(--warm-ink);
   }
 
   .featured-projects {
     min-width: 0;
-    border-left: 1px solid var(--border);
-    padding-left: clamp(28px, 4vw, 50px);
+    padding-left: clamp(26px, 4vw, 48px);
   }
 
   .featured-projects-heading {
@@ -316,28 +379,36 @@ const currentProjects = [
 
   .priority-project-card {
     display: grid;
-    grid-template-columns: 124px minmax(0, 1fr) auto;
-    gap: 16px;
+    grid-template-columns: 136px minmax(0, 1fr) auto;
+    gap: 18px;
     align-items: center;
     overflow: hidden;
-    min-height: 134px;
-    border: 1px solid var(--border);
+    min-height: 146px;
+    border: 1px solid rgba(214, 200, 181, 0.78);
     border-radius: 16px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 8px 22px rgba(63, 47, 31, 0.045);
     color: var(--text);
-    padding: 10px 14px 10px 10px;
-    transition: border-color 180ms ease;
+    padding: 11px 14px 11px 11px;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease,
+      background 180ms ease;
   }
 
   .priority-project-card:hover {
-    border-color: var(--border-strong);
+    border-color: rgba(180, 83, 9, 0.22);
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(63, 47, 31, 0.07);
     color: var(--text);
     text-decoration: none;
+    transform: translateY(-1px);
   }
 
   .priority-project-card img {
-    width: 124px;
-    height: 112px;
+    width: 136px;
+    height: 124px;
     border-radius: 12px;
     object-fit: cover;
   }
@@ -391,10 +462,10 @@ const currentProjects = [
   }
 
   .priority-tag-list li {
-    border: 1px solid var(--border);
+    border: 1px solid rgba(214, 211, 209, 0.9);
     border-radius: 999px;
-    background: #fafafa;
-    color: #64748b;
+    background: #fffaf2;
+    color: #6b5f4e;
     padding: 3px 8px;
     font-size: 0.68rem;
     font-weight: 650;
@@ -410,18 +481,19 @@ const currentProjects = [
     justify-content: center;
     gap: 5px;
     min-height: 34px;
-    border: 1px solid var(--border-strong);
+    border: 1px solid rgba(214, 200, 181, 0.92);
     border-radius: 999px;
     background: #fff;
-    color: #334155;
+    color: #594331;
     padding: 7px 10px;
     font-size: 0.73rem;
     font-weight: 800;
   }
 
   .view-project:hover {
-    border-color: #94a3b8;
-    color: var(--text);
+    border-color: rgba(180, 83, 9, 0.32);
+    background: #fff7ed;
+    color: #7c2d12;
     text-decoration: none;
   }
 
@@ -670,7 +742,6 @@ const currentProjects = [
 
     .featured-projects {
       border-top: 1px solid var(--border);
-      border-left: 0;
       padding-top: 28px;
       padding-left: 0;
     }
@@ -761,6 +832,10 @@ const currentProjects = [
 
     .hero-copy .button {
       width: 100%;
+    }
+
+    .focus-row {
+      gap: 6px;
     }
 
     .current-projects-layout,
