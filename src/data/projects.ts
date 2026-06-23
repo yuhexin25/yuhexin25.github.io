@@ -12,7 +12,7 @@ export const projects = [
     // Placeholder live-page screenshot. Replace with a custom cropped project-output screenshot when available.
     image: 'project-previews/hub-atlas-real.png',
     imageAlt: 'Screenshot of the U.S. Airline Hub Atlas showing routes, hub airports, and network metrics.',
-    href: 'https://yuhexin25-oss.github.io/us-airline-hub-atlas/',
+    href: 'https://yuhexin25.github.io/us-airline-hub-atlas/',
     linkLabel: 'View project',
     external: true,
   },
@@ -29,7 +29,7 @@ export const projects = [
     // Placeholder operational screenshot. Replace with a custom analysis-output screenshot when available.
     image: 'research/houston-iah-delay.jpg',
     imageAlt: 'Screenshot showing observed airport delay conditions at Houston George Bush Intercontinental Airport.',
-    href: 'https://yuhexin25-oss.github.io/usflightdelay/',
+    href: 'https://yuhexin25.github.io/usflightdelay/',
     linkLabel: 'View analysis',
     external: true,
   },
@@ -46,7 +46,7 @@ export const projects = [
     // Placeholder live-page screenshot. Replace with a custom cropped dashboard screenshot when available.
     image: 'project-previews/live-delay-page.png',
     imageAlt: 'Screenshot of the Live Flight Delay Analysis project page showing the Hub Resilience Monitor.',
-    href: 'https://yuhexin25-oss.github.io/livedelayanalysis/',
+    href: 'https://yuhexin25.github.io/livedelayanalysis/',
     linkLabel: 'Open dashboard',
     external: true,
   },
