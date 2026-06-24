@@ -1,6 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import { existsSync, readdirSync } from 'node:fs';
 import Layout from '../components/Layout.astro';
+import {
+  combineBlogPosts,
+  getBlogPostHref,
+  getBlogPostImage,
+  getBlogPostMeta,
+  normalizeContentBlogPost,
+} from '../data/blogPosts';
 
 const base = import.meta.env.BASE_URL;
 // Project thumbnails use live-page screenshots as temporary placeholders.
@@ -56,14 +64,11 @@ const featuredLibraryNote = readingNotes[0];
 const featuredLibraryHref = featuredLibraryNote
   ? `${base}reading-notes/${featuredLibraryNote.data.source.slug}/${featuredLibraryNote.data.noteSlug}`
   : `${base}reading-notes`;
-const featuredBlogArticle = {
-  title: 'World Cup 2026 and the U.S. Aviation System',
-  description:
-    'Demand waves, summer thunderstorms, and field observations from Houston.',
-  href: `${base}blog/world-cup-us-aviation-system/`,
-  image: `${base}research/houston-match-attendance.jpg`,
-  meta: 'June 20, 2026 / 7 min read',
-};
+const blogContentDir = new URL('../content/blog/', import.meta.url);
+const hasContentBlogPosts =
+  existsSync(blogContentDir) && readdirSync(blogContentDir).some((file) => /\.(md|mdx)$/i.test(file));
+const contentBlogPosts = hasContentBlogPosts ? (await getCollection('blog')).map(normalizeContentBlogPost) : [];
+const latestBlogPosts = combineBlogPosts(contentBlogPosts).slice(0, 3);
 const currentProjects = [
   { title: 'Live Flight Delay Analysis', status: 'Active development', tone: 'active' },
   { title: 'World Cup Air Travel Network', status: 'Writing and visualization', tone: 'progress' },
@@ -173,21 +178,21 @@ const currentProjects = [
         <h2 id="featured-research-heading">Latest Writing</h2>
         <a href={`${base}blog/`}>All posts -&gt;</a>
       </div>
-      <a class="featured-research-card container" href={featuredBlogArticle.href}>
-        <div class="featured-research-image">
-          <img
-            src={featuredBlogArticle.image}
-            alt="Germany versus Curaçao scoreboard in Houston showing attendance of 68,021"
-            loading="lazy"
-          />
-        </div>
-        <div class="featured-research-copy">
-          <p class="featured-research-meta">{featuredBlogArticle.meta}</p>
-          <h3>{featuredBlogArticle.title}</h3>
-          <p>{featuredBlogArticle.description}</p>
-          <span>Read the article -&gt;</span>
-        </div>
-      </a>
+      <div class="container latest-writing-grid">
+        {latestBlogPosts.map((post) => (
+          <a class="featured-research-card" href={getBlogPostHref(post, base)}>
+            <div class="featured-research-image">
+              <img src={getBlogPostImage(post, base)} alt={post.imageAlt} loading="lazy" />
+            </div>
+            <div class="featured-research-copy">
+              <p class="featured-research-meta">{post.category} · {getBlogPostMeta(post)}</p>
+              <h3>{post.title}</h3>
+              <p>{post.description}</p>
+              <span>Read the article -&gt;</span>
+            </div>
+          </a>
+        ))}
+      </div>
     </section>
 
     {featuredLibraryNote && (
@@ -568,9 +573,14 @@ const currentProjects = [
     padding-block: 36px;
   }
 
+  .latest-writing-grid {
+    display: grid;
+    gap: 14px;
+  }
+
   .featured-research-card {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
+    grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -586,7 +596,7 @@ const currentProjects = [
   }
 
   .featured-research-image {
-    min-height: 150px;
+    min-height: 142px;
   }
 
   .featured-research-image img {

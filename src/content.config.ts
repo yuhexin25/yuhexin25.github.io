@@ -26,4 +26,18 @@ const readingNotes = defineCollection({
   }),
 });
 
-export const collections = { 'reading-notes': readingNotes };
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.union([z.string(), z.date()]),
+    category: z.string(),
+    readingTime: z.string(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, 'reading-notes': readingNotes };

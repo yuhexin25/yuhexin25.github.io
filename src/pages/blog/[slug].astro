@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import { existsSync, readdirSync } from 'node:fs';
+import BlogArticle from '../../components/BlogArticle.astro';
+import { getBlogPostImage, normalizeContentBlogPost } from '../../data/blogPosts';
+
+const base = import.meta.env.BASE_URL;
+
+export async function getStaticPaths() {
+  const blogContentDir = new URL('../../content/blog/', import.meta.url);
+  const hasContentBlogPosts =
+    existsSync(blogContentDir) && readdirSync(blogContentDir).some((file) => /\.(md|mdx)$/i.test(file));
+  if (!hasContentBlogPosts) return [];
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const normalizedPost = normalizeContentBlogPost(post);
+const { Content } = await post.render();
+---
+
+<BlogArticle
+  title={normalizedPost.title}
+  subtitle={normalizedPost.description}
+  category={normalizedPost.category}
+  date={normalizedPost.date instanceof Date ? normalizedPost.date.toISOString() : normalizedPost.date}
+  readingTime={normalizedPost.readingTime}
+  tags={[normalizedPost.category]}
+  image={getBlogPostImage(normalizedPost, base)}
+  imageAlt={normalizedPost.imageAlt}
+>
+  <Content />
+</BlogArticle>
