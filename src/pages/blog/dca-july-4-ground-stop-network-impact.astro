@@ -49,6 +49,15 @@ const disruptionRows = [
 
   <h2>DCA's geography makes it unusually exposed</h2>
   <p>DCA is not a remote airfield separated from the city it serves. It sits next to the Potomac River, close to downtown Washington, the National Mall, federal airspace restrictions, and some of the most symbolically important public spaces in the United States. That geography is exactly why passengers like the airport: it is convenient, central, and rail-connected. It is also why public events can reach directly into airport operations.</p>
+
+  <figure class="analysis-visual analysis-photo">
+    <img src={`${visualBase}/dca-control-tower-context.jpg`} alt="DCA control tower and terminal area with an aircraft flying above Reagan National Airport." loading="lazy" />
+    <figcaption>
+      Reagan National Airport operates within one of the most constrained and security-sensitive airspaces in the United States. Its proximity to downtown Washington, the Pentagon, and major federal landmarks makes airport operations, airspace management, and FAA traffic-flow considerations especially important during special events.
+      <span>Photo: Hexin Yu</span>
+    </figcaption>
+  </figure>
+
   <p>For aviation analysis, this is a useful reminder that airport reliability is not only an internal airport problem. A runway can be physically usable while the surrounding airspace becomes temporarily unavailable for scheduled commercial operations. A terminal can remain open while departures and arrivals are paused. A city can be celebrating while the flight network absorbs the operational consequences.</p>
 
   <figure class="analysis-visual">
@@ -109,6 +118,8 @@ const disruptionRows = [
 <style is:global>
   .analysis-visual{border:1px solid var(--border);border-radius:18px;background:#fff;padding:12px 12px 16px;box-shadow:0 10px 26px rgba(63,47,31,.045)}
   .analysis-visual img{display:block;width:100%;height:auto;border-radius:14px}
+  .analysis-photo img{max-height:620px;object-fit:cover;object-position:center 42%}
+  .analysis-photo figcaption span{display:block;margin-top:7px;color:#8a7c6b;font-size:.74rem;font-weight:800}
   .disruption-table{border:1px solid var(--border);border-radius:18px;background:#fff;padding:22px;box-shadow:0 10px 26px rgba(63,47,31,.045)}
   .disruption-table h3{margin:0 0 18px!important;font-size:1.15rem!important}
   .disruption-table>div{overflow-x:auto;border:1px solid var(--border);border-radius:14px}.disruption-table [role=row]{display:grid;grid-template-columns:1.05fr 1fr 1.35fr 1.15fr;min-width:720px;border-top:1px solid var(--border)}.disruption-table [role=row]:first-child{border-top:0;background:#172033}.disruption-table strong,.disruption-table span{padding:12px 14px;font-family:inherit!important;font-size:.82rem!important;line-height:1.45!important}.disruption-table strong{color:#fff}.disruption-table span{color:#526071}
