@@ -68,7 +68,7 @@ const blogContentDir = new URL('../content/blog/', import.meta.url);
 const hasContentBlogPosts =
   existsSync(blogContentDir) && readdirSync(blogContentDir).some((file) => /\.(md|mdx)$/i.test(file));
 const contentBlogPosts = hasContentBlogPosts ? (await getCollection('blog')).map(normalizeContentBlogPost) : [];
-const latestBlogPosts = combineBlogPosts(contentBlogPosts).slice(0, 3);
+const latestBlogPosts = combineBlogPosts(contentBlogPosts).slice(0, 1);
 const currentProjects = [
   { title: 'Live Flight Delay Analysis', status: 'Active development', tone: 'active' },
   { title: 'World Cup Air Travel Network', status: 'Writing and visualization', tone: 'progress' },
