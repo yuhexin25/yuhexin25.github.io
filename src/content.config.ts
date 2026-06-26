@@ -23,6 +23,26 @@ const readingNotes = defineCollection({
     sourceTitle: z.string(),
     authors: z.string().optional(),
     sourceDate: z.string().optional(),
+    journal: z.string().optional(),
+    year: z.union([z.string(), z.number()]).optional(),
+    doi: z.string().optional(),
+    arxiv: z.string().optional(),
+    readingTime: z.string().optional(),
+    status: z.string().optional(),
+    difficulty: z.string().optional(),
+    topics: z.array(z.string()).optional(),
+    researchAreas: z.array(z.string()).optional(),
+    pdfPath: z.string().optional(),
+    pdfLabel: z.string().optional(),
+    relatedProjects: z
+      .array(
+        z.object({
+          title: z.string(),
+          href: z.string(),
+          description: z.string().optional(),
+        }),
+      )
+      .optional(),
   }),
 });
 

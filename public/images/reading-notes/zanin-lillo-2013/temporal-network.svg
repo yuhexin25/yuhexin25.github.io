@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Temporal accessibility in air transport networks</title>
+  <desc id="desc">A schematic showing that the same static connection can imply different passenger waiting times depending on flight schedules.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#fff;stroke:#e7e5e4;stroke-width:2}.axis{stroke:#94a3b8;stroke-width:2}.flight{stroke:#2563eb;stroke-width:8;stroke-linecap:round}.wait{stroke:#f59e0b;stroke-width:8;stroke-linecap:round;stroke-dasharray:10 10}.node{fill:#fff;stroke:#2563eb;stroke-width:2.5}.label{font:700 22px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1e293b}.small{font:500 15px system-ui,-apple-system,Segoe UI,sans-serif;fill:#64748b}.airport{font:800 17px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1e293b}.tag{font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#b45309}
+    </style>
+  </defs>
+  <rect class="bg" width="920" height="520" rx="26"/>
+  <rect class="panel" x="42" y="46" width="836" height="382" rx="24"/>
+  <text class="label" x="82" y="96">Static route exists, but schedule time changes accessibility</text>
+  <text class="small" x="82" y="124">A passenger itinerary is a time-respecting path, not just a line on a map.</text>
+  <line class="axis" x1="150" y1="334" x2="790" y2="334"/>
+  <text class="small" x="145" y="368">08:00</text><text class="small" x="370" y="368">12:00</text><text class="small" x="598" y="368">16:00</text><text class="small" x="760" y="368">20:00</text>
+  <circle class="node" cx="170" cy="230" r="18"/><text class="airport" x="156" y="236">A</text>
+  <circle class="node" cx="382" cy="230" r="18"/><text class="airport" x="369" y="236">H</text>
+  <circle class="node" cx="704" cy="230" r="18"/><text class="airport" x="691" y="236">B</text>
+  <path class="flight" d="M188 230C250 198 308 198 364 230"/>
+  <path class="wait" d="M404 230C490 266 588 266 686 230"/>
+  <path class="flight" d="M404 188C490 154 588 154 686 188"/>
+  <text class="tag" x="214" y="196">flight</text>
+  <text class="tag" x="496" y="274">connection wait</text>
+  <text class="tag" x="498" y="150">earlier bank = better access</text>
+  <text class="small" x="82" y="402">Adapted from Zanin &amp; Lillo (2013), section on temporal networks and passenger dynamics.</text>
+</svg>

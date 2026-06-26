@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Point-to-point and hub-and-spoke air transport network structures</title>
+  <desc id="desc">A schematic comparison of dense point-to-point routing and centralized hub-and-spoke routing.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#fff;stroke:#e7e5e4;stroke-width:2}.line{fill:none;stroke:#94a3b8;stroke-width:2.3;opacity:.85}.hubLine{fill:none;stroke:#f59e0b;stroke-width:3}.node{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.hub{fill:#f59e0b;stroke:#92400e;stroke-width:2.4}.label{font:700 22px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1e293b}.small{font:500 15px system-ui,-apple-system,Segoe UI,sans-serif;fill:#64748b}.tag{font:700 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#b45309}
+    </style>
+  </defs>
+  <rect class="bg" width="920" height="520" rx="26"/>
+  <rect class="panel" x="34" y="44" width="405" height="404" rx="22"/>
+  <rect class="panel" x="481" y="44" width="405" height="404" rx="22"/>
+  <text class="label" x="74" y="92">Point-to-point</text>
+  <text class="small" x="74" y="120">More direct links; more aircraft and route complexity</text>
+  <text class="label" x="521" y="92">Hub-and-spoke</text>
+  <text class="small" x="521" y="120">Connectivity concentrated through transfer hubs</text>
+  <g transform="translate(235 264)">
+    <g class="line">
+      <path d="M-110 -86L110 -86M-110 -86L-150 36M-110 -86L0 126M-110 -86L150 36M110 -86L-150 36M110 -86L0 126M110 -86L150 36M-150 36L0 126M-150 36L150 36M0 126L150 36"/>
+    </g>
+    <circle class="node" cx="-110" cy="-86" r="13"/><circle class="node" cx="110" cy="-86" r="13"/>
+    <circle class="node" cx="-150" cy="36" r="13"/><circle class="node" cx="0" cy="126" r="13"/><circle class="node" cx="150" cy="36" r="13"/>
+  </g>
+  <g transform="translate(684 264)">
+    <path class="hubLine" d="M0 0L-132 -92M0 0L132 -92M0 0L-156 52M0 0L0 140M0 0L156 52"/>
+    <circle class="hub" cx="0" cy="0" r="19"/>
+    <circle class="node" cx="-132" cy="-92" r="13"/><circle class="node" cx="132" cy="-92" r="13"/>
+    <circle class="node" cx="-156" cy="52" r="13"/><circle class="node" cx="0" cy="140" r="13"/><circle class="node" cx="156" cy="52" r="13"/>
+  </g>
+  <text class="tag" x="74" y="405">High route count</text>
+  <text class="tag" x="521" y="405">High hub centrality</text>
+  <text class="small" x="34" y="486">Adapted from Zanin &amp; Lillo (2013), discussion of airline network configurations.</text>
+</svg>

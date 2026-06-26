@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Hub synchronization and wave-system scheduling</title>
+  <desc id="desc">A schematic of arrival and departure waves at a hub airport designed to reduce connecting wait time.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#fff;stroke:#e7e5e4;stroke-width:2}.grid{stroke:#e7e5e4;stroke-width:1}.arrival{fill:#2563eb}.depart{fill:#f59e0b}.bridge{fill:#fef3c7;stroke:#b45309;stroke-width:1.5}.label{font:700 22px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1e293b}.small{font:500 15px system-ui,-apple-system,Segoe UI,sans-serif;fill:#64748b}.axis{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#64748b}.tag{font:800 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1e293b}
+    </style>
+  </defs>
+  <rect class="bg" width="920" height="520" rx="26"/>
+  <rect class="panel" x="42" y="44" width="836" height="396" rx="24"/>
+  <text class="label" x="82" y="92">Hub synchronization: arrivals feed departures</text>
+  <text class="small" x="82" y="120">Wave systems trade aircraft utilization and passenger connectivity against congestion risk.</text>
+  <g transform="translate(100 172)">
+    <line class="grid" x1="0" y1="70" x2="720" y2="70"/><line class="grid" x1="0" y1="140" x2="720" y2="140"/>
+    <line class="grid" x1="90" y1="0" x2="90" y2="220"/><line class="grid" x1="270" y1="0" x2="270" y2="220"/><line class="grid" x1="450" y1="0" x2="450" y2="220"/><line class="grid" x1="630" y1="0" x2="630" y2="220"/>
+    <text class="axis" x="0" y="250">08:00</text><text class="axis" x="180" y="250">10:00</text><text class="axis" x="360" y="250">12:00</text><text class="axis" x="540" y="250">14:00</text><text class="axis" x="680" y="250">16:00</text>
+    <rect class="arrival" x="78" y="26" width="34" height="124" rx="8"/><rect class="arrival" x="118" y="44" width="34" height="106" rx="8"/><rect class="arrival" x="158" y="18" width="34" height="132" rx="8"/>
+    <rect class="bridge" x="205" y="42" width="82" height="84" rx="14"/><text class="tag" x="220" y="90">connect</text>
+    <rect class="depart" x="310" y="42" width="34" height="108" rx="8"/><rect class="depart" x="350" y="20" width="34" height="130" rx="8"/><rect class="depart" x="390" y="55" width="34" height="95" rx="8"/>
+    <rect class="arrival" x="500" y="36" width="34" height="114" rx="8"/><rect class="arrival" x="540" y="54" width="34" height="96" rx="8"/>
+    <rect class="depart" x="620" y="44" width="34" height="106" rx="8"/><rect class="depart" x="660" y="24" width="34" height="126" rx="8"/>
+    <text class="tag" x="76" y="-14">arrival bank</text><text class="tag" x="318" y="-14">departure bank</text>
+  </g>
+  <text class="small" x="82" y="410">Adapted from Zanin &amp; Lillo (2013), discussion of synchronized hub wave systems.</text>
+</svg>

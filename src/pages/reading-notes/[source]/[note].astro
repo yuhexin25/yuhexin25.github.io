@@ -18,7 +18,36 @@ interface Props {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
-const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.slug}`;
+const base = import.meta.env.BASE_URL;
+const sourceHref = `${base}reading-notes/${note.data.source.slug}`;
+const allNotes = (await getCollection('reading-notes')).sort((a, b) =>
+  `${a.data.source.category} ${a.data.source.name} ${a.data.title}`.localeCompare(
+    `${b.data.source.category} ${b.data.source.name} ${b.data.title}`,
+  ),
+);
+const noteHref = (entry: CollectionEntry<'reading-notes'>) =>
+  `${base}reading-notes/${entry.data.source.slug}/${entry.data.noteSlug}/`;
+const currentIndex = allNotes.findIndex(
+  (entry) => entry.data.source.slug === note.data.source.slug && entry.data.noteSlug === note.data.noteSlug,
+);
+const previousNote = currentIndex > 0 ? allNotes[currentIndex - 1] : undefined;
+const nextNote = currentIndex >= 0 && currentIndex < allNotes.length - 1 ? allNotes[currentIndex + 1] : undefined;
+const noteTopics = note.data.topics ?? [note.data.topic];
+const topicalRelatedReading = allNotes
+  .filter((entry) => entry.data.noteSlug !== note.data.noteSlug || entry.data.source.slug !== note.data.source.slug)
+  .filter((entry) => {
+    const entryTopics = entry.data.topics ?? [entry.data.topic];
+    return entry.data.source.category === note.data.source.category || entryTopics.some((topic) => noteTopics.includes(topic));
+  })
+  .slice(0, 3);
+const relatedReading =
+  topicalRelatedReading.length > 0
+    ? topicalRelatedReading
+    : allNotes
+        .filter((entry) => entry.data.noteSlug !== note.data.noteSlug || entry.data.source.slug !== note.data.source.slug)
+        .slice(0, 3);
+const pdfHref = note.data.pdfPath ? `${base}${note.data.pdfPath}` : undefined;
+const projectHref = (href: string) => (href.startsWith('http') ? href : `${base}${href.replace(/^\//, '')}`);
 ---
 
 <Layout title={`${note.data.title} | ${note.data.source.name}`} description={note.data.description}>
@@ -28,7 +57,17 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
         <p class="page-kicker">{note.data.source.category} / {note.data.source.name}</p>
         <h1>{note.data.title}</h1>
         <p class="lead">{note.data.description}</p>
-        <div class="note-topic">{note.data.topic}</div>
+        <div class="note-meta-grid" aria-label="Reading note metadata">
+          {note.data.authors && <div><span>Authors</span><strong>{note.data.authors}</strong></div>}
+          {(note.data.journal || note.data.source.name) && <div><span>Journal</span><strong>{note.data.journal ?? note.data.source.name}</strong></div>}
+          {(note.data.year || note.data.sourceDate) && <div><span>Year</span><strong>{note.data.year ?? note.data.sourceDate}</strong></div>}
+          {note.data.doi && <div><span>DOI</span><strong>{note.data.doi}</strong></div>}
+          {note.data.arxiv && <div><span>arXiv</span><strong>{note.data.arxiv}</strong></div>}
+          {note.data.readingTime && <div><span>Reading Time</span><strong>{note.data.readingTime}</strong></div>}
+        </div>
+        <div class="note-topic-list">
+          {note.data.researchAreas?.map((area) => <span>{area}</span>) ?? <span>{note.data.topic}</span>}
+        </div>
       </div>
     </header>
 
@@ -38,12 +77,80 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
         <a href={note.data.source.url} target="_blank" rel="noopener noreferrer">{note.data.sourceTitle}</a>
         {note.data.authors && <span>{note.data.authors}</span>}
         <span>{note.data.source.name}</span>
+        {note.data.status && <span>Status: {note.data.status}</span>}
+        {note.data.difficulty && <span>Difficulty: {note.data.difficulty}</span>}
+        {note.data.readingTime && <span>{note.data.readingTime}</span>}
+        {pdfHref && (
+          <div class="source-actions">
+            <a class="button source-button" href={pdfHref} target="_blank" rel="noopener noreferrer" download>
+              {note.data.pdfLabel ?? 'Download Original Paper'}
+            </a>
+            <a class="button source-button secondary" href={pdfHref} target="_blank" rel="noopener noreferrer">
+              View PDF
+            </a>
+          </div>
+        )}
         <a class="source-link" href={sourceHref}>All {note.data.source.name} notes -></a>
       </aside>
 
-      <div class="reading-content">
-        <Content />
-      </div>
+      <main class="reading-main">
+        <div class="reading-content">
+          <Content />
+        </div>
+
+        {pdfHref && (
+          <section class="pdf-preview" aria-labelledby="pdf-preview-heading">
+            <div class="section-heading compact">
+              <h2 id="pdf-preview-heading">Original Paper Preview</h2>
+              <a href={pdfHref} target="_blank" rel="noopener noreferrer">Open PDF -&gt;</a>
+            </div>
+            <iframe class="pdf-frame pdf-frame-desktop" src={pdfHref} title={`PDF preview of ${note.data.sourceTitle}`} loading="lazy"></iframe>
+            <details class="pdf-frame-mobile">
+              <summary>Preview PDF on this page</summary>
+              <iframe class="pdf-frame" src={pdfHref} title={`PDF preview of ${note.data.sourceTitle}`} loading="lazy"></iframe>
+            </details>
+          </section>
+        )}
+
+        <footer class="note-footer">
+          {note.data.relatedProjects && (
+            <section class="related-section" aria-labelledby="related-projects-heading">
+              <h2 id="related-projects-heading">Related Projects</h2>
+              <div class="related-grid">
+                {note.data.relatedProjects.map((project) => (
+                  <a class="related-card" href={projectHref(project.href)} target={project.href.startsWith('http') ? '_blank' : undefined} rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                    <strong>{project.title}</strong>
+                    {project.description && <span>{project.description}</span>}
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {relatedReading.length > 0 && (
+            <section class="related-section" aria-labelledby="related-reading-heading">
+              <h2 id="related-reading-heading">Related Reading</h2>
+              <div class="related-grid">
+                {relatedReading.map((entry) => (
+                  <a class="related-card" href={noteHref(entry)}>
+                    <strong>{entry.data.title}</strong>
+                    <span>{entry.data.source.name} · {entry.data.topic}</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <nav class="note-nav" aria-label="Previous and next reading notes">
+            {previousNote ? (
+              <a href={noteHref(previousNote)}><span>Previous Note</span><strong>{previousNote.data.title}</strong></a>
+            ) : <span></span>}
+            {nextNote ? (
+              <a href={noteHref(nextNote)}><span>Next Note</span><strong>{nextNote.data.title}</strong></a>
+            ) : <span></span>}
+          </nav>
+        </footer>
+      </main>
     </div>
   </article>
 </Layout>
@@ -69,9 +176,47 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
     font-size: clamp(2.6rem, 6vw, 5.2rem);
   }
 
-  .note-topic {
-    display: inline-flex;
+  .note-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .note-meta-grid div {
+    border: 1px solid rgba(214, 211, 209, 0.86);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 13px 14px;
+  }
+
+  .note-meta-grid span,
+  .note-nav span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 760;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .note-meta-grid strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--text);
+    font-size: 0.94rem;
+    line-height: 1.35;
+  }
+
+  .note-topic-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-top: 24px;
+  }
+
+  .note-topic-list span {
+    display: inline-flex;
     border: 1px solid rgba(245, 158, 11, 0.34);
     border-radius: 999px;
     background: var(--gold-soft);
@@ -127,6 +272,29 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
     font-weight: 720;
   }
 
+  .source-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .source-button {
+    width: 100%;
+    min-height: 42px;
+    padding-inline: 14px;
+    font-size: 0.9rem;
+  }
+
+  .source-button.secondary {
+    border-color: var(--border-strong);
+    background: #fff;
+    color: var(--text);
+  }
+
+  .reading-main {
+    min-width: 0;
+  }
+
   .reading-content {
     max-width: 720px;
     min-width: 0;
@@ -161,6 +329,149 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
     padding-left: 22px;
   }
 
+  .reading-content :global(.takeaway-callout) {
+    margin: 28px 0;
+    border: 1px solid rgba(245, 158, 11, 0.32);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.72), rgba(255, 255, 255, 0.9));
+    padding: clamp(20px, 4vw, 26px);
+  }
+
+  .reading-content :global(.takeaway-callout h3) {
+    color: var(--warm-ink);
+  }
+
+  .reading-content :global(.takeaway-callout ul) {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .reading-content :global(.takeaway-callout li) {
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .reading-content :global(.takeaway-callout li::before) {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--gold-dark);
+    font-weight: 800;
+  }
+
+  .reading-content :global(.paper-figure) {
+    margin: 32px 0;
+  }
+
+  .reading-content :global(.paper-figure img) {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 32px rgba(63, 47, 31, 0.055);
+  }
+
+  .reading-content :global(.paper-figure figcaption) {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .pdf-preview,
+  .note-footer {
+    max-width: 720px;
+    margin-top: 48px;
+  }
+
+  .section-heading.compact {
+    margin-bottom: 16px;
+  }
+
+  .section-heading.compact h2,
+  .related-section h2 {
+    font-size: 1.35rem;
+  }
+
+  .pdf-frame {
+    width: 100%;
+    height: min(72vh, 720px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+  }
+
+  .pdf-frame-mobile {
+    display: none;
+  }
+
+  .related-section {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 34px;
+  }
+
+  .related-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .related-card {
+    display: grid;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--text);
+    padding: 16px;
+  }
+
+  .related-card:hover {
+    border-color: rgba(245, 158, 11, 0.42);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .related-card span {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .note-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    border-top: 1px solid var(--border);
+    margin-top: 34px;
+    padding-top: 28px;
+  }
+
+  .note-nav a {
+    display: grid;
+    gap: 6px;
+    min-height: 104px;
+    align-content: center;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--text);
+    padding: 16px;
+  }
+
+  .note-nav a:hover {
+    border-color: rgba(245, 158, 11, 0.42);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .note-nav strong {
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
   @media (max-width: 900px) {
     .note-layout {
       grid-template-columns: 1fr;
@@ -176,6 +487,34 @@ const sourceHref = `${import.meta.env.BASE_URL}reading-notes/${note.data.source.
     .source-panel {
       border-radius: 16px;
       padding: 18px;
+    }
+
+    .pdf-frame-desktop {
+      display: none;
+    }
+
+    .pdf-frame-mobile {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .pdf-frame-mobile summary {
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 720;
+    }
+
+    .pdf-frame-mobile .pdf-frame {
+      height: 62vh;
+      margin-top: 14px;
+      border-radius: 12px;
+    }
+
+    .note-nav {
+      grid-template-columns: 1fr;
     }
   }
 </style>

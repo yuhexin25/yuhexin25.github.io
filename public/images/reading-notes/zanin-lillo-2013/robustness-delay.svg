@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Delay propagation and network robustness</title>
+  <desc id="desc">A schematic showing how disruption at a central hub can reduce network efficiency more than disruption at a peripheral airport.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#fff;stroke:#e7e5e4;stroke-width:2}.link{stroke:#94a3b8;stroke-width:2.3}.risk{stroke:#f59e0b;stroke-width:4}.node{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.hub{fill:#f59e0b;stroke:#92400e;stroke-width:2.5}.down{fill:#fee2e2;stroke:#b91c1c;stroke-width:2.5}.barBg{fill:#e7e5e4}.bar{fill:#f59e0b}.bar2{fill:#64748b}.label{font:700 22px system-ui,-apple-system,Segoe UI,sans-serif;fill:#1e293b}.small{font:500 15px system-ui,-apple-system,Segoe UI,sans-serif;fill:#64748b}.tag{font:800 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#1e293b}
+    </style>
+  </defs>
+  <rect class="bg" width="920" height="520" rx="26"/>
+  <rect class="panel" x="42" y="44" width="836" height="398" rx="24"/>
+  <text class="label" x="82" y="92">Robustness is uneven across the network</text>
+  <text class="small" x="82" y="120">Central airports carry more connectivity, so disruption can propagate through rotations and missed connections.</text>
+  <g transform="translate(230 260)">
+    <path class="link" d="M0 0L-120 -85M0 0L120 -85M0 0L-145 55M0 0L0 130M0 0L145 55M120 -85L145 55M-120 -85L-145 55"/>
+    <path class="risk" d="M0 0L120 -85M0 0L145 55M0 0L0 130"/>
+    <circle class="down" cx="0" cy="0" r="21"/><text class="tag" x="-7" y="5">!</text>
+    <circle class="node" cx="-120" cy="-85" r="13"/><circle class="node" cx="120" cy="-85" r="13"/>
+    <circle class="node" cx="-145" cy="55" r="13"/><circle class="node" cx="0" cy="130" r="13"/><circle class="node" cx="145" cy="55" r="13"/>
+  </g>
+  <g transform="translate(535 206)">
+    <text class="tag" x="0" y="0">Illustrative efficiency impact</text>
+    <rect class="barBg" x="0" y="30" width="250" height="22" rx="11"/><rect class="bar" x="0" y="30" width="198" height="22" rx="11"/>
+    <text class="small" x="0" y="76">Targeted hub disruption</text>
+    <rect class="barBg" x="0" y="112" width="250" height="22" rx="11"/><rect class="bar2" x="0" y="112" width="82" height="22" rx="11"/>
+    <text class="small" x="0" y="158">Peripheral airport disruption</text>
+  </g>
+  <text class="small" x="82" y="410">Adapted from Zanin &amp; Lillo (2013), discussion of network robustness and reactionary delay propagation.</text>
+</svg>

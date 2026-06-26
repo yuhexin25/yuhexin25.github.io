@@ -8,8 +8,17 @@ const sourceCounts = notes.reduce<Record<string, number>>((counts, note) => {
   counts[note.data.source.slug] = (counts[note.data.source.slug] || 0) + 1;
   return counts;
 }, {});
+const featuredNotes = notes
+  .slice()
+  .sort((a, b) => {
+    const aYear = Number(a.data.year ?? a.data.sourceDate ?? 0);
+    const bYear = Number(b.data.year ?? b.data.sourceDate ?? 0);
+    return bYear - aYear || a.data.title.localeCompare(b.data.title);
+  });
 
 const sourceHref = (slug: string) => `${import.meta.env.BASE_URL}reading-notes/${slug}`;
+const noteHref = (note: (typeof notes)[number]) =>
+  `${import.meta.env.BASE_URL}reading-notes/${note.data.source.slug}/${note.data.noteSlug}`;
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const noteCountLabel = (count: number) => `${count} ${count === 1 ? 'note' : 'notes'}`;
 ---
@@ -26,7 +35,31 @@ const noteCountLabel = (count: number) => `${count} ${count === 1 ? 'note' : 'no
         A source-based knowledge base for aviation analytics, transportation systems, airline networks,
         and flight operations. Notes are organized by source and topic rather than by week.
       </p>
+      <p class="library-count">{notes.length} reading {notes.length === 1 ? 'note' : 'notes'} across {Object.keys(sourceCounts).length} active sources.</p>
     </header>
+
+    <section class="container note-showcase" aria-labelledby="note-showcase-heading">
+      <div class="section-heading">
+        <h2 id="note-showcase-heading">Recent Notes</h2>
+        <span>{notes.length} total</span>
+      </div>
+      <div class="note-card-grid">
+        {featuredNotes.map((note) => (
+          <a class="library-note-card" href={noteHref(note)}>
+            <div>
+              <p class="page-kicker">{note.data.source.category}</p>
+              <h3>{note.data.title}</h3>
+              {note.data.authors && <p class="note-authors">{note.data.authors}</p>}
+            </div>
+            <p>{note.data.description}</p>
+            <div class="note-chip-list">
+              {(note.data.topics ?? [note.data.topic]).slice(0, 4).map((topic) => <span>{topic}</span>)}
+            </div>
+            <small>{note.data.year ?? note.data.sourceDate ?? note.data.source.name}{note.data.readingTime ? ` · ${note.data.readingTime}` : ''}</small>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <div class="container library-grid">
       {libraryCategories.map((category) => (
@@ -57,7 +90,87 @@ const noteCountLabel = (count: number) => `${count} ${count === 1 ? 'note' : 'no
 
   .library-intro {
     max-width: 920px;
-    margin-bottom: 44px;
+    margin-bottom: 34px;
+  }
+
+  .library-count {
+    margin-top: 18px;
+    color: var(--gold-dark);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.92rem;
+    font-weight: 720;
+  }
+
+  .note-showcase {
+    margin-bottom: 34px;
+  }
+
+  .note-showcase .section-heading {
+    margin-bottom: 16px;
+  }
+
+  .note-showcase .section-heading span {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .note-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 16px;
+  }
+
+  .library-note-card {
+    display: grid;
+    gap: 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--paper);
+    color: var(--text);
+    box-shadow: 0 14px 32px rgba(63, 47, 31, 0.045);
+    padding: clamp(18px, 3vw, 24px);
+  }
+
+  .library-note-card:hover {
+    border-color: rgba(245, 158, 11, 0.46);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .library-note-card h3 {
+    font-size: clamp(1.18rem, 2vw, 1.45rem);
+  }
+
+  .library-note-card > p,
+  .note-authors {
+    color: var(--muted);
+  }
+
+  .note-authors {
+    margin-top: 8px;
+    font-size: 0.94rem;
+  }
+
+  .note-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .note-chip-list span {
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    padding: 4px 9px;
+    font-size: 0.78rem;
+    font-weight: 720;
+  }
+
+  .library-note-card small {
+    color: var(--gold-dark);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 720;
   }
 
   .library-grid {

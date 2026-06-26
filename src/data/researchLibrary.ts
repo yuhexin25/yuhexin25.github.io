@@ -18,6 +18,7 @@ export const libraryCategories = [
     name: 'Academic Papers',
     description: 'Scholarly work on aviation operations, transportation networks, and air transport management.',
     sources: [
+      { name: 'European Physical Journal Special Topics', slug: 'european-physical-journal-special-topics' },
       { name: 'Transportation Research Journals', slug: 'transportation-research-journals' },
       { name: 'Air Transport Management Journals', slug: 'air-transport-management-journals' },
     ],
