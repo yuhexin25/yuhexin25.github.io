@@ -1,6 +1,8 @@
 ---
 import Layout from '../components/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const coursework = [
   'Calculus I (A)',
   'Calculus II (A)',
@@ -68,7 +70,7 @@ const awards = [
         Computational Modeling & Data Analytics student at Virginia Tech interested in aviation analytics,
         transportation systems, data visualization, and network analysis.
       </p>
-      <a class="button" href="/hexinyu/Hexin-Yu-CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
+      <a class="button" href={`${base}Hexin-Yu-CV.pdf`} target="_blank" rel="noopener noreferrer">Download CV</a>
     </header>
 
     <section class="container cv-list" aria-label="CV details">
