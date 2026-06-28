@@ -69,7 +69,7 @@ This project is configured for static deployment with Astro.
 
 1. Update `astro.config.mjs`:
    - Set `site` to `https://yuhexin25.github.io`.
-   - Set `base` to the repository name with surrounding slashes, `/hexinyu/`.
+   - Set `base` to `/` for the `yuhexin25.github.io` user-site repository.
 2. Push the repository to GitHub.
 3. In GitHub, go to **Settings -> Pages** and select GitHub Actions as the deployment source.
 4. Add a GitHub Actions workflow such as:

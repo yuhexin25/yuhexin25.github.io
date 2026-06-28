@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://yuhexin25.github.io/hexinyu',
-  base: '/hexinyu/',
-  outDir: './dist/hexinyu',
+  site: 'https://yuhexin25.github.io',
+  base: '/',
+  outDir: './dist',
 });

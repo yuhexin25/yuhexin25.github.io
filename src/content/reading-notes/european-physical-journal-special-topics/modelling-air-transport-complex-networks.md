@@ -79,7 +79,7 @@ In the simplest representation, each airport is a node and each route is an edge
 However, the paper also shows the limits of this simplification. A route between two airports is not just a geographic connection. It has frequency, timing, airline ownership, aircraft assignment, capacity, and reliability. Two airports may be connected on a map while still being poorly connected for a passenger who must wait many hours for a transfer.
 
 <figure class="paper-figure">
-  <img src="/hexinyu/images/reading-notes/zanin-lillo-2013/network-topologies.svg" alt="Schematic comparison of point-to-point and hub-and-spoke network structures." loading="lazy" />
+  <img src="/images/reading-notes/zanin-lillo-2013/network-topologies.svg" alt="Schematic comparison of point-to-point and hub-and-spoke network structures." loading="lazy" />
   <figcaption>Figure 1. Point-to-point and hub-and-spoke structures in air transport networks. Adapted from Zanin &amp; Lillo (2013), European Physical Journal Special Topics.</figcaption>
 </figure>
 
@@ -98,7 +98,7 @@ One of the strongest ideas in the paper is that air transport networks are tempo
 This matters because passenger accessibility is defined by time-respecting paths. A connection exists only if the inbound flight arrives before the outbound flight, with enough time to transfer. The same airport network can therefore produce very different mobility outcomes depending on schedule design.
 
 <figure class="paper-figure">
-  <img src="/hexinyu/images/reading-notes/zanin-lillo-2013/temporal-network.svg" alt="Schematic showing how schedule timing affects passenger accessibility in an air transport network." loading="lazy" />
+  <img src="/images/reading-notes/zanin-lillo-2013/temporal-network.svg" alt="Schematic showing how schedule timing affects passenger accessibility in an air transport network." loading="lazy" />
   <figcaption>Figure 2. Temporal accessibility depends on schedule alignment, not only route existence. Adapted from Zanin &amp; Lillo (2013).</figcaption>
 </figure>
 
@@ -117,7 +117,7 @@ Hub-oriented airlines often schedule flights in waves. Inbound flights arrive wi
 At the same time, wave systems can concentrate operational stress. If weather, airspace restrictions, crew constraints, or airport congestion affect the arrival bank, the disruption can spill into the departure bank.
 
 <figure class="paper-figure">
-  <img src="/hexinyu/images/reading-notes/zanin-lillo-2013/hub-wave-system.svg" alt="Schematic of arrival and departure waves at a hub airport." loading="lazy" />
+  <img src="/images/reading-notes/zanin-lillo-2013/hub-wave-system.svg" alt="Schematic of arrival and departure waves at a hub airport." loading="lazy" />
   <figcaption>Figure 3. Hub wave systems synchronize arrivals and departures to improve transfer connectivity. Adapted from Zanin &amp; Lillo (2013).</figcaption>
 </figure>
 
@@ -128,7 +128,7 @@ The paper notes that removing or disrupting highly connected airports can sharpl
 This does not mean hub-and-spoke systems are bad. It means their efficiency depends on keeping key nodes operational and on building backup capacity when those nodes are constrained.
 
 <figure class="paper-figure">
-  <img src="/hexinyu/images/reading-notes/zanin-lillo-2013/robustness-delay.svg" alt="Schematic showing how central hub disruption can reduce network efficiency." loading="lazy" />
+  <img src="/images/reading-notes/zanin-lillo-2013/robustness-delay.svg" alt="Schematic showing how central hub disruption can reduce network efficiency." loading="lazy" />
   <figcaption>Figure 4. Network robustness is uneven because central airports carry disproportionate connectivity. Adapted from Zanin &amp; Lillo (2013).</figcaption>
 </figure>
 
