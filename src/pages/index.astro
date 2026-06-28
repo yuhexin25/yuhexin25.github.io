@@ -89,20 +89,10 @@ const currentProjects = [
   description="Hexin Yu is a Virginia Tech Computational Modeling & Data Analytics student interested in aviation analytics, transportation systems, data visualization, and network analysis."
 >
   <section class="hero-section" aria-labelledby="home-title">
-    <svg class="hero-lines" viewBox="0 0 1100 520" aria-hidden="true">
-      <path d="M-20 365 C 180 230, 350 260, 540 160 S 860 80, 1130 165" />
-      <path d="M110 130 C 290 205, 410 108, 610 220 S 900 365, 1120 290" />
-      <path d="M190 470 C 360 350, 540 372, 730 285 S 970 190, 1130 235" />
-      <circle cx="180" cy="318" r="4" />
-      <circle cx="540" cy="160" r="4" />
-      <circle cx="820" cy="110" r="4" />
-      <circle cx="985" cy="326" r="4" />
-    </svg>
     <div class="container priority-grid">
       <div class="hero-copy">
         <h1 id="home-title">Hexin Yu</h1>
         <p class="hero-subtitle">Computational Modeling & Data Analytics Student<br />Virginia Tech</p>
-        <p class="gpa-line">GPA: 4.0/4.0</p>
         <p class="lead">
           Data-driven work on aviation networks and transportation systems.
         </p>
@@ -114,7 +104,6 @@ const currentProjects = [
         </ul>
         <div class="button-row">
           <a class="button" href={`${base}projects`}>View Projects</a>
-          <a class="button secondary" href={`${base}Hexin-Yu-CV.pdf`} target="_blank" rel="noopener noreferrer">Download CV</a>
         </div>
       </div>
       <section class="featured-projects" aria-labelledby="featured-projects-heading">
@@ -124,7 +113,13 @@ const currentProjects = [
         </div>
         <div class="featured-project-list">
           {featuredProjects.map((project) => (
-            <article class="priority-project-card">
+            <a
+              class="priority-project-card"
+              href={project.href}
+              target={project.external ? '_blank' : undefined}
+              rel={project.external ? 'noopener noreferrer' : undefined}
+              aria-label={`View ${project.title}`}
+            >
               <img src={project.image} alt={project.imageAlt} />
               <div class="priority-project-copy">
                 <div class="project-eyebrow"><span>{project.number}</span><b>{project.type}</b></div>
@@ -134,13 +129,7 @@ const currentProjects = [
                   {project.tags.map((tag) => <li>{tag}</li>)}
                 </ul>
               </div>
-              <a
-                class="view-project"
-                href={project.href}
-                target={project.external ? '_blank' : undefined}
-                rel={project.external ? 'noopener noreferrer' : undefined}
-              >View project <span aria-hidden="true">↗</span></a>
-            </article>
+            </a>
           ))}
         </div>
       </section>
@@ -229,31 +218,8 @@ const currentProjects = [
     overflow: hidden;
     border-bottom: 1px solid rgba(231, 229, 228, 0.82);
     background:
-      radial-gradient(circle at 17% 22%, rgba(245, 158, 11, 0.13), transparent 30rem),
-      radial-gradient(circle at 86% 16%, rgba(217, 119, 6, 0.07), transparent 28rem),
       linear-gradient(135deg, #fffdf8 0%, #fff8ed 50%, #fffdf8 100%);
     padding: 56px 0 58px;
-  }
-
-  .hero-lines {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    color: #b45309;
-    opacity: 0.13;
-    pointer-events: none;
-  }
-
-  .hero-lines path {
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-width: 1.2;
-  }
-
-  .hero-lines circle {
-    fill: currentColor;
   }
 
   .priority-grid {
@@ -315,19 +281,6 @@ const currentProjects = [
     line-height: 1.45;
   }
 
-  .gpa-line {
-    width: fit-content;
-    margin-top: 12px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: #fff;
-    color: #475569;
-    padding: 5px 11px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.8rem;
-    font-weight: 800;
-  }
-
   .hero-copy .button-row {
     margin-top: 24px;
   }
@@ -352,12 +305,6 @@ const currentProjects = [
     border-color: rgba(180, 83, 9, 0.48);
     background: #92400e;
     color: #fff;
-  }
-
-  .hero-copy .button.secondary:hover {
-    border-color: rgba(180, 83, 9, 0.28);
-    background: #fff7ed;
-    color: var(--warm-ink);
   }
 
   .featured-projects {
@@ -392,7 +339,7 @@ const currentProjects = [
 
   .priority-project-card {
     display: grid;
-    grid-template-columns: 136px minmax(0, 1fr) auto;
+    grid-template-columns: 136px minmax(0, 1fr);
     gap: 18px;
     align-items: center;
     overflow: hidden;
@@ -402,6 +349,7 @@ const currentProjects = [
     background: rgba(255, 255, 255, 0.88);
     box-shadow: 0 8px 22px rgba(63, 47, 31, 0.045);
     color: var(--text);
+    cursor: pointer;
     padding: 11px 14px 11px 11px;
     transition:
       border-color 180ms ease,
@@ -411,12 +359,18 @@ const currentProjects = [
   }
 
   .priority-project-card:hover {
-    border-color: rgba(180, 83, 9, 0.22);
+    border-color: rgba(180, 83, 9, 0.34);
     background: #fff;
-    box-shadow: 0 12px 28px rgba(63, 47, 31, 0.07);
+    box-shadow: 0 14px 30px rgba(63, 47, 31, 0.075);
     color: var(--text);
     text-decoration: none;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+
+  .priority-project-card:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.28);
+    outline-offset: 3px;
+    border-color: rgba(180, 83, 9, 0.44);
   }
 
   .priority-project-card img {
@@ -486,28 +440,6 @@ const currentProjects = [
 
   .priority-tag-list + * {
     margin: 0;
-  }
-
-  .view-project {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    min-height: 34px;
-    border: 1px solid rgba(214, 200, 181, 0.92);
-    border-radius: 999px;
-    background: #fff;
-    color: #594331;
-    padding: 7px 10px;
-    font-size: 0.73rem;
-    font-weight: 800;
-  }
-
-  .view-project:hover {
-    border-color: rgba(180, 83, 9, 0.32);
-    background: #fff7ed;
-    color: #7c2d12;
-    text-decoration: none;
   }
 
   .home-shell {
@@ -835,12 +767,6 @@ const currentProjects = [
       gap: 5px;
     }
 
-    .view-project {
-      grid-column: auto;
-      width: fit-content;
-      min-height: 40px;
-      padding: 7px 12px;
-    }
   }
 
   @media (max-width: 430px) {
